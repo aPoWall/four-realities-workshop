@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карта Реальностей x AI — Воркшоп 25 апреля 2026</title>
+  <meta name="description" content="Как собирать свою систему решений через 4 линзы реальности. Оля Ерёмина (FutureDecoder) + Alex Povaliaev (AI Mindset). 25 апреля, 10:00–14:00 CET. 99 EUR.">
+  <meta property="og:title" content="Карта Реальностей x AI — Воркшоп 25 апреля">
+  <meta property="og:description" content="4-часовой воркшоп: персональная карта реальностей, AI-инструменты, методология форсайта. 99 EUR, 30 мест.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://four-realities-workshop.netlify.app/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f0ede8;
+      --paper-dark: #e8e4de;
+      --ink: #1e2640;
+      --ink-light: #3d4660;
+      --ink-faint: #8890a4;
+      --accent: #3a5bcf;
+      --accent-hover: #2d4ab8;
+      --accent-light: rgba(58, 91, 207, 0.08);
+      --grid: rgba(30, 38, 64, 0.06);
+      --grid-strong: rgba(30, 38, 64, 0.12);
+      --red-soft: #c45c4a;
+      --green-soft: #4a8c5c;
+      --gold-soft: #b8943a;
+      --purple-soft: #7a5caa;
+      --margin-red: rgba(196, 92, 74, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background-color: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Graph paper background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        linear-gradient(var(--grid-strong) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px);
+      background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Red margin line (notebook style) */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 80px;
+      width: 1px; height: 100%;
+      background: var(--margin-red);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+      body::after { left: 16px; }
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.15; }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600; line-height: 1.25; margin-bottom: 1.2rem; }
+    h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.35; }
+    p { font-size: 0.9rem; color: var(--ink-light); }
+    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(58,91,207,0.3); transition: border-color 0.2s; }
+    a:hover { border-color: var(--accent); }
+
+    /* Sections */
+    section { padding: 80px 0; position: relative; }
+    section + section { border-top: 1px solid var(--grid-strong); }
+
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-faint);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 1px;
+      background: var(--ink-faint);
+    }
+
+    /* Fade-in animation */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ================================
+       HEADER NAV
+    ================================ */
+    .top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(240, 237, 232, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--grid-strong);
+      padding: 12px 24px;
+    }
+    .top-nav-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-nav .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+      border: none;
+    }
+    .top-nav .logo:hover { border: none; }
+    .top-nav .nav-date {
+      font-size: 0.7rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.05em;
+    }
+    .top-nav .nav-cta {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: white;
+      background: var(--ink);
+      padding: 6px 16px;
+      border: none;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .top-nav .nav-cta:hover { background: var(--accent); }
+
+    /* ================================
+       HERO
+    ================================ */
+    .hero {
+      padding: 140px 0 80px;
+      min-height: 95vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-text .tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      border: 1px solid rgba(58,91,207,0.25);
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    .hero-text h1 { margin-bottom: 20px; }
+    .hero-text h1 .x-mark {
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--ink-light);
+      margin-bottom: 24px;
+      line-height: 1.8;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      margin-bottom: 0;
+    }
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-meta .dot {
+      width: 4px; height: 4px;
+      background: var(--ink-faint);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* Cross diagram in hero */
+    .hero-diagram {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-diagram svg {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+    }
+
+    /* ================================
+       STORY SECTION
+    ================================ */
+    .story-section { padding: 80px 0; }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .story-block p {
+      margin-bottom: 16px;
+    }
+    .story-block .quote-inline {
+      font-style: italic;
+      color: var(--ink);
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+      margin: 20px 0;
+      font-size: 0.92rem;
+    }
+    .story-block h3 { margin-bottom: 12px; }
+
+    /* ================================
+       MODEL SECTION
+    ================================ */
+    .model-section { padding: 80px 0; }
+    .model-intro { max-width: 640px; margin-bottom: 48px; }
+    .model-intro p { margin-bottom: 12px; font-size: 0.92rem; }
+
+    .quadrant-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 700px;
+      margin: 0 auto 48px;
+      border: 2px solid var(--ink);
+      position: relative;
+    }
+    .quadrant-grid::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: var(--ink);
+      transform: translateX(-1px);
+    }
+    .quadrant-grid::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%;
+      height: 2px;
+      background: var(--ink);
+      transform: translateY(-1px);
+    }
+    .quadrant-card {
+      padding: 28px 24px;
+      position: relative;
+    }
+    .quadrant-card .q-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .quadrant-card .q-icon svg { width: 24px; height: 24px; }
+    .quadrant-card .q-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .quadrant-card .q-wilber {
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+      margin-bottom: 8px;
+    }
+    .quadrant-card p {
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .axis-labels {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-bottom: 16px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-faint);
+    }
+
+    .axis-vertical-labels {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .axis-vertical-labels .axis-top,
+    .axis-vertical-labels .axis-bottom {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-faint);
+      padding: 8px 0;
+    }
+
+    /* Quadrant colors */
+    .q-sovereign { border-right: none; border-bottom: none; }
+    .q-sovereign .q-label { color: var(--green-soft); }
+    .q-techno { border-bottom: none; }
+    .q-techno .q-label { color: var(--red-soft); }
+    .q-institutional { border-right: none; }
+    .q-institutional .q-label { color: var(--gold-soft); }
+    .q-collab .q-label { color: var(--purple-soft); }
+
+    /* ================================
+       SESSION INSIGHTS
+    ================================ */
+    .insights-section { padding: 80px 0; }
+    .insight-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: 700px;
+    }
+    .insight-card {
+      border: 1px dashed var(--grid-strong);
+      padding: 24px 28px;
+      position: relative;
+      background: rgba(240, 237, 232, 0.5);
+    }
+    .insight-card .insight-speaker {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .insight-card blockquote {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .insight-card .insight-context {
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+    }
+
+    /* ================================
+       WORKSHOP FORMAT (6 STEPS)
+    ================================ */
+    .format-section { padding: 80px 0; }
+    .format-intro { max-width: 640px; margin-bottom: 48px; }
+    .format-intro p { margin-bottom: 12px; }
+
+    .steps-flow {
+      position: relative;
+      max-width: 720px;
+    }
+    .steps-flow::before {
+      content: '';
+      position: absolute;
+      left: 24px; top: 0; bottom: 0;
+      width: 2px;
+      background: repeating-linear-gradient(to bottom, var(--ink) 0, var(--ink) 6px, transparent 6px, transparent 12px);
+    }
+    .step-item {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .step-number {
+      width: 50px; height: 50px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      background: var(--paper);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .step-content { padding-top: 6px; }
+    .step-content h3 { margin-bottom: 6px; }
+    .step-content .step-who {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .step-content .step-time {
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      margin-bottom: 8px;
+    }
+    .step-content p { font-size: 0.85rem; line-height: 1.7; }
+
+    /* ================================
+       TAKEAWAYS
+    ================================ */
+    .takeaways-section { padding: 80px 0; }
+    .takeaways-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      max-width: 720px;
+    }
+    .takeaway-card {
+      border: 1px solid var(--grid-strong);
+      padding: 20px;
+      position: relative;
+    }
+    .takeaway-card svg {
+      width: 32px; height: 32px;
+      margin-bottom: 12px;
+    }
+    .takeaway-card h4 {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+    .takeaway-card p {
+      font-size: 0.78rem;
+    }
+
+    /* ================================
+       SPEAKERS
+    ================================ */
+    .speakers-section { padding: 80px 0; }
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .speaker-card {
+      border: 1px solid var(--grid-strong);
+      padding: 32px;
+      position: relative;
+    }
+    .speaker-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+    }
+    .speaker-olya::before { background: var(--red-soft); }
+    .speaker-alex::before { background: var(--accent); }
+    .speaker-card .speaker-role {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+    }
+    .speaker-card h3 { margin-bottom: 4px; }
+    .speaker-card .speaker-tagline {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .speaker-card p { margin-bottom: 10px; font-size: 0.82rem; }
+    .speaker-card .speaker-clients {
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      margin-top: 12px;
+      line-height: 1.8;
+    }
+    .speaker-card .speaker-clients strong {
+      color: var(--ink-light);
+      font-weight: 500;
+    }
+    .speaker-links {
+      margin-top: 16px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .speaker-links a {
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      border: 1px solid var(--grid-strong);
+      padding: 4px 10px;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .speaker-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ================================
+       VIDEO PLACEHOLDER
+    ================================ */
+    .video-section { padding: 80px 0; }
+    .video-placeholder {
+      border: 2px dashed var(--ink-faint);
+      padding: 60px 40px;
+      text-align: center;
+      max-width: 700px;
+      position: relative;
+      background: rgba(30, 38, 64, 0.02);
+    }
+    .video-placeholder svg {
+      width: 48px; height: 48px;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
+    .video-placeholder h3 {
+      color: var(--ink-faint);
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .video-placeholder p {
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+    }
+
+    /* ================================
+       CTA SECTION
+    ================================ */
+    .cta-section {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .cta-box {
+      border: 2px solid var(--ink);
+      padding: 48px 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      background: var(--paper);
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 6px;
+      right: -6px; bottom: -6px;
+      border: 2px solid var(--grid-strong);
+      z-index: -1;
+    }
+    .cta-box h2 { margin-bottom: 8px; }
+    .cta-box .cta-meta {
+      font-size: 0.82rem;
+      color: var(--ink-faint);
+      margin-bottom: 24px;
+    }
+    .cta-box .cta-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .cta-box .cta-spots {
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      margin-bottom: 32px;
+    }
+    .cta-button {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background: var(--ink);
+      padding: 16px 48px;
+      border: none;
+      border-radius: 2px;
+      letter-spacing: 0.02em;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .cta-button:hover { background: var(--accent); color: white; border-bottom: none; }
+    .cta-note {
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      margin-top: 16px;
+    }
+
+    /* ================================
+       FOOTER
+    ================================ */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--grid-strong);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-left {
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      border: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ================================
+       RESPONSIVE
+    ================================ */
+    @media (max-width: 768px) {
+      .hero { min-height: auto; padding: 120px 0 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-diagram { order: -1; }
+      .hero-diagram svg { max-width: 300px; }
+      .story-grid { grid-template-columns: 1fr; gap: 32px; }
+      .speakers-grid { grid-template-columns: 1fr; }
+      .quadrant-grid { grid-template-columns: 1fr; }
+      .quadrant-grid::before { display: none; }
+      .quadrant-grid::after { display: none; }
+      .quadrant-card { border: none !important; border-bottom: 1px solid var(--grid-strong) !important; }
+      .axis-labels { gap: 20px; }
+      section { padding: 60px 0; }
+      .top-nav .nav-date { display: none; }
+      .cta-box { padding: 32px 24px; }
+    }
+
+    /* ================================
+       DECORATIVE ELEMENTS
+    ================================ */
+    .notebook-hole {
+      position: absolute;
+      left: -40px;
+      width: 16px; height: 16px;
+      border: 2px solid var(--grid-strong);
+      border-radius: 50%;
+      background: #ddd8d0;
+    }
+    @media (max-width: 920px) { .notebook-hole { display: none; } }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="#" class="logo">Карта Реальностей <span class="x-mark" style="color:var(--accent);font-weight:400">&times;</span> AI</a>
+    <span class="nav-date">25 апреля 2026 &middot; 10:00 CET</span>
+    <a href="https://lu.ma/gckwpmte" class="nav-cta" target="_blank">Регистрация</a>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO
+============================================ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="tag">AI Mindset &times; FutureDecoder</span>
+        <h1>Карта<br>Реальностей <span class="x-mark">&times;</span> AI</h1>
+        <p class="hero-subtitle">
+          Как выйти из слепого пятна и увидеть мир на 360&deg;.<br>
+          Четыре линзы реальности &mdash; одна система решений.
+        </p>
+        <div class="hero-meta">
+          <span>суббота, 25 апреля 2026</span>
+          <span class="dot"></span>
+          <span>10:00&ndash;14:00 CET</span>
+          <span class="dot"></span>
+          <span>онлайн, Zoom</span>
+          <span class="dot"></span>
+          <span>30 мест</span>
+        </div>
+      </div>
+      <div class="hero-diagram">
+        <!-- Inline SVG: Four Realities Cross Diagram -->
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background circle -->
+          <circle cx="200" cy="200" r="190" fill="none" stroke="#1e2640" stroke-width="1" stroke-dasharray="4 4" opacity="0.15"/>
+          <circle cx="200" cy="200" r="140" fill="none" stroke="#1e2640" stroke-width="1" stroke-dasharray="2 4" opacity="0.1"/>
+
+          <!-- Axes -->
+          <line x1="200" y1="20" x2="200" y2="380" stroke="#1e2640" stroke-width="2"/>
+          <line x1="20" y1="200" x2="380" y2="200" stroke="#1e2640" stroke-width="2"/>
+
+          <!-- Axis arrows -->
+          <polygon points="200,16 196,28 204,28" fill="#1e2640"/>
+          <polygon points="200,384 196,372 204,372" fill="#1e2640"/>
+          <polygon points="16,200 28,196 28,204" fill="#1e2640"/>
+          <polygon points="384,200 372,196 372,204" fill="#1e2640"/>
+
+          <!-- Axis labels -->
+          <text x="200" y="12" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" font-weight="600" fill="#8890a4" letter-spacing="2">ДЕЦЕНТР</text>
+          <text x="200" y="398" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" font-weight="600" fill="#8890a4" letter-spacing="2">ЦЕНТР</text>
+          <text x="10" y="197" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" font-weight="600" fill="#8890a4" letter-spacing="2" transform="rotate(-90,10,197)">СИНТЕТИКА</text>
+          <text x="390" y="197" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" font-weight="600" fill="#8890a4" letter-spacing="2" transform="rotate(90,390,197)">ЗЕМЛЯ</text>
+
+          <!-- Q1: Суверенный Сад (top-left) -->
+          <rect x="40" y="40" width="148" height="148" rx="4" fill="rgba(74,140,92,0.06)" stroke="rgba(74,140,92,0.3)" stroke-width="1"/>
+          <circle cx="80" cy="80" r="16" fill="none" stroke="#4a8c5c" stroke-width="1.5"/>
+          <line x1="80" y1="72" x2="80" y2="88" stroke="#4a8c5c" stroke-width="1.5"/>
+          <line x1="76" y1="76" x2="84" y2="76" stroke="#4a8c5c" stroke-width="1.5"/>
+          <circle cx="80" cy="82" r="3" fill="#4a8c5c" opacity="0.3"/>
+          <text x="80" y="110" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#4a8c5c">Суверенный</text>
+          <text x="80" y="126" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#4a8c5c">сад</text>
+          <text x="80" y="148" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#8890a4">автономность</text>
+          <text x="80" y="160" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#8890a4">делегирование AI</text>
+
+          <!-- Q2: Техно-суверен (top-right) -->
+          <rect x="212" y="40" width="148" height="148" rx="4" fill="rgba(196,92,74,0.06)" stroke="rgba(196,92,74,0.3)" stroke-width="1"/>
+          <circle cx="320" cy="80" r="16" fill="none" stroke="#c45c4a" stroke-width="1.5"/>
+          <rect x="312" y="72" width="16" height="16" rx="2" fill="none" stroke="#c45c4a" stroke-width="1.5"/>
+          <line x1="316" y1="78" x2="324" y2="78" stroke="#c45c4a" stroke-width="1"/>
+          <line x1="316" y1="82" x2="322" y2="82" stroke="#c45c4a" stroke-width="1"/>
+          <text x="320" y="110" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#c45c4a">Техно-</text>
+          <text x="320" y="126" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#c45c4a">суверен</text>
+          <text x="320" y="148" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#8890a4">мастерство</text>
+          <text x="320" y="160" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#8890a4">участие в процессе</text>
+
+          <!-- Q3: Институциональный вклад (bottom-left) -->
+          <rect x="40" y="212" width="148" height="148" rx="4" fill="rgba(184,148,58,0.06)" stroke="rgba(184,148,58,0.3)" stroke-width="1"/>
+          <rect x="64" y="256" width="32" height="24" rx="2" fill="none" stroke="#b8943a" stroke-width="1.5"/>
+          <line x1="68" y1="264" x2="92" y2="264" stroke="#b8943a" stroke-width="1"/>
+          <line x1="68" y1="268" x2="88" y2="268" stroke="#b8943a" stroke-width="1"/>
+          <line x1="68" y1="272" x2="84" y2="272" stroke="#b8943a" stroke-width="1"/>
+          <text x="80" y="298" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#b8943a">Институц.</text>
+          <text x="80" y="314" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#b8943a">вклад</text>
+          <text x="80" y="336" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#8890a4">системы, регуляции</text>
+          <text x="80" y="348" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#8890a4">инфраструктура</text>
+
+          <!-- Q4: Коллаборация сообщества (bottom-right) -->
+          <rect x="212" y="212" width="148" height="148" rx="4" fill="rgba(122,92,170,0.06)" stroke="rgba(122,92,170,0.3)" stroke-width="1"/>
+          <circle cx="310" cy="262" r="8" fill="none" stroke="#7a5caa" stroke-width="1.5"/>
+          <circle cx="330" cy="262" r="8" fill="none" stroke="#7a5caa" stroke-width="1.5"/>
+          <circle cx="320" cy="250" r="8" fill="none" stroke="#7a5caa" stroke-width="1.5"/>
+          <text x="320" y="298" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#7a5caa">Коллаборация</text>
+          <text x="320" y="314" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#7a5caa">сообщества</text>
+          <text x="320" y="336" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#8890a4">культура, смыслы</text>
+          <text x="320" y="348" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="8" fill="#8890a4">коллективный разум</text>
+
+          <!-- Center label -->
+          <rect x="170" y="186" width="60" height="28" rx="3" fill="var(--paper)" stroke="#1e2640" stroke-width="1.5"/>
+          <text x="200" y="205" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="9" font-weight="600" fill="#1e2640">360&deg;</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     STORY: WHY THIS WORKSHOP
+============================================ -->
+<section class="story-section fade-section">
+  <div class="container">
+    <div class="section-label">Предыстория</div>
+    <h2>Почему этот воркшоп</h2>
+    <div class="story-grid">
+      <div class="story-block">
+        <p>Мы привыкли принимать решения из одного квадранта &mdash; того, в котором нам <strong>приятно и понятно</strong>. Мозг не любит энергозатратное. Он стремится к знакомому. И годами мы смотрим на мир через одну линзу, не замечая остальных трёх.</p>
+        <div class="quote-inline">&laquo;Я не знаю, чего я не знаю&raquo; &mdash; четыре стадии знания. Метод помогает выйти из слепого пятна.</div>
+        <p>26 марта Оля Ерёмина провела сессию в AI Mindset (FOS #26), где показала: <strong>любой запрос</strong> &mdash; здоровье, карьера, стартап, переезд &mdash; можно разложить по 4 сценариям и увидеть варианты, которые мозг обычно отфильтровывает.</p>
+      </div>
+      <div class="story-block">
+        <p>Олина методология <strong>&laquo;выстрадана&raquo;</strong> &mdash; не из учебников, а из 50+ корпоративных проектов. Разложила все свои кейсы (банки, FMCG, ритейл, фарма) &mdash; увидела одну и ту же 4-квадрантную логику. А потом нашла параллель с Кеном Уилбером &mdash; он пришёл к тем же выводам через философию.</p>
+        <div class="quote-inline">&laquo;Чтобы управлять AI-агентами, нужно самому обладать агентностью. Вопрос &laquo;зачем&raquo; должен быть до &laquo;чем&raquo;.&raquo;</div>
+        <p>Мы совместили две экспертизы: <strong>внешний контекст</strong> (тренды, сценарии, форсайт) и <strong>внутренний контекст</strong> (AI POS, навыки, мотивация). Вместе &mdash; интегральная система решений.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     MODEL: 4 REALITIES
+============================================ -->
+<section class="model-section fade-section" id="model">
+  <div class="container">
+    <div class="section-label">Модель</div>
+    <div class="model-intro">
+      <h2>Четыре реальности &mdash; одна карта</h2>
+      <p>Две оси разрезают реальность на четыре квадранта. Вертикальная: <strong>кто принимает решение</strong> &mdash; я сам (децентр) или система (центр). Горизонтальная: <strong>как устроен процесс</strong> &mdash; автоматизация и делегирование (синтетика) или моё участие меняет результат (земля).</p>
+      <p>Человечество &laquo;качается&raquo; между этими полюсами. В эпоху AI это качание усилилось. Воркшоп учит видеть все четыре мира одновременно &mdash; и принимать решения с полным обзором.</p>
+    </div>
+
+    <!-- Axis top label -->
+    <div class="axis-vertical-labels">
+      <span class="axis-top">&uarr; Децентр &mdash; решение у носителя</span>
+    </div>
+
+    <div style="display:flex;align-items:center;max-width:700px;margin:0 auto;">
+      <span style="writing-mode:vertical-lr;transform:rotate(180deg);font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-faint);margin-right:12px;">Синтетика &larr;</span>
+      <div class="quadrant-grid" style="flex:1">
+        <div class="quadrant-card q-sovereign">
+          <div class="q-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4a8c5c" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 8l4-2 4 2M8 16l4 2 4-2"/></svg>
+            <span class="q-label">Суверенный сад</span>
+          </div>
+          <div class="q-wilber">I &mdash; Я / Interior Individual</div>
+          <p>Автономность, личные системы, делегирование AI. &laquo;Я строю свой мир сам, с помощью инструментов.&raquo;</p>
+        </div>
+        <div class="quadrant-card q-techno">
+          <div class="q-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c45c4a" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10h8M8 14h5"/></svg>
+            <span class="q-label">Техно-суверен</span>
+          </div>
+          <div class="q-wilber">It &mdash; Оно / Exterior Individual</div>
+          <p>Мастерство, навыки, участие в процессе. &laquo;Моё включение меняет результат. Я &mdash; создатель, а не потребитель.&raquo;</p>
+        </div>
+        <div class="quadrant-card q-institutional">
+          <div class="q-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b8943a" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><rect x="9" y="13" width="6" height="8"/></svg>
+            <span class="q-label">Институциональный вклад</span>
+          </div>
+          <div class="q-wilber">Its &mdash; Они / Exterior Collective</div>
+          <p>Системы, инфраструктура, регуляции. &laquo;Решение зависит от системы &mdash; государства, платформы, корпорации.&raquo;</p>
+        </div>
+        <div class="quadrant-card q-collab">
+          <div class="q-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7a5caa" stroke-width="1.5"><circle cx="8" cy="10" r="4"/><circle cx="16" cy="10" r="4"/><circle cx="12" cy="18" r="4"/></svg>
+            <span class="q-label">Коллаборация сообщества</span>
+          </div>
+          <div class="q-wilber">We &mdash; Мы / Interior Collective</div>
+          <p>Культура, смыслы, коллективные практики. &laquo;Мы вместе создаём новую реальность через соучастие.&raquo;</p>
+        </div>
+      </div>
+      <span style="writing-mode:vertical-lr;font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-faint);margin-left:12px;">&rarr; Земля</span>
+    </div>
+
+    <div class="axis-vertical-labels">
+      <span class="axis-bottom">&darr; Центр &mdash; решение зависит от системы</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SESSION INSIGHTS (FOS #26)
+============================================ -->
+<section class="insights-section fade-section">
+  <div class="container">
+    <div class="section-label">FOS #26 &mdash; ключевые цитаты</div>
+    <h2>Что прозвучало на сессии</h2>
+    <div class="insight-cards">
+      <div class="insight-card">
+        <div class="insight-speaker">Оля Ерёмина</div>
+        <blockquote>&laquo;Мышление &mdash; это наш бэкграунд. Оно формирует внимание. Мы смотрим туда, где приятно и понятно. Долгое время я думала, что только один квадрант &laquo;правильный&raquo; &mdash; потом поняла, что все четыре существуют одновременно.&raquo;</blockquote>
+        <p class="insight-context">О том, почему мы застреваем в одном сценарии</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-speaker">Оля Ерёмина</div>
+        <blockquote>&laquo;Если 6 из 8 ваших действий в одном квадранте &mdash; это звоночек. Все яйца в одну корзину.&raquo;</blockquote>
+        <p class="insight-context">Про слепые зоны и баланс четырёх реальностей</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-speaker">Alex Povaliaev</div>
+        <blockquote>&laquo;Мой первый кейс в Obsidian 7 лет назад &mdash; форсайт. Фотографировал карточки, переводил в Obsidian, строил граф связей. Тогда не было AI &mdash; была идея связанной графовой истории.&raquo;</blockquote>
+        <p class="insight-context">О корнях AI Mindset в форсайте</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-speaker">Оля Ерёмина</div>
+        <blockquote>&laquo;Тренды &mdash; это кайфовая история. Но важно не искать чужие тренды, а уметь использовать текущие. Они меняются не так часто, как все думают.&raquo;</blockquote>
+        <p class="insight-context">О подходе FutureDecoder к трендвотчингу</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-speaker">Участник</div>
+        <blockquote>&laquo;Можно анализировать свои поступки &mdash; насколько ты автономен в знаниях, продуктах, доходах, цифровых ресурсах?&raquo;</blockquote>
+        <p class="insight-context">Вопрос из аудитории о цифровой автономности</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     WORKSHOP FORMAT: 6 STEPS
+============================================ -->
+<section class="format-section fade-section" id="format">
+  <div class="container">
+    <div class="section-label">Программа</div>
+    <div class="format-intro">
+      <h2>6 шагов &mdash; 4 часа</h2>
+      <p>От личного запроса &mdash; к персональной карте реальностей. Каждый этап усилен AI-инструментами.</p>
+    </div>
+
+    <div class="steps-flow">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-who">Все &mdash; 30 мин</div>
+          <h3>Зачем</h3>
+          <p>Формулируем личный запрос. AI помогает через серию уточняющих вопросов. Здоровье, карьера, стартап, переезд &mdash; любой запрос подходит.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <div class="step-who">Оля &mdash; 45 мин</div>
+          <h3>Карта</h3>
+          <p>Четыре реальности как система координат. Оси Децентр/Центр &times; Синтетика/Земля. Демо: как один запрос раскладывается на 4 сценария. Кейсы: спина, блогер, стартап.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <div class="step-who">Alex &mdash; 60 мин</div>
+          <h3>Сигналы</h3>
+          <p>Выгрузка ваших Telegram-каналов и источников. AI автоматически раскладывает по 4 мирам. Загрузка методологии в Claude. Демо пайплайна.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <div class="step-who">Все &mdash; 60 мин</div>
+          <h3>Игра</h3>
+          <p>Групповая раскладка сигналов. Обсуждение в парах. Поиск слепых зон &mdash; если большинство ваших действий в одном квадранте, это звоночек.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <div class="step-who">Все &mdash; 30 мин</div>
+          <h3>Решение</h3>
+          <p>Что из 4 миров поддерживать? Что нельзя игнорировать? &laquo;Совет директоров&raquo; из четырёх миров &mdash; каждый мир советует. Персональная карта &rarr; артефакт.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <div class="step-who">Alex &mdash; 15 мин</div>
+          <h3>AI-обвязка</h3>
+          <p>Obsidian-шаблон для ежедневного сканирования. Claude-промпт с загруженной методологией. Telegram-бот для сбора сигналов. Всё &mdash; с собой.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TAKEAWAYS
+============================================ -->
+<section class="takeaways-section fade-section">
+  <div class="container">
+    <div class="section-label">Результат</div>
+    <h2>Что вы уносите</h2>
+    <div class="takeaways-grid">
+      <div class="takeaway-card">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1e2640" stroke-width="1.5"><rect x="4" y="4" width="24" height="24" rx="3"/><line x1="16" y1="4" x2="16" y2="28"/><line x1="4" y1="16" x2="28" y2="16"/><circle cx="10" cy="10" r="2" fill="#4a8c5c" stroke="none"/><circle cx="22" cy="10" r="2" fill="#c45c4a" stroke="none"/><circle cx="10" cy="22" r="2" fill="#b8943a" stroke="none"/><circle cx="22" cy="22" r="2" fill="#7a5caa" stroke="none"/></svg>
+        <h4>Персональная карта</h4>
+        <p>4 реальности по вашему запросу &mdash; готовый артефакт для принятия решений.</p>
+      </div>
+      <div class="takeaway-card">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1e2640" stroke-width="1.5"><rect x="6" y="3" width="20" height="26" rx="2"/><line x1="10" y1="10" x2="22" y2="10"/><line x1="10" y1="15" x2="22" y2="15"/><line x1="10" y1="20" x2="18" y2="20"/></svg>
+        <h4>Obsidian-шаблон</h4>
+        <p>Шаблон для сбора сигналов: заголовок, ссылка, к какому сценарию.</p>
+      </div>
+      <div class="takeaway-card">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1e2640" stroke-width="1.5"><path d="M6 6h20v20H6z"/><path d="M10 16l4 4 8-8"/></svg>
+        <h4>Claude-промпт</h4>
+        <p>Промпт с загруженной методологией &mdash; для самостоятельного анализа любой темы.</p>
+      </div>
+      <div class="takeaway-card">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1e2640" stroke-width="1.5"><circle cx="16" cy="12" r="6"/><circle cx="8" cy="22" r="4"/><circle cx="24" cy="22" r="4"/></svg>
+        <h4>Групповой контекст</h4>
+        <p>Инсайты от других участников &mdash; чужие слепые зоны раскрывают ваши.</p>
+      </div>
+      <div class="takeaway-card">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1e2640" stroke-width="1.5"><path d="M16 4v24M8 12l8-8 8 8"/><line x1="8" y1="28" x2="24" y2="28"/></svg>
+        <h4>Навыки будущего</h4>
+        <p>Конкретный список: что развивать, что нельзя игнорировать.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SPEAKERS
+============================================ -->
+<section class="speakers-section fade-section" id="speakers">
+  <div class="container">
+    <div class="section-label">Ведущие</div>
+    <h2>Кто проводит</h2>
+    <div class="speakers-grid">
+      <div class="speaker-card speaker-olya">
+        <div class="speaker-role">Методология &amp; Форсайт</div>
+        <h3>Оля Ерёмина</h3>
+        <p class="speaker-tagline">&laquo;Будущее &ndash; не приговор, а множество возможностей&raquo;</p>
+        <p>Основатель <a href="https://futuredecoder.ru" target="_blank">FutureDecoder</a> &mdash; проекта, который демократизирует знания о будущем. 13+ лет в стратегии и трендвотчинге. 50+ корпоративных проектов. 500+ обученных специалистов.</p>
+        <p>3 высших образования (финансы, лингвистика, стратегический маркетинг ВШЭ). Сертификаты Trendwatching.com и The Future Laboratory. Преподаватель BHSAD, Нетологии, МШУ Сколково.</p>
+        <p>Автор игрового формата с &laquo;визуальной колодой&raquo; трендов. Научный подход к тому, что обычно кажется гаданием.</p>
+        <div class="speaker-clients">
+          <strong>Клиенты:</strong> X5, КРОК, РБК, QIWI, ВТБ, Avito, МТС, Ozon, VK, Яндекс.Алиса, AstraZeneca, Боржоми, Сколково
+        </div>
+        <div class="speaker-links">
+          <a href="https://futuredecoder.ru" target="_blank">futuredecoder.ru</a>
+          <a href="https://t.me/olya_v_trende" target="_blank">@olya_v_trende</a>
+        </div>
+      </div>
+      <div class="speaker-card speaker-alex">
+        <div class="speaker-role">AI-инструменты &amp; Контекст</div>
+        <h3>Alex Povaliaev</h3>
+        <p class="speaker-tagline">Founder AI Mindset &middot; Personal OS</p>
+        <p>4 года строит сообщество <a href="https://aimindset.org/ai-mindset-community" target="_blank">AI Mindset</a>. Начал с форсайтных карточек в Obsidian 7 лет назад &mdash; ещё без AI. Сегодня &mdash; методология Personal OS, Claude Code как рабочий инструмент.</p>
+        <p>AI-Native спринты: 200 участников, 1500&ndash;2200 EUR. Формат FOS (Future of Self) &mdash; серия сессий на пересечении смыслов и технологий.</p>
+        <p>Задача на воркшопе: показать, как AI усиливает каждый этап форсайтной методологии &mdash; от сбора сигналов до персональной карты решений.</p>
+        <div class="speaker-links">
+          <a href="https://aimindset.org/ai-mindset-community" target="_blank">AI Mindset</a>
+          <a href="https://t.me/ai_mind_set_team" target="_blank">@ai_mind_set_team</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     VIDEO PLACEHOLDER (FOS #26)
+============================================ -->
+<section class="video-section fade-section" id="video">
+  <div class="container">
+    <div class="section-label">Запись</div>
+    <h2>FOS #26: Четыре реальности</h2>
+    <div class="video-placeholder">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="22" stroke="#8890a4" stroke-width="1.5"/>
+        <polygon points="20,14 36,24 20,34" fill="#8890a4" opacity="0.5"/>
+      </svg>
+      <h3>Запись FOS #26 появится здесь</h3>
+      <p>Сессия 26 марта 2026 &mdash; Оля Ерёмина &times; Alex Povaliaev.<br>Запись обрабатывается и скоро будет доступна.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CTA
+============================================ -->
+<section class="cta-section fade-section" id="register">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Карта Реальностей <span style="color:var(--accent);font-weight:400">&times;</span> AI</h2>
+      <p class="cta-meta">суббота, 25 апреля 2026 &middot; 10:00&ndash;14:00 CET &middot; онлайн, Zoom</p>
+      <div class="cta-price">99 EUR</div>
+      <p class="cta-spots">30 мест &mdash; мини-группа для глубокой работы</p>
+      <a href="https://lu.ma/gckwpmte" class="cta-button" target="_blank">Зарегистрироваться</a>
+      <p class="cta-note">Регистрация через Luma. Оплата картой. Ссылка на Zoom придёт после оплаты.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+============================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">
+        &copy; 2026 AI Mindset &times; FutureDecoder
+      </div>
+      <div class="footer-links">
+        <a href="https://aimindset.org/ai-mindset-community" target="_blank">AI Mindset Community</a>
+        <a href="https://t.me/ai_mind_set_team" target="_blank">Telegram</a>
+        <a href="https://futuredecoder.ru" target="_blank">FutureDecoder</a>
+        <a href="https://t.me/olya_v_trende" target="_blank">@olya_v_trende</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     SCRIPTS
+============================================ -->
+<script>
+// Fade-in on scroll
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('.fade-section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  sections.forEach(s => observer.observe(s));
+});
+</script>
+
+</body>
+</html>
