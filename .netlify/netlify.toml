@@ -1,0 +1,26 @@
+plugins = []
+headers = []
+redirects = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "/Users/alex/Documents/_code/_landings/four-realities-workshop"
+publishOrigin = "config"
+base = "/Users/alex/Documents/_code/_landings/four-realities-workshop"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
