@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Four Realities Workshop — Luma Cover</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    background: #f0ede8;
+    font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    color: #1e2640;
+    position: relative;
+  }
+
+  /* Very subtle grid — almost invisible */
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(30, 38, 64, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 38, 64, 0.04) 1px, transparent 1px);
+    background-size: 54px 54px;
+    z-index: 0;
+  }
+
+  /* Registration marks — corners */
+  .reg-mark {
+    position: absolute;
+    z-index: 5;
+  }
+  .reg-mark::before,
+  .reg-mark::after {
+    content: '';
+    position: absolute;
+    background: #1e2640;
+    opacity: 0.25;
+  }
+  .reg-mark.tl { top: 32px; left: 32px; }
+  .reg-mark.tr { top: 32px; right: 32px; }
+  .reg-mark.bl { bottom: 32px; left: 32px; }
+  .reg-mark.br { bottom: 32px; right: 32px; }
+
+  .reg-mark.tl::before, .reg-mark.tr::before,
+  .reg-mark.bl::before, .reg-mark.br::before {
+    width: 20px; height: 1.5px; top: 0; left: 0;
+  }
+  .reg-mark.tl::after, .reg-mark.bl::after {
+    width: 1.5px; height: 20px; top: 0; left: 0;
+  }
+  .reg-mark.tr::before { right: 0; left: auto; }
+  .reg-mark.tr::after {
+    width: 1.5px; height: 20px; top: 0; right: 0; left: auto;
+  }
+  .reg-mark.bl::after { bottom: 0; top: auto; }
+  .reg-mark.br::before { right: 0; left: auto; }
+  .reg-mark.br::after {
+    width: 1.5px; height: 20px; bottom: 0; top: auto; right: 0; left: auto;
+  }
+
+  /* Top-left brand */
+  .brand {
+    position: absolute;
+    top: 56px;
+    left: 64px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #1e2640;
+    opacity: 0.4;
+    z-index: 4;
+  }
+
+  /* Content centered */
+  .content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Title above cross */
+  .title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #1e2640;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .title-ai {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #3a5bcf;
+    letter-spacing: 2px;
+    margin-bottom: 48px;
+  }
+
+  /* Cross SVG */
+  .cross-wrap {
+    position: relative;
+    width: 360px;
+    height: 360px;
+    margin-bottom: 48px;
+  }
+
+  .cross-wrap svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Quadrant hint words */
+  .q-hint {
+    position: absolute;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #1e2640;
+    opacity: 0.12;
+    z-index: 4;
+  }
+  .q-hint.tl { top: 120px; left: 120px; }
+  .q-hint.tr { top: 120px; right: 120px; }
+  .q-hint.bl { bottom: 120px; left: 120px; }
+  .q-hint.br { bottom: 120px; right: 120px; }
+
+  /* Subtitle below cross */
+  .sub {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: #1e2640;
+    opacity: 0.4;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* Bottom info */
+  .info {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #1e2640;
+    opacity: 0.45;
+  }
+
+  .info .dot {
+    margin: 0 8px;
+    opacity: 0.5;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- Subtle grid -->
+  <div class="grid"></div>
+
+  <!-- Registration marks -->
+  <div class="reg-mark tl"></div>
+  <div class="reg-mark tr"></div>
+  <div class="reg-mark bl"></div>
+  <div class="reg-mark br"></div>
+
+  <!-- Brand -->
+  <div class="brand">AI MINDSET</div>
+
+  <!-- Quadrant hints -->
+  <span class="q-hint tl">навыки</span>
+  <span class="q-hint tr">ценности</span>
+  <span class="q-hint bl">системы</span>
+  <span class="q-hint br">культура</span>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Title -->
+    <div class="title">КАРТА РЕАЛЬНОСТЕЙ</div>
+    <div class="title-ai">&times; AI</div>
+
+    <!-- Cross diagram -->
+    <div class="cross-wrap">
+      <svg viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Dashed circles around center -->
+        <circle cx="180" cy="180" r="60" stroke="#1e2640" stroke-width="0.75" stroke-dasharray="4 6" opacity="0.15"/>
+        <circle cx="180" cy="180" r="110" stroke="#1e2640" stroke-width="0.5" stroke-dasharray="3 8" opacity="0.1"/>
+        <circle cx="180" cy="180" r="160" stroke="#3a5bcf" stroke-width="0.5" stroke-dasharray="2 10" opacity="0.08"/>
+
+        <!-- Vertical line -->
+        <line x1="180" y1="10" x2="180" y2="350" stroke="#1e2640" stroke-width="4"/>
+        <!-- Horizontal line -->
+        <line x1="10" y1="180" x2="350" y2="180" stroke="#1e2640" stroke-width="4"/>
+
+        <!-- Circle endpoints — top -->
+        <circle cx="180" cy="10" r="6" fill="#1e2640"/>
+        <!-- Circle endpoints — bottom -->
+        <circle cx="180" cy="350" r="6" fill="#1e2640"/>
+        <!-- Circle endpoints — left -->
+        <circle cx="10" cy="180" r="6" fill="#1e2640"/>
+        <!-- Circle endpoints — right -->
+        <circle cx="350" cy="180" r="6" fill="#1e2640"/>
+
+        <!-- Center dot — accent -->
+        <circle cx="180" cy="180" r="8" fill="#3a5bcf"/>
+        <circle cx="180" cy="180" r="4" fill="#f0ede8"/>
+
+      </svg>
+    </div>
+
+    <!-- Subtitle -->
+    <div class="sub">мастер-класс</div>
+
+    <!-- Info line -->
+    <div class="info">
+      25.04.2026<span class="dot">&middot;</span>99 EUR<span class="dot">&middot;</span>30 мест
+    </div>
+
+  </div>
+
+</body>
+</html>

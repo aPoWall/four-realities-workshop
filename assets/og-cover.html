@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>Four Realities Workshop OG Cover</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #f0ede8;
+    font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    color: #1e2640;
+    position: relative;
+  }
+
+  /* Graph paper grid */
+  .grid-minor {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(#d8d4cc 1px, transparent 1px),
+      linear-gradient(90deg, #d8d4cc 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 0;
+  }
+
+  .grid-major {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(#c2bdb5 1px, transparent 1px),
+      linear-gradient(90deg, #c2bdb5 1px, transparent 1px);
+    background-size: 100px 100px;
+    z-index: 1;
+  }
+
+  /* Dark navy frame */
+  .frame {
+    position: absolute;
+    inset: 16px;
+    border: 3px solid #1e2640;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .frame-inner {
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(30, 38, 64, 0.25);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Content layer */
+  .content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Top-left label */
+  .label-top-left {
+    position: absolute;
+    top: 32px;
+    left: 36px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #1e2640;
+    opacity: 0.7;
+  }
+
+  /* Corner marks */
+  .corner-mark {
+    position: absolute;
+    font-size: 10px;
+    color: #3a5bcf;
+    opacity: 0.5;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  .corner-mark.tr { top: 32px; right: 36px; }
+  .corner-mark.bl { bottom: 32px; left: 36px; }
+  .corner-mark.br { bottom: 32px; right: 36px; }
+
+  /* Title block */
+  .title-block {
+    text-align: center;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 4;
+  }
+
+  .title-main {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #1e2640;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .title-main .cross {
+    color: #3a5bcf;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #1e2640;
+    opacity: 0.6;
+  }
+
+  .subtitle .sep {
+    color: #3a5bcf;
+    opacity: 1;
+    margin: 0 4px;
+  }
+
+  /* Cross diagram */
+  .cross-diagram {
+    position: relative;
+    width: 340px;
+    height: 260px;
+    margin: 16px auto 20px;
+  }
+
+  .cross-diagram svg {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Quadrant labels */
+  .q-label {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1e2640;
+    opacity: 0.45;
+  }
+
+  .q-label.q-tl {
+    top: 22px;
+    left: 16px;
+  }
+
+  .q-label.q-tr {
+    top: 22px;
+    right: 16px;
+    text-align: right;
+  }
+
+  .q-label.q-bl {
+    bottom: 22px;
+    left: 16px;
+  }
+
+  .q-label.q-br {
+    bottom: 22px;
+    right: 16px;
+    text-align: right;
+  }
+
+  /* Axis labels */
+  .axis-label {
+    position: absolute;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #3a5bcf;
+    opacity: 0.55;
+  }
+
+  .axis-label.top { top: 0; left: 50%; transform: translateX(-50%); }
+  .axis-label.bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
+  .axis-label.left { top: 50%; left: -24px; transform: translateY(-50%) rotate(-90deg); }
+  .axis-label.right { top: 50%; right: -24px; transform: translateY(-50%) rotate(90deg); }
+
+  /* Center dot */
+  .center-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: #3a5bcf;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Authors */
+  .authors {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #1e2640;
+    opacity: 0.7;
+    text-align: center;
+  }
+
+  /* Small decorative elements */
+  .deco-circle {
+    position: absolute;
+    border: 1px solid #3a5bcf;
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+
+  .deco-circle.c1 { width: 80px; height: 80px; top: 60px; right: 80px; }
+  .deco-circle.c2 { width: 50px; height: 50px; bottom: 70px; left: 90px; }
+  .deco-circle.c3 { width: 30px; height: 30px; top: 100px; left: 120px; }
+
+  .deco-plus {
+    position: absolute;
+    color: #3a5bcf;
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.2;
+  }
+
+  .deco-plus.p1 { top: 80px; left: 200px; }
+  .deco-plus.p2 { bottom: 90px; right: 200px; }
+  .deco-plus.p3 { top: 160px; right: 160px; }
+  .deco-plus.p4 { bottom: 140px; left: 180px; }
+
+  .deco-hash {
+    position: absolute;
+    color: #1e2640;
+    font-size: 12px;
+    font-weight: 300;
+    opacity: 0.12;
+  }
+
+  .deco-hash.h1 { top: 120px; left: 60px; }
+  .deco-hash.h2 { bottom: 110px; right: 100px; }
+</style>
+</head>
+<body>
+
+  <!-- Graph paper layers -->
+  <div class="grid-minor"></div>
+  <div class="grid-major"></div>
+
+  <!-- Frame -->
+  <div class="frame"></div>
+  <div class="frame-inner"></div>
+
+  <!-- Decorative elements -->
+  <div class="deco-circle c1"></div>
+  <div class="deco-circle c2"></div>
+  <div class="deco-circle c3"></div>
+  <div class="deco-plus p1">+</div>
+  <div class="deco-plus p2">+</div>
+  <div class="deco-plus p3">+</div>
+  <div class="deco-plus p4">+</div>
+  <div class="deco-hash h1"># # #</div>
+  <div class="deco-hash h2"># # #</div>
+
+  <!-- Corner marks -->
+  <span class="corner-mark tr">1200 x 630</span>
+  <span class="corner-mark bl">OG:IMAGE</span>
+  <span class="corner-mark br">v1.0</span>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Top-left brand -->
+    <div class="label-top-left">AI MINDSET</div>
+
+    <!-- Title -->
+    <div class="title-block">
+      <div class="title-main">
+        КАРТА РЕАЛЬНОСТЕЙ <span class="cross">&times;</span> AI
+      </div>
+      <div class="subtitle">
+        мастер-класс <span class="sep">&middot;</span> 25 апреля 2026 <span class="sep">&middot;</span> 99 EUR
+      </div>
+    </div>
+
+    <!-- Cross Diagram -->
+    <div class="cross-diagram">
+      <svg viewBox="0 0 340 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Vertical axis -->
+        <line x1="170" y1="10" x2="170" y2="250" stroke="#1e2640" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
+        <!-- Horizontal axis -->
+        <line x1="20" y1="130" x2="320" y2="130" stroke="#1e2640" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
+        <!-- Arrow tips -->
+        <polygon points="170,8 166,18 174,18" fill="#1e2640" opacity="0.4"/>
+        <polygon points="170,252 166,242 174,242" fill="#1e2640" opacity="0.4"/>
+        <polygon points="18,130 28,126 28,134" fill="#1e2640" opacity="0.4"/>
+        <polygon points="322,130 312,126 312,134" fill="#1e2640" opacity="0.4"/>
+        <!-- Small cross marks at quadrant centers -->
+        <line x1="85" y1="60" x2="85" y2="72" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
+        <line x1="79" y1="66" x2="91" y2="66" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
+        <line x1="255" y1="60" x2="255" y2="72" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
+        <line x1="249" y1="66" x2="261" y2="66" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
+        <line x1="85" y1="188" x2="85" y2="200" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
+        <line x1="79" y1="194" x2="91" y2="194" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
+        <line x1="255" y1="188" x2="255" y2="200" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
+        <line x1="249" y1="194" x2="261" y2="194" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
+        <!-- Subtle quadrant fills -->
+        <rect x="21" y="11" width="148" height="118" fill="#3a5bcf" opacity="0.025"/>
+        <rect x="171" y="11" width="148" height="118" fill="#3a5bcf" opacity="0.04"/>
+        <rect x="21" y="131" width="148" height="118" fill="#3a5bcf" opacity="0.04"/>
+        <rect x="171" y="131" width="148" height="118" fill="#3a5bcf" opacity="0.025"/>
+      </svg>
+
+      <!-- Quadrant labels -->
+      <span class="q-label q-tl">ЖЕЛАЕМОЕ</span>
+      <span class="q-label q-tr">НАБЛЮДАЕМОЕ</span>
+      <span class="q-label q-bl">СКРЫТОЕ</span>
+      <span class="q-label q-br">ДЕЙСТВУЕМОЕ</span>
+
+      <!-- Center dot -->
+      <div class="center-dot"></div>
+    </div>
+
+    <!-- Authors -->
+    <div class="authors">
+      Alex Povaliaev + Olya Eremina
+    </div>
+
+  </div>
+
+</body>
+</html>
