@@ -5,331 +5,210 @@
 <meta name="viewport" content="width=1200">
 <title>Four Realities Workshop OG Cover</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+  :root {
+    --paper: #f0ede8;
+    --grid-minor: #d8d4cc;
+    --grid-major: #c2bdb5;
+    --ink: #1e2640;
+    --accent: #3a5bcf;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
     width: 1200px;
     height: 630px;
     overflow: hidden;
-    background: #f0ede8;
-    font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-    color: #1e2640;
+    background: var(--paper);
+    font-family: var(--mono);
+    color: var(--ink);
     position: relative;
   }
 
-  /* Graph paper grid */
-  .grid-minor {
-    position: absolute;
-    inset: 0;
+  /* Graph paper — same as map */
+  body {
     background-image:
-      linear-gradient(#d8d4cc 1px, transparent 1px),
-      linear-gradient(90deg, #d8d4cc 1px, transparent 1px);
-    background-size: 20px 20px;
-    z-index: 0;
+      linear-gradient(var(--grid-minor) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px),
+      linear-gradient(var(--grid-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
+    background-size:
+      20px 20px,
+      20px 20px,
+      100px 100px,
+      100px 100px;
+    background-position: -1px -1px;
   }
 
-  .grid-major {
+  /* Brand top-left */
+  .brand {
     position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(#c2bdb5 1px, transparent 1px),
-      linear-gradient(90deg, #c2bdb5 1px, transparent 1px);
-    background-size: 100px 100px;
-    z-index: 1;
+    top: 30px;
+    left: 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: var(--ink);
+    opacity: 0.35;
+    z-index: 4;
   }
 
-  /* Dark navy frame */
-  .frame {
-    position: absolute;
-    inset: 16px;
-    border: 3px solid #1e2640;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .frame-inner {
-    position: absolute;
-    inset: 20px;
-    border: 1px solid rgba(30, 38, 64, 0.25);
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  /* Content layer */
-  .content {
+  /* Layout: left text + right cross */
+  .layout {
     position: absolute;
     inset: 0;
     z-index: 3;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 60px;
+    padding: 0 80px;
   }
 
-  /* Top-left label */
-  .label-top-left {
-    position: absolute;
-    top: 32px;
-    left: 36px;
-    font-size: 13px;
+  /* Left side */
+  .left {
+    flex: 1;
+    max-width: 500px;
+  }
+
+  .title {
+    font-family: var(--sans);
+    font-size: 36px;
     font-weight: 700;
-    letter-spacing: 4px;
-    color: #1e2640;
-    opacity: 0.7;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 16px;
   }
-
-  /* Corner marks */
-  .corner-mark {
-    position: absolute;
-    font-size: 10px;
-    color: #3a5bcf;
-    opacity: 0.5;
+  .title .x-mark {
+    color: var(--accent);
     font-weight: 400;
-    letter-spacing: 1px;
-  }
-  .corner-mark.tr { top: 32px; right: 36px; }
-  .corner-mark.bl { bottom: 32px; left: 36px; }
-  .corner-mark.br { bottom: 32px; right: 36px; }
-
-  /* Title block */
-  .title-block {
-    text-align: center;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 4;
-  }
-
-  .title-main {
-    font-size: 38px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #1e2640;
-    line-height: 1.15;
-    margin-bottom: 12px;
-  }
-
-  .title-main .cross {
-    color: #3a5bcf;
   }
 
   .subtitle {
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    color: #1e2640;
-    opacity: 0.6;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
   }
 
-  .subtitle .sep {
-    color: #3a5bcf;
-    opacity: 1;
-    margin: 0 4px;
+  .rule {
+    width: 200px;
+    height: 3px;
+    background: var(--ink);
+    margin-bottom: 16px;
   }
 
-  /* Cross diagram */
-  .cross-diagram {
+  .meta {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: rgba(30,38,64,0.4);
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+  }
+
+  /* Right side: cross */
+  .cross-wrap {
     position: relative;
-    width: 340px;
-    height: 260px;
-    margin: 16px auto 20px;
+    width: 320px;
+    height: 320px;
+    flex-shrink: 0;
   }
 
-  .cross-diagram svg {
-    position: absolute;
-    inset: 0;
-  }
-
-  /* Quadrant labels */
   .q-label {
     position: absolute;
-    font-size: 11px;
+    font-family: var(--mono);
+    font-size: 10px;
     font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #1e2640;
-    opacity: 0.45;
+    color: var(--ink);
+    opacity: 0.35;
+    letter-spacing: 0.5px;
+    z-index: 5;
   }
+  .q-label.tl { top: 28px; left: 14px; }
+  .q-label.tr { top: 28px; right: 14px; text-align: right; }
+  .q-label.bl { bottom: 28px; left: 14px; }
+  .q-label.br { bottom: 28px; right: 14px; text-align: right; }
 
-  .q-label.q-tl {
-    top: 22px;
-    left: 16px;
-  }
-
-  .q-label.q-tr {
-    top: 22px;
-    right: 16px;
-    text-align: right;
-  }
-
-  .q-label.q-bl {
-    bottom: 22px;
-    left: 16px;
-  }
-
-  .q-label.q-br {
-    bottom: 22px;
-    right: 16px;
-    text-align: right;
-  }
-
-  /* Axis labels */
-  .axis-label {
-    position: absolute;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #3a5bcf;
-    opacity: 0.55;
-  }
-
-  .axis-label.top { top: 0; left: 50%; transform: translateX(-50%); }
-  .axis-label.bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
-  .axis-label.left { top: 50%; left: -24px; transform: translateY(-50%) rotate(-90deg); }
-  .axis-label.right { top: 50%; right: -24px; transform: translateY(-50%) rotate(90deg); }
-
-  /* Center dot */
-  .center-dot {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    background: #3a5bcf;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  /* Authors */
-  .authors {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    color: #1e2640;
-    opacity: 0.7;
-    text-align: center;
-  }
-
-  /* Small decorative elements */
-  .deco-circle {
-    position: absolute;
-    border: 1px solid #3a5bcf;
-    border-radius: 50%;
-    opacity: 0.15;
-  }
-
-  .deco-circle.c1 { width: 80px; height: 80px; top: 60px; right: 80px; }
-  .deco-circle.c2 { width: 50px; height: 50px; bottom: 70px; left: 90px; }
-  .deco-circle.c3 { width: 30px; height: 30px; top: 100px; left: 120px; }
-
-  .deco-plus {
-    position: absolute;
-    color: #3a5bcf;
-    font-size: 16px;
-    font-weight: 300;
-    opacity: 0.2;
-  }
-
-  .deco-plus.p1 { top: 80px; left: 200px; }
-  .deco-plus.p2 { bottom: 90px; right: 200px; }
-  .deco-plus.p3 { top: 160px; right: 160px; }
-  .deco-plus.p4 { bottom: 140px; left: 180px; }
-
-  .deco-hash {
-    position: absolute;
-    color: #1e2640;
-    font-size: 12px;
-    font-weight: 300;
-    opacity: 0.12;
-  }
-
-  .deco-hash.h1 { top: 120px; left: 60px; }
-  .deco-hash.h2 { bottom: 110px; right: 100px; }
 </style>
 </head>
 <body>
 
-  <!-- Graph paper layers -->
-  <div class="grid-minor"></div>
-  <div class="grid-major"></div>
+  <!-- Brand -->
+  <div class="brand">AI MINDSET</div>
 
-  <!-- Frame -->
-  <div class="frame"></div>
-  <div class="frame-inner"></div>
+  <!-- Layout -->
+  <div class="layout">
 
-  <!-- Decorative elements -->
-  <div class="deco-circle c1"></div>
-  <div class="deco-circle c2"></div>
-  <div class="deco-circle c3"></div>
-  <div class="deco-plus p1">+</div>
-  <div class="deco-plus p2">+</div>
-  <div class="deco-plus p3">+</div>
-  <div class="deco-plus p4">+</div>
-  <div class="deco-hash h1"># # #</div>
-  <div class="deco-hash h2"># # #</div>
-
-  <!-- Corner marks -->
-  <span class="corner-mark tr">1200 x 630</span>
-  <span class="corner-mark bl">OG:IMAGE</span>
-  <span class="corner-mark br">v1.0</span>
-
-  <!-- Content -->
-  <div class="content">
-
-    <!-- Top-left brand -->
-    <div class="label-top-left">AI MINDSET</div>
-
-    <!-- Title -->
-    <div class="title-block">
-      <div class="title-main">
-        КАРТА РЕАЛЬНОСТЕЙ <span class="cross">&times;</span> AI
-      </div>
-      <div class="subtitle">
-        мастер-класс <span class="sep">&middot;</span> 25 апреля 2026 <span class="sep">&middot;</span> 99 EUR
+    <!-- Left: text -->
+    <div class="left">
+      <div class="title">КАРТА РЕАЛЬНОСТЕЙ <span class="x-mark">&times;</span> AI</div>
+      <div class="subtitle">Integral Context OS</div>
+      <div class="rule"></div>
+      <div class="meta">
+        мастер-класс &middot; 25 апреля 2026<br>
+        99 EUR &middot; 30 мест &middot; Zoom<br>
+        Alex Povaliaev + Olya Eremina
       </div>
     </div>
 
-    <!-- Cross Diagram -->
-    <div class="cross-diagram">
-      <svg viewBox="0 0 340 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Vertical axis -->
-        <line x1="170" y1="10" x2="170" y2="250" stroke="#1e2640" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
-        <!-- Horizontal axis -->
-        <line x1="20" y1="130" x2="320" y2="130" stroke="#1e2640" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
-        <!-- Arrow tips -->
-        <polygon points="170,8 166,18 174,18" fill="#1e2640" opacity="0.4"/>
-        <polygon points="170,252 166,242 174,242" fill="#1e2640" opacity="0.4"/>
-        <polygon points="18,130 28,126 28,134" fill="#1e2640" opacity="0.4"/>
-        <polygon points="322,130 312,126 312,134" fill="#1e2640" opacity="0.4"/>
-        <!-- Small cross marks at quadrant centers -->
-        <line x1="85" y1="60" x2="85" y2="72" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
-        <line x1="79" y1="66" x2="91" y2="66" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
-        <line x1="255" y1="60" x2="255" y2="72" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
-        <line x1="249" y1="66" x2="261" y2="66" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
-        <line x1="85" y1="188" x2="85" y2="200" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
-        <line x1="79" y1="194" x2="91" y2="194" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
-        <line x1="255" y1="188" x2="255" y2="200" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
-        <line x1="249" y1="194" x2="261" y2="194" stroke="#3a5bcf" stroke-width="1" opacity="0.3"/>
-        <!-- Subtle quadrant fills -->
-        <rect x="21" y="11" width="148" height="118" fill="#3a5bcf" opacity="0.025"/>
-        <rect x="171" y="11" width="148" height="118" fill="#3a5bcf" opacity="0.04"/>
-        <rect x="21" y="131" width="148" height="118" fill="#3a5bcf" opacity="0.04"/>
-        <rect x="171" y="131" width="148" height="118" fill="#3a5bcf" opacity="0.025"/>
+    <!-- Right: cross -->
+    <div class="cross-wrap">
+      <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
+        <defs>
+          <filter id="rough" x="-2%" y="-2%" width="104%" height="104%">
+            <feTurbulence type="turbulence" baseFrequency="0.015" numOctaves="3" result="noise" seed="2"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Axis lines -->
+        <g filter="url(#rough)">
+          <path d="M 160 15 C 159 80, 161 240, 160 305" stroke="#1e2640" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M 15 160 C 80 159, 240 161, 305 160" stroke="#1e2640" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
+
+        <!-- Endpoints -->
+        <circle cx="160" cy="15" r="5" fill="#1e2640"/>
+        <circle cx="160" cy="305" r="5" fill="#1e2640"/>
+        <circle cx="15" cy="160" r="5" fill="#1e2640"/>
+        <circle cx="305" cy="160" r="5" fill="#1e2640"/>
+
+        <!-- Center circle -->
+        <circle cx="160" cy="160" r="20" fill="#f0ede8" stroke="#1e2640" stroke-width="2.5" filter="url(#glow)"/>
+        <circle cx="160" cy="160" r="20" fill="none" stroke="#3a5bcf" stroke-width="1" opacity="0.35"/>
+        <text x="160" y="164" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="10" font-weight="700" fill="#1e2640">ЗАЧЕМ</text>
+
+        <!-- Axis labels -->
+        <text x="160" y="8" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="8" font-weight="700" fill="#1e2640" letter-spacing="2">ДЕЦЕНТР</text>
+        <text x="160" y="318" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="8" font-weight="700" fill="#1e2640" letter-spacing="2">ЦЕНТР</text>
+
+        <!-- Diagonal lines -->
+        <g stroke="#c2bdb5" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.3">
+          <line x1="70" y1="70" x2="142" y2="144"/>
+          <line x1="250" y1="70" x2="178" y2="144"/>
+          <line x1="70" y1="250" x2="142" y2="176"/>
+          <line x1="250" y1="250" x2="178" y2="176"/>
+        </g>
       </svg>
 
       <!-- Quadrant labels -->
-      <span class="q-label q-tl">ЖЕЛАЕМОЕ</span>
-      <span class="q-label q-tr">НАБЛЮДАЕМОЕ</span>
-      <span class="q-label q-bl">СКРЫТОЕ</span>
-      <span class="q-label q-br">ДЕЙСТВУЕМОЕ</span>
-
-      <!-- Center dot -->
-      <div class="center-dot"></div>
-    </div>
-
-    <!-- Authors -->
-    <div class="authors">
-      Alex Povaliaev + Olya Eremina
+      <span class="q-label tl">Суверенный сад</span>
+      <span class="q-label tr">Техносуверен</span>
+      <span class="q-label bl">Институц. вклад</span>
+      <span class="q-label br">Коллаборация</span>
     </div>
 
   </div>

@@ -5,7 +5,17 @@
 <meta name="viewport" content="width=1080">
 <title>Four Realities Workshop — Luma Cover</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+  :root {
+    --paper: #f0ede8;
+    --grid-minor: #d8d4cc;
+    --grid-major: #c2bdb5;
+    --ink: #1e2640;
+    --accent: #3a5bcf;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -13,67 +23,38 @@
     width: 1080px;
     height: 1080px;
     overflow: hidden;
-    background: #f0ede8;
-    font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-    color: #1e2640;
+    background: var(--paper);
+    font-family: var(--mono);
+    color: var(--ink);
     position: relative;
   }
 
-  /* Very subtle grid — almost invisible */
-  .grid {
-    position: absolute;
-    inset: 0;
+  /* Graph paper — same as map */
+  body {
     background-image:
-      linear-gradient(rgba(30, 38, 64, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30, 38, 64, 0.04) 1px, transparent 1px);
-    background-size: 54px 54px;
-    z-index: 0;
+      linear-gradient(var(--grid-minor) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px),
+      linear-gradient(var(--grid-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
+    background-size:
+      20px 20px,
+      20px 20px,
+      100px 100px,
+      100px 100px;
+    background-position: -1px -1px;
   }
 
-  /* Registration marks — corners */
-  .reg-mark {
-    position: absolute;
-    z-index: 5;
-  }
-  .reg-mark::before,
-  .reg-mark::after {
-    content: '';
-    position: absolute;
-    background: #1e2640;
-    opacity: 0.25;
-  }
-  .reg-mark.tl { top: 32px; left: 32px; }
-  .reg-mark.tr { top: 32px; right: 32px; }
-  .reg-mark.bl { bottom: 32px; left: 32px; }
-  .reg-mark.br { bottom: 32px; right: 32px; }
-
-  .reg-mark.tl::before, .reg-mark.tr::before,
-  .reg-mark.bl::before, .reg-mark.br::before {
-    width: 20px; height: 1.5px; top: 0; left: 0;
-  }
-  .reg-mark.tl::after, .reg-mark.bl::after {
-    width: 1.5px; height: 20px; top: 0; left: 0;
-  }
-  .reg-mark.tr::before { right: 0; left: auto; }
-  .reg-mark.tr::after {
-    width: 1.5px; height: 20px; top: 0; right: 0; left: auto;
-  }
-  .reg-mark.bl::after { bottom: 0; top: auto; }
-  .reg-mark.br::before { right: 0; left: auto; }
-  .reg-mark.br::after {
-    width: 1.5px; height: 20px; bottom: 0; top: auto; right: 0; left: auto;
-  }
-
-  /* Top-left brand */
+  /* Brand top-left */
   .brand {
     position: absolute;
-    top: 56px;
-    left: 64px;
+    top: 52px;
+    left: 60px;
+    font-family: var(--mono);
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 5px;
-    color: #1e2640;
-    opacity: 0.4;
+    color: var(--ink);
+    opacity: 0.35;
     z-index: 4;
   }
 
@@ -88,79 +69,57 @@
     justify-content: center;
   }
 
-  /* Title above cross */
+  /* Title */
   .title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 48px;
+    font-family: var(--sans);
+    font-size: 38px;
     font-weight: 700;
-    letter-spacing: 3px;
-    color: #1e2640;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--ink);
     text-align: center;
-    margin-bottom: 4px;
+    margin-bottom: 56px;
   }
-
-  .title-ai {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: #3a5bcf;
-    letter-spacing: 2px;
-    margin-bottom: 48px;
+  .title .x-mark {
+    color: var(--accent);
+    font-weight: 400;
   }
 
   /* Cross SVG */
   .cross-wrap {
     position: relative;
-    width: 360px;
-    height: 360px;
+    width: 440px;
+    height: 440px;
     margin-bottom: 48px;
   }
 
-  .cross-wrap svg {
+  /* Quadrant labels */
+  .q-label {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Quadrant hint words */
-  .q-hint {
-    position: absolute;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: #1e2640;
-    opacity: 0.12;
-    z-index: 4;
-  }
-  .q-hint.tl { top: 120px; left: 120px; }
-  .q-hint.tr { top: 120px; right: 120px; }
-  .q-hint.bl { bottom: 120px; left: 120px; }
-  .q-hint.br { bottom: 120px; right: 120px; }
-
-  /* Subtitle below cross */
-  .sub {
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 4px;
-    color: #1e2640;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
     opacity: 0.4;
-    text-transform: uppercase;
-    margin-bottom: 24px;
+    letter-spacing: 1px;
+    z-index: 5;
   }
+  .q-label.tl { top: 40px; left: 24px; }
+  .q-label.tr { top: 40px; right: 24px; text-align: right; }
+  .q-label.bl { bottom: 40px; left: 24px; }
+  .q-label.br { bottom: 40px; right: 24px; text-align: right; }
 
   /* Bottom info */
   .info {
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    color: #1e2640;
-    opacity: 0.45;
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: var(--ink);
+    opacity: 0.4;
   }
-
   .info .dot {
-    margin: 0 8px;
+    margin: 0 10px;
     opacity: 0.5;
   }
 
@@ -168,67 +127,71 @@
 </head>
 <body>
 
-  <!-- Subtle grid -->
-  <div class="grid"></div>
-
-  <!-- Registration marks -->
-  <div class="reg-mark tl"></div>
-  <div class="reg-mark tr"></div>
-  <div class="reg-mark bl"></div>
-  <div class="reg-mark br"></div>
-
   <!-- Brand -->
   <div class="brand">AI MINDSET</div>
-
-  <!-- Quadrant hints -->
-  <span class="q-hint tl">навыки</span>
-  <span class="q-hint tr">ценности</span>
-  <span class="q-hint bl">системы</span>
-  <span class="q-hint br">культура</span>
 
   <!-- Content -->
   <div class="content">
 
     <!-- Title -->
-    <div class="title">КАРТА РЕАЛЬНОСТЕЙ</div>
-    <div class="title-ai">&times; AI</div>
+    <div class="title">КАРТА РЕАЛЬНОСТЕЙ <span class="x-mark">&times;</span> AI</div>
 
-    <!-- Cross diagram -->
+    <!-- Cross diagram — same stroke style as map -->
     <div class="cross-wrap">
-      <svg viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
+        <defs>
+          <filter id="rough" x="-2%" y="-2%" width="104%" height="104%">
+            <feTurbulence type="turbulence" baseFrequency="0.015" numOctaves="3" result="noise" seed="2"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
 
-        <!-- Dashed circles around center -->
-        <circle cx="180" cy="180" r="60" stroke="#1e2640" stroke-width="0.75" stroke-dasharray="4 6" opacity="0.15"/>
-        <circle cx="180" cy="180" r="110" stroke="#1e2640" stroke-width="0.5" stroke-dasharray="3 8" opacity="0.1"/>
-        <circle cx="180" cy="180" r="160" stroke="#3a5bcf" stroke-width="0.5" stroke-dasharray="2 10" opacity="0.08"/>
+        <!-- Axis lines — hand-drawn feel like map -->
+        <g filter="url(#rough)">
+          <path d="M 220 20 C 219 100, 221 300, 220 420" stroke="#1e2640" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M 20 220 C 100 219, 340 221, 420 220" stroke="#1e2640" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
 
-        <!-- Vertical line -->
-        <line x1="180" y1="10" x2="180" y2="350" stroke="#1e2640" stroke-width="4"/>
-        <!-- Horizontal line -->
-        <line x1="10" y1="180" x2="350" y2="180" stroke="#1e2640" stroke-width="4"/>
+        <!-- Axis endpoints -->
+        <circle cx="220" cy="20" r="6" fill="#1e2640"/>
+        <circle cx="220" cy="420" r="6" fill="#1e2640"/>
+        <circle cx="20" cy="220" r="6" fill="#1e2640"/>
+        <circle cx="420" cy="220" r="6" fill="#1e2640"/>
 
-        <!-- Circle endpoints — top -->
-        <circle cx="180" cy="10" r="6" fill="#1e2640"/>
-        <!-- Circle endpoints — bottom -->
-        <circle cx="180" cy="350" r="6" fill="#1e2640"/>
-        <!-- Circle endpoints — left -->
-        <circle cx="10" cy="180" r="6" fill="#1e2640"/>
-        <!-- Circle endpoints — right -->
-        <circle cx="350" cy="180" r="6" fill="#1e2640"/>
+        <!-- Center circle: ЗАЧЕМ -->
+        <circle cx="220" cy="220" r="26" fill="#f0ede8" stroke="#1e2640" stroke-width="3" filter="url(#glow)"/>
+        <circle cx="220" cy="220" r="26" fill="none" stroke="#3a5bcf" stroke-width="1.5" opacity="0.35"/>
+        <text x="220" y="225" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="700" fill="#1e2640">ЗАЧЕМ</text>
 
-        <!-- Center dot — accent -->
-        <circle cx="180" cy="180" r="8" fill="#3a5bcf"/>
-        <circle cx="180" cy="180" r="4" fill="#f0ede8"/>
+        <!-- Axis labels -->
+        <text x="220" y="12" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="#1e2640" letter-spacing="3">ДЕЦЕНТР</text>
+        <text x="220" y="438" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="#1e2640" letter-spacing="3">ЦЕНТР</text>
+        <text x="10" y="220" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="10" font-weight="700" fill="#1e2640" letter-spacing="2" transform="rotate(-90, 10, 220)">СИНТЕТИКА</text>
+        <text x="430" y="220" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="10" font-weight="700" fill="#1e2640" letter-spacing="2" transform="rotate(90, 430, 220)">ЗЕМЛЯ</text>
 
+        <!-- Diagonal connection lines -->
+        <g stroke="#c2bdb5" stroke-width="1" stroke-dasharray="4,4" opacity="0.3">
+          <line x1="100" y1="100" x2="195" y2="200"/>
+          <line x1="340" y1="100" x2="245" y2="200"/>
+          <line x1="100" y1="340" x2="195" y2="240"/>
+          <line x1="340" y1="340" x2="245" y2="240"/>
+        </g>
       </svg>
-    </div>
 
-    <!-- Subtitle -->
-    <div class="sub">мастер-класс</div>
+      <!-- Quadrant labels -->
+      <span class="q-label tl">Суверенный сад</span>
+      <span class="q-label tr">Техносуверен</span>
+      <span class="q-label bl">Институциональный вклад</span>
+      <span class="q-label br">Коллаборация сообщества</span>
+    </div>
 
     <!-- Info line -->
     <div class="info">
-      25.04.2026<span class="dot">&middot;</span>99 EUR<span class="dot">&middot;</span>30 мест
+      25.04.2026<span class="dot">&middot;</span>99 EUR
     </div>
 
   </div>
