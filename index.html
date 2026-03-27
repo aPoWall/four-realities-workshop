@@ -62,6 +62,24 @@
     position: relative;
   }
 
+  /* ── Logo ── */
+  .logo-area {
+    margin-bottom: 40px;
+  }
+  .logo-area a {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--faded-strong);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .logo-area a:hover {
+    color: var(--accent);
+  }
+
   /* ── Title Block ── */
   .title-block {
     margin-bottom: 60px;
@@ -357,27 +375,38 @@
 
   /* ── Speakers Section ── */
   .speakers-section {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto 50px;
   }
   .speakers-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: 32px;
   }
   .speaker-card {
     border: 1px solid var(--grid-major);
-    padding: 20px 24px;
+    padding: 30px 24px 24px;
     position: relative;
+    text-align: center;
   }
   .speaker-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
-    width: 3px; height: 100%;
+    width: 100%; height: 3px;
   }
   .speaker-alex::before { background: var(--accent); }
   .speaker-olya::before { background: #c45c4a; }
+  .speaker-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    border: 2px solid var(--grid-major);
+    margin: 0 auto 16px;
+    display: block;
+  }
   .speaker-name {
     font-family: var(--sans);
     font-size: 16px;
@@ -389,7 +418,7 @@
     font-family: var(--mono);
     font-size: 11px;
     color: var(--faded-strong);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     letter-spacing: 0.5px;
   }
   .speaker-desc {
@@ -397,29 +426,184 @@
     font-size: 12px;
     color: var(--ink);
     line-height: 1.7;
+    text-align: left;
+  }
+  .speaker-desc .speaker-line {
+    display: block;
+    margin-bottom: 2px;
+  }
+  .speaker-links {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faded-strong);
+    margin-top: 10px;
+    text-align: left;
+  }
+  .speaker-links a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .speaker-links a:hover {
+    border-bottom-color: var(--accent);
   }
 
-  /* ── Recording Placeholder ── */
-  .recording-section {
-    max-width: 600px;
+  /* ── Video Section ── */
+  .video-section {
+    max-width: 900px;
     margin: 0 auto 50px;
-    text-align: center;
   }
-  .recording-placeholder {
-    border: 2px dashed var(--grid-major);
-    border-radius: 6px;
-    padding: 40px 30px;
+  .video-section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     color: var(--faded-strong);
+    margin-bottom: 16px;
+  }
+  .video-thumbnail-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    border: 2px solid var(--grid-major);
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .video-thumbnail-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s;
+  }
+  .video-thumbnail-wrapper:hover img {
+    opacity: 0.85;
+  }
+  .video-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    transition: transform 0.25s;
+  }
+  .video-thumbnail-wrapper:hover .video-play-btn {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  .video-meta {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faded-strong);
+    line-height: 1.6;
+  }
+
+  /* ── Timeline / Timecodes ── */
+  .timeline-section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+  }
+  .timeline-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--grid-major);
+    margin-bottom: 14px;
+  }
+  .timecodes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .timecode-link {
+    display: flex;
+    gap: 16px;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--grid-minor);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    align-items: baseline;
+  }
+  .timecode-link:first-child {
+    border-top: 1px solid var(--grid-minor);
+  }
+  .timecode-link:hover {
+    background: rgba(30,38,64,0.04);
+    padding-left: 16px;
+  }
+  .timecode-time {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--grid-major);
+    min-width: 44px;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.25s;
+  }
+  .timecode-link:hover .timecode-time {
+    color: var(--accent);
+  }
+  .timecode-text {
     font-family: var(--mono);
     font-size: 13px;
-    line-height: 1.8;
-    position: relative;
+    color: var(--faded-strong);
+    line-height: 1.5;
+    transition: color 0.25s;
   }
-  .recording-placeholder .rec-icon {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 24px;
-    opacity: 0.35;
+  .timecode-link:hover .timecode-text {
+    color: var(--ink);
+  }
+
+  /* ── Quotes Section ── */
+  .quotes-section {
+    max-width: 800px;
+    margin: 0 auto 60px;
+  }
+  .quote-item {
+    margin-bottom: 48px;
+    position: relative;
+    padding: 0 30px;
+  }
+  .quote-item.align-right {
+    text-align: right;
+  }
+  .quote-mark {
+    position: absolute;
+    top: -20px;
+    font-family: var(--sans);
+    font-size: 80px;
+    font-weight: 700;
+    color: var(--faded);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .quote-item:not(.align-right) .quote-mark {
+    left: -10px;
+  }
+  .quote-item.align-right .quote-mark {
+    right: -10px;
+  }
+  .quote-text {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--ink);
+    position: relative;
+    z-index: 1;
+  }
+  .quote-author {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faded-strong);
+    margin-top: 10px;
+    letter-spacing: 0.5px;
   }
 
   /* ── CTA Section ── */
@@ -512,100 +696,6 @@
     border-bottom-color: var(--accent);
   }
 
-  /* ── Video Section ── */
-  .video-section {
-    max-width: 900px;
-    margin: 0 auto 50px;
-  }
-  .video-section-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--faded-strong);
-    margin-bottom: 16px;
-  }
-  .video-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%;
-    background: #e8e4de;
-    border: 2px solid var(--grid-major);
-  }
-  .video-container iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-  .video-meta {
-    margin-top: 14px;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--faded-strong);
-    line-height: 1.6;
-  }
-
-  /* ── Timeline / Timecodes ── */
-  .timeline-section {
-    max-width: 900px;
-    margin: 0 auto 60px;
-  }
-  .timeline-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--grid-major);
-    margin-bottom: 14px;
-  }
-  .timecodes-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .timecode-link {
-    display: flex;
-    gap: 16px;
-    padding: 8px 10px;
-    border-bottom: 1px solid var(--grid-minor);
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.25s;
-    align-items: baseline;
-  }
-  .timecode-link:first-child {
-    border-top: 1px solid var(--grid-minor);
-  }
-  .timecode-link:hover {
-    background: rgba(30,38,64,0.04);
-    padding-left: 16px;
-  }
-  .timecode-time {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--grid-major);
-    min-width: 44px;
-    font-variant-numeric: tabular-nums;
-    transition: color 0.25s;
-  }
-  .timecode-link:hover .timecode-time {
-    color: var(--accent);
-  }
-  .timecode-text {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--faded-strong);
-    line-height: 1.5;
-    transition: color 0.25s;
-  }
-  .timecode-link:hover .timecode-text {
-    color: var(--ink);
-  }
-
   /* ── Responsive ── */
   @media (max-width: 900px) {
     body { padding: 24px 20px 60px; }
@@ -624,6 +714,8 @@
     .steps-grid { grid-template-columns: repeat(2, 1fr); }
     .speakers-grid { grid-template-columns: 1fr; }
     .video-section { margin-bottom: 40px; }
+    .quote-text { font-size: 16px; }
+    .quote-mark { font-size: 60px; }
   }
 </style>
 </head>
@@ -631,10 +723,15 @@
 
 <div class="page-container">
 
-  <!-- 1. TITLE BLOCK -->
+  <!-- 1. AI MINDSET LOGO -->
+  <div class="logo-area">
+    <a href="https://aimindset.org" target="_blank">AI MINDSET</a>
+  </div>
+
+  <!-- 2. TITLE BLOCK -->
   <div class="title-block">
-    <h1>Four Realities Map</h1>
-    <div class="subtitle">Integral Context OS</div>
+    <h1>FOS #26</h1>
+    <div class="subtitle">Мышление, среда и AI</div>
     <div class="rule"></div>
     <div class="meta">
       Мастер-класс &middot; 25 апреля 2026<br>
@@ -642,24 +739,23 @@
     </div>
   </div>
 
-  <!-- 2. VIDEO: FOS #26 -->
+  <!-- 3. VIDEO THUMBNAIL + PLAY BUTTON -->
   <div class="video-section">
     <div class="video-section-label">FOS #26 // Запись</div>
-    <div class="video-container">
-      <iframe
-        src="https://www.youtube.com/embed/3kCKqNxysP8?rel=0&modestbranding=1"
-        title="FOS #26 -- Мышление, среда и AI: как собирать свою систему решений"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
+    <a href="https://www.youtube.com/watch?v=3kCKqNxysP8" target="_blank" class="video-thumbnail-wrapper">
+      <img src="https://img.youtube.com/vi/3kCKqNxysP8/maxresdefault.jpg" alt="FOS #26 -- Мышление, среда и AI: как собирать свою систему решений">
+      <svg class="video-play-btn" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="38" fill="rgba(30,38,64,0.75)" stroke="rgba(240,237,232,0.8)" stroke-width="3"/>
+        <polygon points="32,24 60,40 32,56" fill="rgba(240,237,232,0.95)"/>
+      </svg>
+    </a>
     <div class="video-meta">
       FOS #26 // Мышление, среда и AI: как собирать свою систему решений<br>
       Alex Povaliaev + Olya Eremina &middot; 26 марта 2026 &middot; AI Mindset Space
     </div>
   </div>
 
-  <!-- 3. TIMECODES -->
+  <!-- 4. TIMECODES -->
   <div class="timeline-section">
     <div class="timeline-label">Timecodes</div>
     <div class="timecodes-list">
@@ -710,7 +806,7 @@
     </div>
   </div>
 
-  <!-- 4. MAIN DIAGRAM + ANNOTATIONS -->
+  <!-- 5. MAIN DIAGRAM + ANNOTATIONS -->
   <div class="diagram-area">
     <div class="diagram-main">
       <div class="quadrant-svg-container">
@@ -886,7 +982,36 @@
     </div>
   </div>
 
-  <!-- 3. INSIGHT BOX -->
+  <!-- 6. QUOTES FROM SESSION -->
+  <div class="quotes-section">
+    <div class="section-title">Цитаты из сессии</div>
+
+    <div class="quote-item">
+      <span class="quote-mark">&laquo;</span>
+      <div class="quote-text">я разложила ВСЕ свои проекты &mdash; банки, FMCG, разные периоды &mdash; и увидела одну и ту же логику в 4 квадрантах</div>
+      <div class="quote-author">&mdash; Olya Eremina</div>
+    </div>
+
+    <div class="quote-item align-right">
+      <span class="quote-mark">&raquo;</span>
+      <div class="quote-text">мой первый кейс в Obsidian 7 лет назад &mdash; форсайт. фотографировал карточки и строил граф. тогда AI не было даже в мыслях</div>
+      <div class="quote-author">&mdash; Alex Povaliaev</div>
+    </div>
+
+    <div class="quote-item">
+      <span class="quote-mark">&laquo;</span>
+      <div class="quote-text">чтобы управлять AI-агентами, нужно самому обладать агентностью. вопрос &laquo;зачем&raquo; должен быть до &laquo;чем&raquo;</div>
+      <div class="quote-author">&mdash; из диалога FOS #26</div>
+    </div>
+
+    <div class="quote-item align-right">
+      <span class="quote-mark">&raquo;</span>
+      <div class="quote-text">если 6 из 8 ваших действий в одном квадранте &mdash; это звоночек. все яйца в одну корзину</div>
+      <div class="quote-author">&mdash; Olya Eremina</div>
+    </div>
+  </div>
+
+  <!-- 7. INSIGHT BOX -->
   <div class="insight-box">
     <span class="insight-label">Ключевой инсайт</span>
     <p>
@@ -896,14 +1021,61 @@
     </p>
   </div>
 
-  <!-- 4. DIVIDER -->
+  <!-- DIVIDER -->
   <svg class="svg-divider" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg">
     <line x1="10" y1="10" x2="138" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
     <polygon points="150,3 157,10 150,17 143,10" fill="none" stroke="#1e2640" stroke-width="1.5"/>
     <line x1="162" y1="10" x2="290" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
   </svg>
 
-  <!-- 5. WORKSHOP FLOW -->
+  <!-- 8. SPEAKERS -->
+  <div class="speakers-section">
+    <div class="section-title">Кто ведёт</div>
+    <div class="speakers-grid">
+      <div class="speaker-card speaker-olya">
+        <img class="speaker-photo" src="assets/olya.jpg" alt="Olya Eremina">
+        <div class="speaker-name">Olya Eremina</div>
+        <div class="speaker-role">методология + форсайт</div>
+        <div class="speaker-desc">
+          <span class="speaker-line">основатель <a href="https://futuredecoder.ru" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">FutureDecoder.ru</a> &mdash; &laquo;подготовим вас к переменам&raquo;</span>
+          <span class="speaker-line">13+ лет в стратегии и трендвотчинге</span>
+          <span class="speaker-line">директор трендвотчинга UXSSR</span>
+          <span class="speaker-line">50+ корпоративных проектов, 500+ обученных</span>
+          <span class="speaker-line">клиенты: РБК, X5, Ozon, VK, Яндекс, КРОК, ВТБ, МТС, AstraZeneca</span>
+          <span class="speaker-line">3 высших: финансы, лингвистика, стратегический маркетинг (ВШЭ)</span>
+          <span class="speaker-line">сертификаты: Trendwatching.com, The Future Laboratory</span>
+          <span class="speaker-line">преподаватель: BHSAD, Нетология, Сколково</span>
+          <span class="speaker-line">канал &laquo;Декодер будущего&raquo; &mdash; ~2,400 подписчиков</span>
+          <span class="speaker-line">провела тестовую лабу на 7 человек &mdash; участники просят продолжения</span>
+        </div>
+        <div class="speaker-links">@ereminaolya &middot; <a href="https://futuredecoder.ru" target="_blank">futuredecoder.ru</a></div>
+      </div>
+      <div class="speaker-card speaker-alex">
+        <img class="speaker-photo" src="assets/alex.jpg" alt="Alex Povaliaev">
+        <div class="speaker-name">Alex Povaliaev</div>
+        <div class="speaker-role">AI + personal operating systems</div>
+        <div class="speaker-desc">
+          <span class="speaker-line">founder <a href="https://aimindset.org" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">AI Mindset</a> &mdash; сообщество исследования себя через технологии (4 года)</span>
+          <span class="speaker-line">AI Mindset Space &mdash; серия Founder OS, 30+ сессий, 100+ участников</span>
+          <span class="speaker-line">Personal OS Sprint &mdash; методология персональной операционной системы</span>
+          <span class="speaker-line">AI-Native Organizations Sprint &mdash; 200 участников, 3 недели интенсива</span>
+          <span class="speaker-line">7 лет в Obsidian &mdash; начинал с форсайт-карточек в графе</span>
+          <span class="speaker-line">Claude Code, агентные системы, AI-инструменты</span>
+          <span class="speaker-line">связка технологий и смыслов &mdash; &laquo;зачем&raquo; до &laquo;чем&raquo;</span>
+        </div>
+        <div class="speaker-links"><a href="https://aimindset.org" target="_blank">aimindset.org</a> &middot; @ai_mind_set</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <svg class="svg-divider" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg">
+    <line x1="10" y1="10" x2="138" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
+    <polygon points="150,3 157,10 150,17 143,10" fill="none" stroke="#1e2640" stroke-width="1.5"/>
+    <line x1="162" y1="10" x2="290" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
+  </svg>
+
+  <!-- 9. WORKSHOP FLOW + CTA -->
   <div class="workshop-section">
     <div class="section-title">Мастер-класс: Карта Реальностей &times; AI</div>
 
@@ -1002,14 +1174,14 @@
     </div>
   </div>
 
-  <!-- 6. DIVIDER -->
+  <!-- DIVIDER -->
   <svg class="svg-divider" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg">
     <line x1="10" y1="10" x2="138" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
     <polygon points="150,3 157,10 150,17 143,10" fill="none" stroke="#1e2640" stroke-width="1.5"/>
     <line x1="162" y1="10" x2="290" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
   </svg>
 
-  <!-- 7. BRIDGE DIAGRAM -->
+  <!-- BRIDGE DIAGRAM -->
   <div class="bridge-section">
     <svg class="bridge-svg" viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg">
       <circle cx="90" cy="40" r="35" fill="none" stroke="#1e2640" stroke-width="2"/>
@@ -1035,7 +1207,7 @@
     <div class="bridge-label">= Integral Context OS</div>
   </div>
 
-  <!-- 8. WILBER TABLE -->
+  <!-- WILBER TABLE -->
   <div class="table-section">
     <table>
       <thead>
@@ -1075,39 +1247,14 @@
     </table>
   </div>
 
-  <!-- 9. DIVIDER -->
+  <!-- DIVIDER -->
   <svg class="svg-divider" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg">
     <line x1="10" y1="10" x2="138" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
     <polygon points="150,3 157,10 150,17 143,10" fill="none" stroke="#1e2640" stroke-width="1.5"/>
     <line x1="162" y1="10" x2="290" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
   </svg>
 
-  <!-- 10. SPEAKERS -->
-  <div class="speakers-section">
-    <div class="section-title">Кто ведёт</div>
-    <div class="speakers-grid">
-      <div class="speaker-card speaker-alex">
-        <div class="speaker-name">Alex Povaliaev</div>
-        <div class="speaker-role">AI + personal operating systems</div>
-        <div class="speaker-desc">Founder AI Mindset. AI POS, агентные системы, Obsidian + Claude. Связка технологий и смыслов.</div>
-      </div>
-      <div class="speaker-card speaker-olya">
-        <div class="speaker-name">Olya Eremina</div>
-        <div class="speaker-role">методология + форсайт</div>
-        <div class="speaker-desc">Founder FutureDecoder. 13+ лет стратегии. 50+ корпоративных проектов. Визуальная колода трендов. Wilber AQAL.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 11. VIDEO NOTE -->
-  <div class="recording-section">
-    <div class="recording-placeholder">
-      <span class="rec-icon">&#9654;</span>
-      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">Смотреть запись FOS #26</a> -- видео вверху страницы
-    </div>
-  </div>
-
-  <!-- 12. CTA -->
+  <!-- CTA -->
   <div class="cta-section">
     <span class="cta-label">Следующий шаг</span>
     <div class="cta-title">Мастер-класс: Карта Реальностей &times; AI</div>
@@ -1118,7 +1265,7 @@
     </div>
   </div>
 
-  <!-- 13. FOOTER -->
+  <!-- FOOTER -->
   <div class="page-footer">
     <a href="https://aimindset.org" target="_blank">AI Mindset</a> &nbsp;&middot;&nbsp; aimindset.org
   </div>
