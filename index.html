@@ -512,6 +512,100 @@
     border-bottom-color: var(--accent);
   }
 
+  /* ── Video Section ── */
+  .video-section {
+    max-width: 900px;
+    margin: 0 auto 50px;
+  }
+  .video-section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--faded-strong);
+    margin-bottom: 16px;
+  }
+  .video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    background: #e8e4de;
+    border: 2px solid var(--grid-major);
+  }
+  .video-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .video-meta {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faded-strong);
+    line-height: 1.6;
+  }
+
+  /* ── Timeline / Timecodes ── */
+  .timeline-section {
+    max-width: 900px;
+    margin: 0 auto 60px;
+  }
+  .timeline-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--grid-major);
+    margin-bottom: 14px;
+  }
+  .timecodes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .timecode-link {
+    display: flex;
+    gap: 16px;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--grid-minor);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    align-items: baseline;
+  }
+  .timecode-link:first-child {
+    border-top: 1px solid var(--grid-minor);
+  }
+  .timecode-link:hover {
+    background: rgba(30,38,64,0.04);
+    padding-left: 16px;
+  }
+  .timecode-time {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--grid-major);
+    min-width: 44px;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.25s;
+  }
+  .timecode-link:hover .timecode-time {
+    color: var(--accent);
+  }
+  .timecode-text {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--faded-strong);
+    line-height: 1.5;
+    transition: color 0.25s;
+  }
+  .timecode-link:hover .timecode-text {
+    color: var(--ink);
+  }
+
   /* ── Responsive ── */
   @media (max-width: 900px) {
     body { padding: 24px 20px 60px; }
@@ -529,6 +623,7 @@
     .annotation-strip .ann-heading { width: 100%; }
     .steps-grid { grid-template-columns: repeat(2, 1fr); }
     .speakers-grid { grid-template-columns: 1fr; }
+    .video-section { margin-bottom: 40px; }
   }
 </style>
 </head>
@@ -547,7 +642,75 @@
     </div>
   </div>
 
-  <!-- 2. MAIN DIAGRAM + ANNOTATIONS -->
+  <!-- 2. VIDEO: FOS #26 -->
+  <div class="video-section">
+    <div class="video-section-label">FOS #26 // Запись</div>
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube.com/embed/3kCKqNxysP8?rel=0&modestbranding=1"
+        title="FOS #26 -- Мышление, среда и AI: как собирать свою систему решений"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="video-meta">
+      FOS #26 // Мышление, среда и AI: как собирать свою систему решений<br>
+      Alex Povaliaev + Olya Eremina &middot; 26 марта 2026 &middot; AI Mindset Space
+    </div>
+  </div>
+
+  <!-- 3. TIMECODES -->
+  <div class="timeline-section">
+    <div class="timeline-label">Timecodes</div>
+    <div class="timecodes-list">
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=0s" target="_blank">
+        <span class="timecode-time">00:00</span>
+        <span class="timecode-text">вступление -- зачем мы здесь</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=300s" target="_blank">
+        <span class="timecode-time">05:00</span>
+        <span class="timecode-text">путь от корпоративной стратегии к методологии</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=900s" target="_blank">
+        <span class="timecode-time">15:00</span>
+        <span class="timecode-text">четыре логики -- система координат</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=1500s" target="_blank">
+        <span class="timecode-time">25:00</span>
+        <span class="timecode-text">оси: Децентр / Центр x Синтетика / Земля</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=2100s" target="_blank">
+        <span class="timecode-time">35:00</span>
+        <span class="timecode-text">демо: база трендов в Obsidian</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=2700s" target="_blank">
+        <span class="timecode-time">45:00</span>
+        <span class="timecode-text">личный кейс через 4 парадигмы</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=3300s" target="_blank">
+        <span class="timecode-time">55:00</span>
+        <span class="timecode-text">AI: загрузка методологии в Claude</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=3900s" target="_blank">
+        <span class="timecode-time">65:00</span>
+        <span class="timecode-text">агентность: "зачем" до "чем"</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=4500s" target="_blank">
+        <span class="timecode-time">75:00</span>
+        <span class="timecode-text">баланс внутреннего и внешнего</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=5100s" target="_blank">
+        <span class="timecode-time">85:00</span>
+        <span class="timecode-text">формат мастер-класса</span>
+      </a>
+      <a class="timecode-link" href="https://www.youtube.com/watch?v=3kCKqNxysP8&t=5700s" target="_blank">
+        <span class="timecode-time">95:00</span>
+        <span class="timecode-text">Q&amp;A</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 4. MAIN DIAGRAM + ANNOTATIONS -->
   <div class="diagram-area">
     <div class="diagram-main">
       <div class="quadrant-svg-container">
@@ -936,11 +1099,11 @@
     </div>
   </div>
 
-  <!-- 11. VIDEO PLACEHOLDER -->
+  <!-- 11. VIDEO NOTE -->
   <div class="recording-section">
     <div class="recording-placeholder">
       <span class="rec-icon">&#9654;</span>
-      Запись FOS #26 будет доступна здесь
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">Смотреть запись FOS #26</a> -- видео вверху страницы
     </div>
   </div>
 
