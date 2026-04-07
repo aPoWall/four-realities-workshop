@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:title" content="Карта Реальностей x AI – воркшоп 25 апреля 2026">
-<meta property="og:description" content="реальность имеет 4 параллельные логики. мастер-класс: персональная карта реальностей + AI. 25 апреля, 99 EUR.">
+<meta property="og:description" content="реальность имеет 4 параллельные логики. мастер-класс: персональная карта реальностей + AI. 25 апреля, 99 EUR, 36 мест.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://apowall.github.io/four-realities-workshop/">
 <meta property="og:image" content="https://apowall.github.io/four-realities-workshop/assets/og-cover.png">
@@ -18,10 +18,11 @@
     --paper: #f0ede8;
     --grid-minor: #d8d4cc;
     --grid-major: #c2bdb5;
-    --ink: #1e2640;
+    --ink: #1a1e2e;
     --accent: #3a5bcf;
-    --faded: rgba(30,38,64,0.12);
-    --faded-strong: rgba(30,38,64,0.35);
+    --terracotta: #c45c4a;
+    --faded: rgba(26,30,46,0.12);
+    --faded-strong: rgba(26,30,46,0.6);
     --mono: 'IBM Plex Mono', 'SF Mono', 'Fira Code', monospace;
     --sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   }
@@ -36,7 +37,7 @@
     background: var(--paper);
     color: var(--ink);
     font-family: var(--mono);
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.7;
     min-height: 100vh;
   }
@@ -65,6 +66,16 @@
   /* ── Logo ── */
   .logo-area {
     margin-bottom: 40px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(240,237,232,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    margin-left: -60px;
+    margin-right: -60px;
+    padding: 12px 60px;
+    border-bottom: 1px solid var(--grid-minor);
   }
   .logo-area a {
     font-family: var(--mono);
@@ -75,9 +86,17 @@
     color: var(--faded-strong);
     text-decoration: none;
     transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   .logo-area a:hover {
     color: var(--accent);
+  }
+  .logo-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
   }
 
   /* ── Title Block ── */
@@ -96,7 +115,7 @@
   }
   .title-block .subtitle {
     font-family: var(--mono);
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--accent);
     letter-spacing: 1px;
@@ -287,7 +306,7 @@
   }
   .step-desc {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 14px;
     color: var(--ink);
     line-height: 1.6;
   }
@@ -423,7 +442,7 @@
   }
   .speaker-desc {
     font-family: var(--mono);
-    font-size: 13px;
+    font-size: 15px;
     color: var(--ink);
     line-height: 1.7;
     text-align: left;
@@ -544,8 +563,8 @@
   }
   .timecode-time {
     font-family: var(--mono);
-    font-size: 12px;
-    color: rgba(30,38,64,0.45);
+    font-size: 13px;
+    color: rgba(30,38,64,0.55);
     min-width: 44px;
     font-variant-numeric: tabular-nums;
     transition: color 0.25s;
@@ -555,8 +574,8 @@
   }
   .timecode-text {
     font-family: var(--mono);
-    font-size: 13px;
-    color: rgba(30,38,64,0.55);
+    font-size: 15px;
+    color: rgba(30,38,64,0.65);
     line-height: 1.5;
     transition: color 0.25s;
   }
@@ -570,7 +589,7 @@
     margin: 0 auto 80px;
   }
   .quote-item {
-    margin-bottom: 48px;
+    margin-bottom: 24px;
     position: relative;
     padding: 0 30px;
   }
@@ -579,9 +598,9 @@
   }
   .quote-mark {
     position: absolute;
-    top: -20px;
+    top: -16px;
     font-family: var(--sans);
-    font-size: 80px;
+    font-size: 60px;
     font-weight: 700;
     color: var(--faded);
     line-height: 1;
@@ -596,7 +615,7 @@
   }
   .quote-text {
     font-family: var(--sans);
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 400;
     font-style: italic;
     line-height: 1.7;
@@ -702,9 +721,407 @@
     border-bottom-color: var(--accent);
   }
 
+  /* ── Video + Timecodes side-by-side ── */
+  .video-timecodes-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 32px;
+    max-width: 900px;
+    margin: 0 auto 80px;
+    align-items: start;
+  }
+  .video-timecodes-grid .video-section {
+    margin: 0;
+  }
+  .video-timecodes-grid .timeline-section {
+    margin: 0;
+  }
+  .timecodes-instruction {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faded-strong);
+    font-style: italic;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  /* ── Outcomes Section ── */
+  .outcomes-section {
+    max-width: 700px;
+    margin: 0 auto 60px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--grid-major);
+    border-radius: 4px;
+    padding: 28px 32px;
+    position: relative;
+    box-shadow: 0 2px 12px rgba(30,38,64,0.04);
+  }
+  .outcomes-section .insight-label {
+    color: var(--accent);
+    position: static;
+    background: none;
+    display: block;
+    margin-bottom: 12px;
+    padding: 0;
+    font-size: 13px;
+    font-family: var(--sans);
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .outcomes-list {
+    list-style: none;
+    padding: 0;
+  }
+  .outcomes-list li {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink);
+    padding: 6px 0;
+    padding-left: 24px;
+    position: relative;
+  }
+  .outcomes-list li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  /* ── Noise texture overlay ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.03;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* ── Step cards with icons ── */
+  .step-item {
+    padding: 20px;
+    background: rgba(255,255,255,0.45);
+    border: 1px solid var(--grid-major);
+    border-radius: 4px;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(26,30,46,0.08);
+  }
+  .step-item:last-child {
+    border-color: var(--grid-major);
+    background: rgba(255,255,255,0.45);
+  }
+
+  /* ── Quadrant redesign — colored backgrounds ── */
+  .quadrant-zone:hover rect.q-bg {
+    fill: rgba(58,91,207,0.08) !important;
+  }
+
+  /* ── Section Backgrounds (подложки) ── */
+  .section-card {
+    background: rgba(255,255,255,0.55);
+    border: 1px solid var(--grid-major);
+    border-radius: 4px;
+    padding: 40px 48px;
+    margin-bottom: 60px;
+    position: relative;
+    box-shadow: 0 2px 12px rgba(30,38,64,0.04);
+  }
+  .section-card::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: 12px; right: 12px;
+    height: 8px;
+    background: rgba(30,38,64,0.03);
+    border-radius: 0 0 4px 4px;
+    z-index: -1;
+  }
+
+  .section-dark {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px;
+    margin-left: -60px;
+    margin-right: -60px;
+    margin-bottom: 60px;
+    position: relative;
+  }
+  .section-dark .section-title {
+    color: var(--paper);
+  }
+  .section-dark .cta-button {
+    color: var(--paper);
+    border-color: var(--paper);
+  }
+  .section-dark .cta-button:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .section-accent {
+    background: rgba(58,91,207,0.06);
+    border-left: 4px solid var(--accent);
+    padding: 32px 40px;
+    margin-bottom: 60px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── Hero CTA Button ── */
+  .hero-cta-button {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    padding: 14px 36px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-cta-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .hero-cta-button:hover {
+    background: #4a6bdf;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(58,91,207,0.4), 0 2px 8px rgba(58,91,207,0.2);
+  }
+  .hero-cta-button:hover::after {
+    opacity: 1;
+  }
+  .hero-cta-button:active {
+    transform: translateY(-1px) scale(0.99);
+  }
+
+  /* ── Dark Section CTA Button ── */
+  .dark-cta-button {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e2640;
+    background: #f0ede8;
+    border: none;
+    padding: 14px 36px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dark-cta-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .dark-cta-button:hover {
+    background: #fff;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(240,237,232,0.4), 0 2px 8px rgba(255,255,255,0.3);
+    color: var(--accent);
+  }
+  .dark-cta-button:hover::after {
+    opacity: 1;
+  }
+  .dark-cta-button:active {
+    transform: translateY(-1px) scale(0.99);
+  }
+
+  /* ── Hero Stripe — bold gradient inspired by FutureDecoder ── */
+  .hero-stripe {
+    background: linear-gradient(135deg, #1e2640 0%, #2a3a6b 40%, #3a5bcf 70%, #c45c4a 100%);
+    color: var(--paper);
+    padding: 56px 52px;
+    margin-bottom: 50px;
+    margin-left: -60px;
+    margin-right: -60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-stripe::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(58,91,207,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(196,92,74,0.2) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-stripe::after {
+    content: '×';
+    position: absolute;
+    top: 10px; right: 40px;
+    font-family: var(--sans);
+    font-size: 180px;
+    font-weight: 700;
+    color: rgba(240,237,232,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .hero-stripe h1 { color: #fff !important; }
+  .hero-stripe p { color: rgba(240,237,232,0.9) !important; }
+  .hero-stripe .cta-button {
+    color: #fff;
+    border-color: #fff;
+    background: transparent;
+  }
+  .hero-stripe .cta-button:hover {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  /* ── Decorative Elements ── */
+  .deco-cross {
+    display: block;
+    margin: 30px auto 40px;
+    width: 40px; height: 40px;
+    opacity: 0.2;
+  }
+
+  /* ── Pull Number ── */
+  .pull-number {
+    font-family: var(--sans);
+    font-size: 72px;
+    font-weight: 700;
+    color: rgba(58,91,207,0.1);
+    line-height: 1;
+    position: absolute;
+    top: -10px; left: 20px;
+    pointer-events: none;
+  }
+
+  /* ── Real Questions Block ── */
+  .questions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .question-chip {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink);
+    background: rgba(255,255,255,0.6);
+    border: 1px solid var(--grid-major);
+    padding: 10px 14px;
+    border-radius: 3px;
+    line-height: 1.5;
+  }
+  .question-chip::before {
+    content: '?';
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--accent);
+    margin-right: 8px;
+    font-size: 14px;
+  }
+
+  /* ── Animated breathing dot ── */
+  @keyframes breathe {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.3); }
+  }
+  .breathe-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: breathe 3s ease-in-out infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  /* ── Scroll Reveal ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Side Navigation ── */
+  .side-nav {
+    position: fixed;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
+  .side-nav a {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--grid-major);
+    border: 2px solid var(--grid-major);
+    transition: all 0.3s;
+    position: relative;
+    text-decoration: none;
+  }
+  .side-nav a.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.3);
+  }
+  .side-nav a:hover {
+    border-color: var(--ink);
+  }
+  .side-nav a::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--faded-strong);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  .side-nav a:hover::after {
+    opacity: 1;
+  }
+  @media (max-width: 900px) {
+    .side-nav { display: none; }
+  }
+
   /* ── Responsive ── */
   @media (max-width: 900px) {
     body { padding: 24px 20px 60px; }
+    .logo-area { margin-left: -20px; margin-right: -20px; padding: 10px 20px; }
+    .logo-img { width: 24px; height: 24px; }
+    .logo-area a { font-size: 11px; letter-spacing: 3px; }
     .diagram-area { flex-direction: column; }
     .annotation-strip {
       width: 100%;
@@ -717,35 +1134,117 @@
       gap: 6px 20px;
     }
     .annotation-strip .ann-heading { width: 100%; }
-    .steps-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-grid { grid-template-columns: 1fr; }
     .speakers-grid { grid-template-columns: 1fr; }
     .video-section { margin-bottom: 60px; }
+    .video-timecodes-grid { grid-template-columns: 1fr; }
+    .section-card { padding: 24px 20px; }
+    .section-dark { margin-left: -20px; margin-right: -20px; padding: 32px 20px; }
+    .hero-stripe { padding: 36px 24px; margin-left: -20px; margin-right: -20px; }
+    .hero-stripe::after { font-size: 80px; top: 10px; right: 10px; }
+    .questions-grid { grid-template-columns: 1fr; }
+    .pull-number { font-size: 48px; }
     .quote-text { font-size: 16px; }
     .quote-mark { font-size: 60px; }
+    .hero-cta-button, .dark-cta-button { width: 100%; text-align: center; padding: 16px 24px; font-size: 17px; }
   }
 </style>
 </head>
 <body>
 
+<!-- SIDE NAVIGATION -->
+<nav class="side-nav" id="sideNav">
+  <a href="#hero" data-label="Hero" data-section="hero" class="active"></a>
+  <a href="#problem" data-label="Проблема" data-section="problem"></a>
+  <a href="#video" data-label="Видео" data-section="video"></a>
+  <a href="#map" data-label="Карта" data-section="map"></a>
+  <a href="#quotes" data-label="Цитаты" data-section="quotes"></a>
+  <a href="#format" data-label="Формат" data-section="format"></a>
+  <a href="#results" data-label="Результат" data-section="results"></a>
+  <a href="#speakers" data-label="Спикеры" data-section="speakers"></a>
+  <a href="#cta" data-label="Записаться" data-section="cta"></a>
+</nav>
+
 <div class="page-container">
 
   <!-- 1. AI MINDSET LOGO -->
   <div class="logo-area">
-    <a href="https://aimindset.org" target="_blank">AI MINDSET</a>
+    <a href="https://aimindset.org" target="_blank">
+      <img src="assets/logo_rb.png" alt="AI Mindset" class="logo-img">
+      <span>AI MINDSET</span>
+    </a>
   </div>
 
-  <!-- 2. TITLE BLOCK -->
-  <div class="title-block">
-    <h1>FOS #26</h1>
-    <div class="subtitle">Мышление, среда и AI</div>
-    <div class="rule"></div>
-    <div class="meta">
-      Мастер-класс &middot; 25 апреля 2026<br>
-      Alex Povaliaev + Olya Eremina
+  <!-- 2. HERO — bold gradient with speakers -->
+  <div class="hero-stripe reveal" id="hero">
+    <!-- Mesh gradient overlay -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.15;" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="hg1" cx="20%" cy="40%"><stop offset="0%" stop-color="#3a5bcf" stop-opacity="0.6"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <radialGradient id="hg2" cx="80%" cy="30%"><stop offset="0%" stop-color="#c45c4a" stop-opacity="0.5"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <radialGradient id="hg3" cx="50%" cy="90%"><stop offset="0%" stop-color="#f0ede8" stop-opacity="0.15"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hg1)"/>
+      <rect width="100%" height="100%" fill="url(#hg2)"/>
+      <rect width="100%" height="100%" fill="url(#hg3)"/>
+    </svg>
+    <!-- Cross axis decoration -->
+    <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;opacity:0.06;pointer-events:none;" viewBox="0 0 400 400">
+      <line x1="200" y1="20" x2="200" y2="380" stroke="#fff" stroke-width="2"/>
+      <line x1="20" y1="200" x2="380" y2="200" stroke="#fff" stroke-width="2"/>
+      <circle cx="200" cy="200" r="40" fill="none" stroke="#fff" stroke-width="1.5"/>
+      <circle cx="200" cy="200" r="80" fill="none" stroke="#fff" stroke-width="0.5" stroke-dasharray="4,4"/>
+    </svg>
+    <div style="position:relative;z-index:1;display:flex;gap:40px;align-items:center;flex-wrap:wrap;">
+      <div style="flex:1;min-width:320px;">
+        <div style="font-family:var(--mono); font-size:12px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,237,232,0.45); margin-bottom:16px;">FOS #26 &middot; мастер-класс &middot; AI Mindset</div>
+        <h1 style="font-family:var(--sans); font-size:44px; font-weight:700; letter-spacing:1px; line-height:1.15; margin-bottom:16px; color:#fff;">Карта<br>Реальностей &times; AI</h1>
+        <p style="font-family:var(--sans); font-size:18px; font-weight:400; line-height:1.6; color:rgba(240,237,232,0.85); margin-bottom:24px; max-width:480px;">
+          Научись смотреть на любой запрос через 4&nbsp;параллельные реальности и собери свою карту решений
+        </p>
+        <div style="font-family:var(--mono); font-size:13px; color:rgba(240,237,232,0.55); margin-bottom:28px;">
+          25 апреля 2026 &middot; 4 часа &middot; Zoom &middot; 99 EUR &middot; 36 мест
+        </div>
+        <a href="https://lu.ma/gckwpmte" target="_blank" class="hero-cta-button">Записаться &mdash; 99 EUR</a>
+      </div>
+      <div style="display:flex; gap:12px; align-items:flex-end;">
+        <div style="text-align:center;">
+          <img src="assets/olya.jpg" alt="Olya Eremina" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:2px solid rgba(240,237,232,0.3);filter:grayscale(30%);">
+          <div style="font-family:var(--mono);font-size:11px;color:rgba(240,237,232,0.5);margin-top:6px;">Olya Eremina</div>
+        </div>
+        <div style="font-family:var(--sans);font-size:20px;color:rgba(240,237,232,0.25);margin-bottom:30px;">&times;</div>
+        <div style="text-align:center;">
+          <img src="assets/alex.jpg" alt="Alex Povaliaev" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:2px solid rgba(240,237,232,0.3);filter:grayscale(30%);">
+          <div style="font-family:var(--mono);font-size:11px;color:rgba(240,237,232,0.5);margin-top:6px;">Alex Povaliaev</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- 3. VIDEO THUMBNAIL + PLAY BUTTON -->
+  <!-- 2b. PROBLEM + INSIGHT HOOK -->
+  <div class="section-accent reveal" id="problem">
+    <div style="max-width:750px;">
+      <div style="font-family:var(--sans); font-size:22px; font-weight:700; color:var(--ink); margin-bottom:14px;">Реальность не одна</div>
+      <p style="font-family:var(--sans); font-size:17px; line-height:1.7; color:var(--ink);">
+        Один и тот же вопрос может иметь разные ответы. Потому что реальность не одна &mdash; их несколько.
+        И если ты видишь только одну, ты принимаешь решения вслепую.
+      </p>
+      <p style="font-family:var(--sans); font-size:16px; line-height:1.7; color:var(--ink); margin-top:12px;">
+        На мастер-классе ты разложишь любой запрос через 4 параллельные логики &mdash;
+        и увидишь несколько возможных сценариев вместо одного.
+      </p>
+
+      <p style="font-family:var(--mono); font-size:14px; color:var(--faded-strong); margin-top:16px; font-style:italic;">
+        &laquo;Я разложила ВСЕ свои проекты &mdash; банки, FMCG, разные периоды &mdash; и увидела одну и ту же логику в 4 квадрантах.&raquo; &mdash; Olya Eremina
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. VIDEO + TIMECODES (side-by-side) -->
+  <div class="section-card reveal" style="padding:32px 36px;" id="video">
+  <div style="font-family:var(--mono); font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--faded-strong); margin-bottom:6px;">Как родилась эта история</div>
+  <p style="font-family:var(--sans); font-size:15px; color:var(--ink); margin-bottom:20px; line-height:1.6;">Мы поговорили в рамках AI Mindset {space} — Оля рассказала свою методологию, а мы разобрали, как AI может усилить каждый квадрант.</p>
+  <div class="video-timecodes-grid" style="margin-bottom:0;">
   <div class="video-section">
     <div class="video-section-label">FOS #26 // Запись</div>
     <div class="video-thumbnail-wrapper" onclick="playAt(0)" style="cursor:pointer">
@@ -761,9 +1260,10 @@
     </div>
   </div>
 
-  <!-- 4. TIMECODES -->
+  <!-- 4. TIMECODES (right column) -->
   <div class="timeline-section">
     <div class="timeline-label">Timecodes</div>
+    <div class="timecodes-instruction">таймкоды собраны из глав видео &mdash; кликни на тему, и откроется нужный момент</div>
     <div class="timecodes-list">
       <a class="timecode-link" href="#" onclick="playAt(0); return false;">
         <span class="timecode-time">00:00</span>
@@ -810,12 +1310,60 @@
         <span class="timecode-text">Q&amp;A</span>
       </a>
     </div>
+    <div style="margin-top:14px; font-family:var(--mono); font-size:12px;">
+      <a href="https://www.youtube.com/watch?v=3kCKqNxysP8" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent);">Смотреть на YouTube &rarr;</a>
+    </div>
+  </div>
+  </div><!-- /video-timecodes-grid -->
+  </div><!-- /section-card -->
+
+  <!-- 4b. QUESTIONS — what can be decomposed -->
+  <div style="max-width:800px; margin:0 auto 50px;">
+    <div style="font-family:var(--mono); font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--faded-strong); margin-bottom:14px;">Какие вопросы можно разложить через 4 реальности?</div>
+    <div class="questions-grid">
+      <div class="question-chip">У меня болит спина &mdash; какие решения я не вижу?</div>
+      <div class="question-chip">Я блогер &mdash; какие сценарии за пределами привычного?</div>
+      <div class="question-chip">Как сформировать устойчивую финансовую стратегию</div>
+      <div class="question-chip">Мой стартап &mdash; слепые зоны бизнес-модели</div>
+      <div class="question-chip">Какие навыки нужны через 3&ndash;4 года</div>
+      <div class="question-chip">Как не терять фокус при множестве сценариев</div>
+    </div>
   </div>
 
-  <!-- 5. MAIN DIAGRAM + ANNOTATIONS -->
-  <div class="diagram-area">
-    <div class="diagram-main">
-      <div class="quadrant-svg-container">
+  <!-- 5. KEY INSIGHT -->
+  <div class="insight-box reveal" style="max-width:750px; background:rgba(255,255,255,0.5);">
+    <span class="insight-label">Ключевой инсайт</span>
+    <p>
+      Квадранты &mdash; это не стадии развития, а <strong>параллельные логики</strong>.
+      Один запрос решается в 4&nbsp;реальностях одновременно.
+      Игнорировать квадрант &mdash; значит получить слепое пятно в решении.
+    </p>
+  </div>
+
+  <!-- 5b. METHODOLOGY ORIGIN — insight-box style for consistency -->
+  <div class="insight-box reveal" style="max-width:750px; background:rgba(255,255,255,0.5); position:relative;">
+    <span class="insight-label">Выстраданная методология</span>
+    <p>
+      Оля <strong>13+ лет</strong> работала в стратегических департаментах. Главный вопрос клиентов: &laquo;какой тренд вы <strong>гарантируете</strong>?&raquo; &mdash; невозможно ответить. Обучалась у европейских лидеров форсайта &mdash; не нашла гарантий. Тогда <strong>разложила ВСЕ свои проекты</strong> по отраслям и периодам &mdash; и увидела одну и ту же 4-квадрантную логику.
+    </p>
+    <p style="margin-top:10px; font-size:14px; color:var(--faded-strong);">
+      Конвергенция с философией <strong>Кена Уилбера</strong> (AQAL) &mdash; пришла из корпоративной практики, не из теории.
+      <a href="https://futuredecoder.ru/blog/e6g7bd84k1-elitarnoe-mishlenie-chto-eto-takoe-kak-e" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent); margin-left:6px;">Статья: Элитарное мышление &rarr;</a>
+    </p>
+  </div>
+
+  <!-- Decorative cross -->
+  <svg class="deco-cross" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+    <line x1="20" y1="4" x2="20" y2="36" stroke="var(--ink)" stroke-width="2"/>
+    <line x1="4" y1="20" x2="36" y2="20" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="20" cy="20" r="5" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+  </svg>
+
+  <!-- 6. MAIN DIAGRAM (full-width, card background) -->
+  <div class="section-card reveal" style="max-width:940px; margin:0 auto 60px; padding:36px 40px;" id="map">
+    <div class="section-title" style="margin-bottom:16px;">Карта четырёх реальностей</div>
+    <p style="font-family:var(--mono); font-size:13px; color:var(--faded-strong); text-align:center; margin-bottom:24px;">кликни на квадрант, чтобы увидеть детали &middot; Olya Eremina &times; Ken Wilber AQAL</p>
+    <div class="quadrant-svg-container">
 
         <!-- SVG Cross Diagram -->
         <svg viewBox="0 0 860 790" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
@@ -843,17 +1391,17 @@
           <circle cx="810" cy="385" r="7" fill="#1e2640"/>
 
           <!-- Axis labels -->
-          <text x="430" y="32" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="14" font-weight="700" fill="#1e2640" letter-spacing="4">ДЕЦЕНТР</text>
-          <text x="430" y="18" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(30,38,64,0.4)">Решение у носителя. Автономно.</text>
+          <text x="430" y="32" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="16" font-weight="700" fill="#1e2640" letter-spacing="4">ДЕЦЕНТР</text>
+          <text x="430" y="16" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" fill="rgba(30,38,64,0.5)">Решение у носителя. Автономно.</text>
 
-          <text x="430" y="748" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="14" font-weight="700" fill="#1e2640" letter-spacing="4">ЦЕНТР</text>
-          <text x="430" y="762" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(30,38,64,0.4)">Решение зависит от системы.</text>
+          <text x="430" y="748" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="16" font-weight="700" fill="#1e2640" letter-spacing="4">ЦЕНТР</text>
+          <text x="430" y="764" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" fill="rgba(30,38,64,0.5)">Решение зависит от системы.</text>
 
-          <text x="20" y="385" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="700" fill="#1e2640" letter-spacing="3" transform="rotate(-90, 20, 385)">СИНТЕТИКА</text>
-          <text x="38" y="385" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.4)" transform="rotate(-90, 38, 385)">Готовый продукт. Автоматически.</text>
+          <text x="20" y="385" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="15" font-weight="700" fill="#1e2640" letter-spacing="3" transform="rotate(-90, 20, 385)">СИНТЕТИКА</text>
+          <text x="38" y="385" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(30,38,64,0.5)" transform="rotate(-90, 38, 385)">Готовый продукт. Автоматически.</text>
 
-          <text x="840" y="385" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="700" fill="#1e2640" letter-spacing="3" transform="rotate(90, 840, 385)">ЗЕМЛЯ</text>
-          <text x="822" y="385" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.4)" transform="rotate(90, 822, 385)">Сотворчество. Участие меняет результат.</text>
+          <text x="840" y="385" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="15" font-weight="700" fill="#1e2640" letter-spacing="3" transform="rotate(90, 840, 385)">ЗЕМЛЯ</text>
+          <text x="822" y="385" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(30,38,64,0.5)" transform="rotate(90, 822, 385)">Сотворчество. Участие меняет результат.</text>
 
           <!-- Center circle: ЗАЧЕМ -->
           <circle cx="430" cy="385" r="30" fill="var(--paper)" stroke="#1e2640" stroke-width="3" filter="url(#glow)">
@@ -895,62 +1443,62 @@
             <line x1="660" y1="580" x2="460" y2="415"/>
           </g>
 
-          <!-- Q1: Техносуверен (top-left) -->
-          <g class="quadrant-zone" data-q="1">
-          <rect class="q-bg" x="70" y="60" width="350" height="310" fill="rgba(30,38,64,0.02)" rx="4"/>
+          <!-- Q1: Суверенный сад (top-left) — Оно: навыки -->
+          <g class="quadrant-zone" data-q="2">
+          <rect class="q-bg" x="70" y="60" width="350" height="310" fill="rgba(58,91,207,0.04)" rx="6"/>
           <g transform="translate(100, 100)">
-            <text x="0" y="38" font-family="'Space Grotesk',sans-serif" font-size="52" font-weight="700" fill="rgba(30,38,64,0.08)">I</text>
-            <text x="0" y="64" font-family="'Space Grotesk',sans-serif" font-size="18" font-weight="700" fill="#1e2640">Техносуверен</text>
-            <line x1="0" y1="68" x2="140" y2="68" stroke="#3a5bcf" stroke-width="2" opacity="0.5"/>
-            <text x="0" y="86" font-family="'IBM Plex Mono',monospace" font-size="11" fill="rgba(30,38,64,0.45)">Wilber: I (Я) – мотивация, сознание</text>
-            <text x="0" y="104" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600" fill="#1e2640">"Автономность + автоматизация"</text>
-            <text x="0" y="122" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="rgba(30,38,64,0.55)">Ценности, зачем я здесь, мой путь</text>
-            <text x="0" y="140" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="#3a5bcf" opacity="0.7">AI POS: focus, values, agency</text>
-            <text x="0" y="162" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(30,38,64,0.35)" font-style="italic">&rarr; Вопрос 'зачем' до вопроса 'чем'</text>
+            <text x="0" y="38" font-family="'Space Grotesk',sans-serif" font-size="52" font-weight="700" fill="rgba(30,38,64,0.08)">II</text>
+            <text x="0" y="64" font-family="'Space Grotesk',sans-serif" font-size="20" font-weight="700" fill="#1a1e2e">Суверенный сад</text>
+            <line x1="0" y1="68" x2="160" y2="68" stroke="#3a5bcf" stroke-width="2" opacity="0.5"/>
+            <text x="0" y="86" font-family="'IBM Plex Mono',monospace" font-size="12" fill="rgba(30,38,64,0.55)">Wilber: It (Оно) – навыки, поведение</text>
+            <text x="0" y="104" font-family="'IBM Plex Mono',monospace" font-size="13" font-weight="600" fill="#1e2640">"Автономность + участие"</text>
+            <text x="0" y="122" font-family="'IBM Plex Mono',monospace" font-size="12" fill="rgba(30,38,64,0.65)">Мои инструменты, системы, рутины</text>
+            <text x="0" y="140" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#3a5bcf" opacity="0.7">AI POS: skills, automation, Obsidian</text>
+            <text x="0" y="162" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(30,38,64,0.35)" font-style="italic">&rarr; Obsidian vault с базой трендов за 5 лет</text>
           </g>
           </g>
 
-          <!-- Q2: Суверенный сад (top-right) -->
-          <g class="quadrant-zone" data-q="2">
-          <rect class="q-bg" x="440" y="60" width="350" height="310" fill="rgba(30,38,64,0.02)" rx="4"/>
+          <!-- Q2: Техносуверен (top-right) — Я: мотивация -->
+          <g class="quadrant-zone" data-q="1">
+          <rect class="q-bg" x="440" y="60" width="350" height="310" fill="rgba(196,92,74,0.04)" rx="6"/>
           <g transform="translate(470, 100)">
-            <text x="270" y="38" text-anchor="end" font-family="'Space Grotesk',sans-serif" font-size="52" font-weight="700" fill="rgba(30,38,64,0.08)">II</text>
-            <text x="270" y="64" text-anchor="end" font-family="'Space Grotesk',sans-serif" font-size="18" font-weight="700" fill="#1e2640">Суверенный сад</text>
+            <text x="270" y="38" text-anchor="end" font-family="'Space Grotesk',sans-serif" font-size="52" font-weight="700" fill="rgba(30,38,64,0.08)">I</text>
+            <text x="270" y="64" text-anchor="end" font-family="'Space Grotesk',sans-serif" font-size="20" font-weight="700" fill="#1a1e2e">Техносуверен</text>
             <line x1="130" y1="68" x2="270" y2="68" stroke="#3a5bcf" stroke-width="2" opacity="0.5"/>
-            <text x="270" y="86" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="11" fill="rgba(30,38,64,0.45)">Wilber: It (Оно) – навыки, поведение</text>
-            <text x="270" y="104" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600" fill="#1e2640">"Автономность + участие"</text>
-            <text x="270" y="122" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="rgba(30,38,64,0.55)">Мои инструменты, системы, рутины</text>
-            <text x="270" y="140" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="#3a5bcf" opacity="0.7">AI POS: skills, automation, Obsidian</text>
-            <text x="270" y="162" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(30,38,64,0.35)" font-style="italic">&rarr; Obsidian vault с базой трендов за 5 лет</text>
+            <text x="270" y="86" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="12" fill="rgba(30,38,64,0.55)">Wilber: I (Я) – мотивация, сознание</text>
+            <text x="270" y="104" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="13" font-weight="600" fill="#1e2640">"Автономность + автоматизация"</text>
+            <text x="270" y="122" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="12" fill="rgba(30,38,64,0.65)">Ценности, зачем я здесь, мой путь</text>
+            <text x="270" y="140" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#3a5bcf" opacity="0.7">AI POS: focus, values, agency</text>
+            <text x="270" y="162" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(30,38,64,0.35)" font-style="italic">&rarr; Вопрос 'зачем' до вопроса 'чем'</text>
           </g>
           </g>
 
           <!-- Q3: Институциональный вклад (bottom-left) -->
           <g class="quadrant-zone" data-q="3">
-          <rect class="q-bg" x="70" y="400" width="350" height="310" fill="rgba(30,38,64,0.02)" rx="4"/>
+          <rect class="q-bg" x="70" y="400" width="350" height="310" fill="rgba(26,30,46,0.04)" rx="6"/>
           <g transform="translate(100, 430)">
             <text x="0" y="38" font-family="'Space Grotesk',sans-serif" font-size="52" font-weight="700" fill="rgba(30,38,64,0.08)">III</text>
-            <text x="0" y="64" font-family="'Space Grotesk',sans-serif" font-size="18" font-weight="700" fill="#1e2640">Институциональный вклад</text>
+            <text x="0" y="64" font-family="'Space Grotesk',sans-serif" font-size="20" font-weight="700" fill="#1a1e2e">Институциональный вклад</text>
             <line x1="0" y1="68" x2="200" y2="68" stroke="#3a5bcf" stroke-width="2" opacity="0.5"/>
-            <text x="0" y="86" font-family="'IBM Plex Mono',monospace" font-size="11" fill="rgba(30,38,64,0.45)">Wilber: Its (Они) – системы, структуры</text>
-            <text x="0" y="104" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600" fill="#1e2640">"Система + автоматизация"</text>
-            <text x="0" y="122" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="rgba(30,38,64,0.55)">Регуляции, инфраструктура, тренды рынка</text>
-            <text x="0" y="140" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="#3a5bcf" opacity="0.7">4R: trend scan, signal monitoring</text>
+            <text x="0" y="86" font-family="'IBM Plex Mono',monospace" font-size="12" fill="rgba(30,38,64,0.55)">Wilber: Its (Они) – системы, структуры</text>
+            <text x="0" y="104" font-family="'IBM Plex Mono',monospace" font-size="13" font-weight="600" fill="#1e2640">"Система + автоматизация"</text>
+            <text x="0" y="122" font-family="'IBM Plex Mono',monospace" font-size="12" fill="rgba(30,38,64,0.65)">Регуляции, инфраструктура, тренды рынка</text>
+            <text x="0" y="140" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#3a5bcf" opacity="0.7">4R: trend scan, signal monitoring</text>
             <text x="0" y="162" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(30,38,64,0.35)" font-style="italic">&rarr; AI-скан каналов по 4 сценариям</text>
           </g>
           </g>
 
           <!-- Q4: Коллаборация сообщества (bottom-right) -->
           <g class="quadrant-zone" data-q="4">
-          <rect class="q-bg" x="440" y="400" width="350" height="310" fill="rgba(30,38,64,0.02)" rx="4"/>
+          <rect class="q-bg" x="440" y="400" width="350" height="310" fill="rgba(58,91,207,0.03)" rx="6"/>
           <g transform="translate(470, 430)">
             <text x="270" y="38" text-anchor="end" font-family="'Space Grotesk',sans-serif" font-size="52" font-weight="700" fill="rgba(30,38,64,0.08)">IV</text>
-            <text x="270" y="64" text-anchor="end" font-family="'Space Grotesk',sans-serif" font-size="18" font-weight="700" fill="#1e2640">Коллаборация сообщества</text>
+            <text x="270" y="64" text-anchor="end" font-family="'Space Grotesk',sans-serif" font-size="20" font-weight="700" fill="#1a1e2e">Коллаборация сообщества</text>
             <line x1="70" y1="68" x2="270" y2="68" stroke="#3a5bcf" stroke-width="2" opacity="0.5"/>
-            <text x="270" y="86" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="11" fill="rgba(30,38,64,0.45)">Wilber: We (Мы) – культура, смыслы</text>
-            <text x="270" y="104" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600" fill="#1e2640">"Система + участие"</text>
-            <text x="270" y="122" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="rgba(30,38,64,0.55)">Сообщества, групповой контекст, ритуалы</text>
-            <text x="270" y="140" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="#3a5bcf" opacity="0.7">4R: group play, collective foresight</text>
+            <text x="270" y="86" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="12" fill="rgba(30,38,64,0.55)">Wilber: We (Мы) – культура, смыслы</text>
+            <text x="270" y="104" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="13" font-weight="600" fill="#1e2640">"Система + участие"</text>
+            <text x="270" y="122" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="12" fill="rgba(30,38,64,0.65)">Сообщества, групповой контекст, ритуалы</text>
+            <text x="270" y="140" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#3a5bcf" opacity="0.7">4R: group play, collective foresight</text>
             <text x="270" y="162" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(30,38,64,0.35)" font-style="italic">&rarr; Тестовая лаба: 7 человек, просят продолжения</text>
           </g>
           </g>
@@ -959,8 +1507,8 @@
           <g stroke="#1e2640" stroke-width="1" fill="none" opacity="0.15">
             <path d="M 390 65 L 380 65 L 380 100 L 390 100"/>
             <path d="M 470 65 L 480 65 L 480 100 L 470 100"/>
-            <text x="383" y="86" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.25)">UL</text>
-            <text x="473" y="86" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.25)">UR</text>
+            <text x="383" y="86" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.25)">UR</text>
+            <text x="473" y="86" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.25)">UL</text>
           </g>
           <g stroke="#1e2640" stroke-width="1" fill="none" opacity="0.15">
             <path d="M 390 670 L 380 670 L 380 700 L 390 700"/>
@@ -971,62 +1519,38 @@
 
         </svg>
       </div>
-    </div>
+  </div><!-- /section-card diagram -->
 
-    <!-- Annotation Strip -->
-    <div class="annotation-strip">
-      <div class="ann-heading">Контекст</div>
-      <div class="ann-item"><strong>40+</strong> участников FOS</div>
-      <div class="ann-item"><strong>7</strong> чел. тестовая лаба</div>
-      <div class="ann-item"><strong>5</strong> лет база трендов</div>
-      <div class="ann-item"><strong>13+</strong> лет форсайта</div>
-      <div class="ann-heading" style="margin-top:20px">Корни</div>
-      <div class="ann-item">Wilber AQAL 1995</div>
-      <div class="ann-item">Integral Futures 1998</div>
-      <div class="ann-item">Causal Layered Analysis</div>
-      <div class="ann-item">Scenario Planning</div>
-    </div>
-  </div>
+  <!-- Decorative cross between sections -->
+  <svg class="deco-cross" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+    <line x1="20" y1="4" x2="20" y2="36" stroke="var(--ink)" stroke-width="2"/>
+    <line x1="4" y1="20" x2="36" y2="20" stroke="var(--ink)" stroke-width="2"/>
+    <circle cx="20" cy="20" r="5" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+  </svg>
 
-  <!-- 6. QUOTES FROM SESSION -->
-  <div class="quotes-section">
+  <!-- 7. QUOTES FROM SESSION -->
+  <div class="quotes-section reveal" id="quotes">
     <div class="section-title">Цитаты из сессии</div>
 
     <div class="quote-item">
       <span class="quote-mark">&laquo;</span>
-      <div class="quote-text">я разложила ВСЕ свои проекты &mdash; банки, FMCG, разные периоды &mdash; и увидела одну и ту же логику в 4 квадрантах</div>
+      <div class="quote-text">мы смотрим туда, где приятно и понятно. мозг стремится к знакомому</div>
       <div class="quote-author">&mdash; Olya Eremina</div>
     </div>
 
     <div class="quote-item align-right">
       <span class="quote-mark">&raquo;</span>
-      <div class="quote-text">мой первый кейс в Obsidian 7 лет назад &mdash; форсайт. фотографировал карточки и строил граф. тогда AI не было даже в мыслях</div>
-      <div class="quote-author">&mdash; Alex Povaliaev</div>
+      <div class="quote-text">чтобы управлять AI-агентами, нужно самому обладать агентностью</div>
+      <div class="quote-author">&mdash; из диалога FOS #26</div>
     </div>
 
     <div class="quote-item">
       <span class="quote-mark">&laquo;</span>
-      <div class="quote-text">чтобы управлять AI-агентами, нужно самому обладать агентностью. вопрос &laquo;зачем&raquo; должен быть до &laquo;чем&raquo;</div>
-      <div class="quote-author">&mdash; из диалога FOS #26</div>
-    </div>
-
-    <div class="quote-item align-right">
-      <span class="quote-mark">&raquo;</span>
-      <div class="quote-text">если 6 из 8 ваших действий в одном квадранте &mdash; это звоночек. все яйца в одну корзину</div>
+      <div class="quote-text">если 6 из 8 действий в одном квадранте &mdash; это звоночек. все яйца в одну корзину</div>
       <div class="quote-author">&mdash; Olya Eremina</div>
     </div>
   </div>
 
-  <!-- 7. INSIGHT BOX -->
-  <div class="insight-box">
-    <span class="insight-label">Ключевой инсайт</span>
-    <p>
-      Квадранты &mdash; это не стадии развития, а <strong>параллельные логики</strong>.
-      Один запрос решается в 4 реальностях одновременно.
-      Игнорировать квадрант &mdash; значит получить слепое пятно в решении.
-    </p>
-  </div>
-
   <!-- DIVIDER -->
   <svg class="svg-divider" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg">
     <line x1="10" y1="10" x2="138" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
@@ -1034,108 +1558,11 @@
     <line x1="162" y1="10" x2="290" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
   </svg>
 
-  <!-- 8. SPEAKERS -->
-  <div class="speakers-section">
-    <div class="section-title">Кто ведёт</div>
-    <div class="speakers-grid">
-      <div class="speaker-card speaker-olya">
-        <img class="speaker-photo" src="assets/olya.jpg" alt="Olya Eremina">
-        <div class="speaker-name">Olya Eremina</div>
-        <div class="speaker-role">методология + форсайт</div>
-        <div class="speaker-desc">
-          <span class="speaker-line">основатель <a href="https://futuredecoder.ru" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">FutureDecoder.ru</a> &mdash; &laquo;подготовим вас к переменам&raquo;</span>
-          <span class="speaker-line">13+ лет в стратегии и трендвотчинге</span>
-          <span class="speaker-line">директор трендвотчинга UXSSR</span>
-          <span class="speaker-line">50+ корпоративных проектов, 500+ обученных</span>
-          <span class="speaker-line">клиенты: РБК, X5, Ozon, VK, Яндекс, КРОК, ВТБ, МТС, AstraZeneca</span>
-          <span class="speaker-line">3 высших: финансы, лингвистика, стратегический маркетинг (ВШЭ)</span>
-          <span class="speaker-line">сертификаты: Trendwatching.com, The Future Laboratory</span>
-          <span class="speaker-line">преподаватель: BHSAD, Нетология, Сколково</span>
-          <span class="speaker-line">канал &laquo;Декодер будущего&raquo; &mdash; ~2,400 подписчиков</span>
-          <span class="speaker-line">провела тестовую лабу на 7 человек &mdash; участники просят продолжения</span>
-        </div>
-        <div class="speaker-links">@ereminaolya &middot; <a href="https://futuredecoder.ru" target="_blank">futuredecoder.ru</a></div>
-      </div>
-      <div class="speaker-card speaker-alex">
-        <img class="speaker-photo" src="assets/alex.jpg" alt="Alex Povaliaev">
-        <div class="speaker-name">Alex Povaliaev</div>
-        <div class="speaker-role">AI + personal operating systems</div>
-        <div class="speaker-desc">
-          <span class="speaker-line">founder <a href="https://aimindset.org" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">AI Mindset</a> &mdash; сообщество исследования себя через технологии (4 года)</span>
-          <span class="speaker-line">AI Mindset Space &mdash; серия Founder OS, 30+ сессий, 100+ участников</span>
-          <span class="speaker-line">Personal OS Sprint &mdash; методология персональной операционной системы</span>
-          <span class="speaker-line">AI-Native Organizations Sprint &mdash; 200 участников, 3 недели интенсива</span>
-          <span class="speaker-line">7 лет в Obsidian &mdash; начинал с форсайт-карточек в графе</span>
-          <span class="speaker-line">Claude Code, агентные системы, AI-инструменты</span>
-          <span class="speaker-line">связка технологий и смыслов &mdash; &laquo;зачем&raquo; до &laquo;чем&raquo;</span>
-        </div>
-        <div class="speaker-links"><a href="https://aimindset.org" target="_blank">aimindset.org</a> &middot; @ai_mind_set</div>
-      </div>
-    </div>
-  </div>
+  <!-- 8. WORKSHOP FLOW (before speakers — people come for methodology) -->
+  <div class="workshop-section section-card reveal" style="padding:40px 48px;" id="format">
+    <div class="section-title">Формат: как это будет</div>
 
-  <!-- DIVIDER -->
-  <svg class="svg-divider" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg">
-    <line x1="10" y1="10" x2="138" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
-    <polygon points="150,3 157,10 150,17 143,10" fill="none" stroke="#1e2640" stroke-width="1.5"/>
-    <line x1="162" y1="10" x2="290" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
-  </svg>
-
-  <!-- 9. WORKSHOP FLOW + CTA -->
-  <div class="workshop-section">
-    <div class="section-title">Мастер-класс: Карта Реальностей &times; AI</div>
-
-    <!-- Flow Diagram SVG -->
-    <svg class="flow-svg" viewBox="0 0 750 90" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#1e2640" stroke-width="1.5"/>
-        </marker>
-      </defs>
-      <g font-family="'Space Grotesk',sans-serif">
-        <circle cx="65" cy="35" r="22" fill="none" stroke="#1e2640" stroke-width="2"/>
-        <text x="65" y="40" text-anchor="middle" font-size="16" font-weight="700" fill="#1e2640">1</text>
-        <text x="65" y="70" text-anchor="middle" font-size="10" font-weight="600" fill="#1e2640">ЗАЧЕМ</text>
-        <text x="65" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.4)">30 мин</text>
-
-        <line x1="90" y1="35" x2="145" y2="35" stroke="#1e2640" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-        <circle cx="190" cy="35" r="22" fill="none" stroke="#1e2640" stroke-width="2"/>
-        <text x="190" y="40" text-anchor="middle" font-size="16" font-weight="700" fill="#1e2640">2</text>
-        <text x="190" y="70" text-anchor="middle" font-size="10" font-weight="600" fill="#1e2640">КАРТА</text>
-        <text x="190" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.4)">45 мин</text>
-
-        <line x1="215" y1="35" x2="270" y2="35" stroke="#1e2640" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-        <circle cx="315" cy="35" r="22" fill="none" stroke="#1e2640" stroke-width="2"/>
-        <text x="315" y="40" text-anchor="middle" font-size="16" font-weight="700" fill="#1e2640">3</text>
-        <text x="315" y="70" text-anchor="middle" font-size="10" font-weight="600" fill="#1e2640">СИГНАЛЫ</text>
-        <text x="315" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.4)">60 мин</text>
-
-        <line x1="340" y1="35" x2="395" y2="35" stroke="#1e2640" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-        <circle cx="440" cy="35" r="22" fill="none" stroke="#1e2640" stroke-width="2"/>
-        <text x="440" y="40" text-anchor="middle" font-size="16" font-weight="700" fill="#1e2640">4</text>
-        <text x="440" y="70" text-anchor="middle" font-size="10" font-weight="600" fill="#1e2640">ИГРА</text>
-        <text x="440" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.4)">60 мин</text>
-
-        <line x1="465" y1="35" x2="520" y2="35" stroke="#1e2640" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-        <circle cx="565" cy="35" r="22" fill="none" stroke="#1e2640" stroke-width="2"/>
-        <text x="565" y="40" text-anchor="middle" font-size="16" font-weight="700" fill="#1e2640">5</text>
-        <text x="565" y="70" text-anchor="middle" font-size="10" font-weight="600" fill="#1e2640">РЕШЕНИЕ</text>
-        <text x="565" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(30,38,64,0.4)">30 мин</text>
-
-        <line x1="590" y1="35" x2="645" y2="35" stroke="#1e2640" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-        <circle cx="690" cy="35" r="22" fill="none" stroke="#3a5bcf" stroke-width="2"/>
-        <text x="690" y="40" text-anchor="middle" font-size="16" font-weight="700" fill="#3a5bcf">6</text>
-        <text x="690" y="70" text-anchor="middle" font-size="10" font-weight="600" fill="#3a5bcf">AI-ОБВЯЗКА</text>
-        <text x="690" y="82" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="rgba(58,91,207,0.5)">15 мин</text>
-      </g>
-    </svg>
-
-    <!-- Steps Details -->
+    <!-- Steps Details (SVG flow removed — duplicated info, Karina: "кругляшки грустные") -->
     <div class="steps-grid">
       <div class="step-item">
         <div class="step-number">01</div>
@@ -1175,8 +1602,10 @@
       </div>
     </div>
 
-    <div class="workshop-params">
-      суббота, 25 апреля 2026 &middot; 3&ndash;5 часов &middot; 99 EUR &middot; 30 мест &middot; Zoom
+    <div style="font-family:var(--mono); font-size:13px; color:var(--faded-strong); margin-top:20px; line-height:1.8; border-top:1px solid var(--grid-major); padding-top:16px;">
+      <strong style="color:var(--ink);">Формат:</strong> 10 мин знакомство + 3 раунда по 20 мин в группах + обсуждение + AI-обвязка<br>
+      Breakout-комнаты &mdash; обсуждаете, делитесь, переключаетесь между квадрантами<br>
+      <span class="breathe-dot"></span>суббота, 25 апреля 2026 &middot; 4 часа &middot; 99 EUR &middot; 36 мест &middot; Zoom
     </div>
   </div>
 
@@ -1187,70 +1616,16 @@
     <line x1="162" y1="10" x2="290" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
   </svg>
 
-  <!-- BRIDGE DIAGRAM -->
-  <div class="bridge-section">
-    <svg class="bridge-svg" viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="90" cy="40" r="35" fill="none" stroke="#1e2640" stroke-width="2"/>
-      <text x="90" y="37" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="700" fill="#1e2640">AI POS</text>
-      <text x="90" y="50" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(30,38,64,0.5)">Я + Оно</text>
-      <text x="90" y="88" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(30,38,64,0.35)">internal</text>
-
-      <line x1="128" y1="40" x2="252" y2="40" stroke="#1e2640" stroke-width="2" stroke-dasharray="6,3"/>
-
-      <polygon points="300,8 340,40 300,72 260,40" fill="none" stroke="#3a5bcf" stroke-width="2.5"/>
-      <text x="300" y="38" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="#3a5bcf">АГЕНТ-</text>
-      <text x="300" y="50" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="#3a5bcf">НОСТЬ</text>
-      <text x="300" y="88" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(58,91,207,0.5)">(зачем)</text>
-
-      <line x1="348" y1="40" x2="472" y2="40" stroke="#1e2640" stroke-width="2" stroke-dasharray="6,3"/>
-
-      <circle cx="510" cy="40" r="35" fill="none" stroke="#1e2640" stroke-width="2"/>
-      <text x="510" y="33" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="#1e2640">Four</text>
-      <text x="510" y="47" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="#1e2640">Realities</text>
-      <text x="510" y="58" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(30,38,64,0.5)">Мы + Они</text>
-      <text x="510" y="88" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(30,38,64,0.35)">external</text>
-    </svg>
-    <div class="bridge-label">= Integral Context OS</div>
-  </div>
-
-  <!-- WILBER TABLE -->
-  <div class="table-section">
-    <table>
-      <thead>
-        <tr>
-          <th>Wilber</th>
-          <th>Ось</th>
-          <th>Квадрант</th>
-          <th>AI-слой</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>UL (Я)</td>
-          <td>субъективное, внутреннее</td>
-          <td>I &mdash; Техносуверен</td>
-          <td>focus, values, agency</td>
-        </tr>
-        <tr>
-          <td>UR (Оно)</td>
-          <td>объективное, внешнее</td>
-          <td>II &mdash; Суверенный сад</td>
-          <td>skills, automation, Obsidian</td>
-        </tr>
-        <tr>
-          <td>LL (Мы)</td>
-          <td>межсубъективное</td>
-          <td>IV &mdash; Коллаборация сообщества</td>
-          <td>culture, rituals, meaning</td>
-        </tr>
-        <tr>
-          <td>LR (Они)</td>
-          <td>межобъективное</td>
-          <td>III &mdash; Институциональный вклад</td>
-          <td>governance, compliance, org</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- 9. OUTCOMES — "В итоге ты" -->
+  <div class="outcomes-section reveal" id="results">
+    <span class="insight-label">В итоге ты</span>
+    <ul class="outcomes-list">
+      <li>разложишь свой запрос через 4 параллельные реальности &mdash; здоровье, карьера, бизнес, что угодно</li>
+      <li>увидишь несколько сценариев вместо одного &mdash; и слепые зоны, которые мозг отфильтровывает</li>
+      <li>научишься сканировать внешний контекст &mdash; привычка собирать сигналы через 4 линзы</li>
+      <li>получишь персональную карту 4 реальностей (артефакт под твой запрос)</li>
+      <li>заберёшь Obsidian-шаблон для ежедневного сканирования + Claude-промпт с методологией</li>
+    </ul>
   </div>
 
   <!-- DIVIDER -->
@@ -1260,21 +1635,63 @@
     <line x1="162" y1="10" x2="290" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
   </svg>
 
-  <!-- CTA -->
-  <div class="cta-section">
-    <span class="cta-label">Следующий шаг</span>
-    <div class="cta-title">Мастер-класс: Карта Реальностей &times; AI</div>
-    <div class="cta-meta">суббота, 25 апреля 2026 &middot; 99 EUR &middot; 30 мест</div>
-    <a href="https://lu.ma/gckwpmte" class="cta-button" target="_blank">Записаться через Luma &mdash; 99 EUR</a>
-    <div class="cta-links">
-      <a href="https://aimindset.org" target="_blank">AI Mindset &rarr; aimindset.org</a>
+  <!-- 10. SPEAKERS (compact — 3-4 facts, bigger photos) -->
+  <div class="speakers-section reveal" id="speakers">
+    <div class="section-title">Кто ведёт</div>
+    <div class="speakers-grid">
+      <div class="speaker-card speaker-olya">
+        <img class="speaker-photo" src="assets/olya.jpg" alt="Olya Eremina" style="width:130px; height:130px;">
+        <div class="speaker-name">Olya Eremina</div>
+        <div class="speaker-role">методология + форсайт</div>
+        <div class="speaker-desc">
+          <span class="speaker-line">13+ лет в стратегии и трендвотчинге</span>
+          <span class="speaker-line">50+ корпоративных проектов (РБК, X5, Ozon, VK, ВТБ)</span>
+          <span class="speaker-line">основатель <a href="https://futuredecoder.ru" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">FutureDecoder.ru</a></span>
+          <span class="speaker-line">провела тестовую лабу на 7 человек &mdash; просят продолжения</span>
+        </div>
+        <div class="speaker-links">@ereminaolya &middot; <a href="https://futuredecoder.ru" target="_blank">futuredecoder.ru</a></div>
+      </div>
+      <div class="speaker-card speaker-alex">
+        <img class="speaker-photo" src="assets/alex.jpg" alt="Alex Povaliaev" style="width:130px; height:130px;">
+        <div class="speaker-name">Alex Povaliaev</div>
+        <div class="speaker-role">AI + personal operating systems</div>
+        <div class="speaker-desc">
+          <span class="speaker-line">founder <a href="https://aimindset.org" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">AI Mindset</a> &mdash; 4 года, 30+ Founder OS сессий</span>
+          <span class="speaker-line">Personal OS Sprint + AI-Native Sprint (200 участников)</span>
+          <span class="speaker-line">7 лет в Obsidian &mdash; форсайт-карточки в графе</span>
+          <span class="speaker-line">Claude Code, агентные системы, связка технологий и смыслов</span>
+        </div>
+        <div class="speaker-links"><a href="https://aimindset.org" target="_blank">aimindset.org</a> &middot; @ai_mind_set</div>
+      </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <div class="page-footer">
-    <a href="https://aimindset.org" target="_blank">AI Mindset</a> &nbsp;&middot;&nbsp; aimindset.org
+  <!-- DIVIDER -->
+  <svg class="svg-divider" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg">
+    <line x1="10" y1="10" x2="138" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
+    <polygon points="150,3 157,10 150,17 143,10" fill="none" stroke="#1e2640" stroke-width="1.5"/>
+    <line x1="162" y1="10" x2="290" y2="10" stroke="#c2bdb5" stroke-width="1.5"/>
+  </svg>
+
+  <!-- 11. CTA + SOCIAL LINKS (dark section — academic style) -->
+  <div class="section-dark" style="text-align:center; padding:56px 48px; background: linear-gradient(135deg, #1e2640 0%, #2a3a6b 100%);" id="cta">
+    <div style="max-width:600px; margin:0 auto;">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,237,232,0.45); margin-bottom:16px;">Следующий шаг</div>
+      <div style="font-family:var(--sans); font-size:22px; font-weight:700; color:#fff; margin-bottom:8px;">Мастер-класс: Карта Реальностей &times; AI</div>
+      <div style="font-family:var(--mono); font-size:14px; color:rgba(240,237,232,0.6); margin-bottom:28px;">
+        суббота, 25 апреля 2026 &middot; 99 EUR &middot; 36 мест
+      </div>
+      <a href="https://lu.ma/gckwpmte" target="_blank" class="dark-cta-button">Записаться через Luma &mdash; 99 EUR</a>
+      <div style="font-family:var(--mono); font-size:12px; color:rgba(240,237,232,0.4); margin-top:24px; line-height:2.2;">
+        <a href="https://lu.ma/aimindset" target="_blank" style="color:rgba(240,237,232,0.55); text-decoration:none; border-bottom:1px solid rgba(240,237,232,0.2);">Подписаться на события AI Mindset (Luma)</a><br>
+        <a href="https://t.me/ai_mind_set" target="_blank" style="color:rgba(240,237,232,0.55); text-decoration:none; border-bottom:1px solid rgba(240,237,232,0.2);">Telegram</a> &nbsp;&middot;&nbsp;
+        <a href="https://www.youtube.com/@aimindset" target="_blank" style="color:rgba(240,237,232,0.55); text-decoration:none; border-bottom:1px solid rgba(240,237,232,0.2);">YouTube</a> &nbsp;&middot;&nbsp;
+        <a href="https://aimindset.org" target="_blank" style="color:rgba(240,237,232,0.55); text-decoration:none; border-bottom:1px solid rgba(240,237,232,0.2);">aimindset.org</a>
+      </div>
+    </div>
   </div>
+
+  <!-- FOOTER (merged into dark CTA section above — no duplicate) -->
 
 </div>
 
@@ -1305,11 +1722,11 @@ function playAt(seconds) {
 const tooltipData = {
   1: {
     title: 'I. Техносуверен',
-    text: 'Децентр + Синтетика. Ценности, мотивация, сознание. AI-слой: focus, values, agency. Автономность + автоматизация.'
+    text: 'Децентр + Земля. Ценности, мотивация, сознание. AI-слой: focus, values, agency. Автономность + автоматизация.'
   },
   2: {
     title: 'II. Суверенный сад',
-    text: 'Децентр + Земля. Личная операционная система: инструменты, системы, рутины. AI-слой: skills, automation, Obsidian. Автономность + участие.'
+    text: 'Децентр + Синтетика. Личная операционная система: инструменты, системы, рутины. AI-слой: skills, automation, Obsidian. Автономность + участие.'
   },
   3: {
     title: 'III. Институциональный вклад',
@@ -1360,6 +1777,43 @@ document.addEventListener('keydown', function(e) {
     tooltip.classList.remove('visible');
     tooltipVisible = false;
   }
+});
+
+// Side navigation scroll tracking
+const navLinks = document.querySelectorAll('.side-nav a[data-section]');
+const sections = [];
+navLinks.forEach(function(link) {
+  var el = document.getElementById(link.dataset.section);
+  if (el) sections.push({ el: el, link: link });
+});
+
+function updateNav() {
+  var scrollY = window.scrollY + window.innerHeight * 0.35;
+  var active = sections[0];
+  for (var i = 0; i < sections.length; i++) {
+    if (sections[i].el.offsetTop <= scrollY) {
+      active = sections[i];
+    }
+  }
+  navLinks.forEach(function(l) { l.classList.remove('active'); });
+  if (active) active.link.classList.add('active');
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+// Scroll reveal animation
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+revealElements.forEach(function(el) {
+  revealObserver.observe(el);
 });
 </script>
 
