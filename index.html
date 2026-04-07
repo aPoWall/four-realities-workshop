@@ -224,6 +224,8 @@
     max-width: 700px;
     margin: 0 auto 50px;
     position: relative;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(26,30,46,0.05);
   }
   .insight-box::before {
     content: '';
@@ -411,16 +413,27 @@
     gap: 32px;
   }
   .speaker-card {
-    border: 1px solid var(--grid-major);
+    border: 1px solid rgba(194,189,181,0.5);
     padding: 30px 24px 24px;
     position: relative;
     text-align: center;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 30px rgba(26,30,46,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .speaker-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(26,30,46,0.1);
   }
   .speaker-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 3px;
+    top: 0; left: 20px; right: 20px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
   }
   .speaker-alex::before { background: var(--accent); }
   .speaker-olya::before { background: #c45c4a; }
@@ -494,9 +507,10 @@
     position: relative;
     display: block;
     width: 100%;
-    border: 2px solid var(--grid-major);
+    border: 1px solid rgba(194,189,181,0.4);
     overflow: hidden;
     background: #1a1a1a;
+    border-radius: 14px;
   }
   .video-thumbnail-wrapper img {
     display: block;
@@ -522,7 +536,8 @@
   .video-embed-iframe {
     width: 100%;
     aspect-ratio: 16/9;
-    border: 2px solid var(--grid-major);
+    border: 1px solid rgba(194,189,181,0.4);
+    border-radius: 14px;
     display: block;
   }
   .video-meta {
@@ -758,11 +773,13 @@
     max-width: 700px;
     margin: 0 auto 60px;
     background: rgba(255,255,255,0.7);
-    border: 1px solid var(--grid-major);
-    border-radius: 4px;
+    border: 1px solid rgba(194,189,181,0.5);
+    border-radius: 20px;
     padding: 28px 32px;
     position: relative;
-    box-shadow: 0 2px 12px rgba(30,38,64,0.04);
+    box-shadow: 0 8px 40px rgba(26,30,46,0.07), 0 2px 8px rgba(26,30,46,0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .outcomes-section .insight-label {
     color: var(--accent);
@@ -813,27 +830,29 @@
   /* ── Step cards with SVG icons ── */
   .step-item {
     padding: 24px 20px 20px;
-    background: rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.6);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(194,189,181,0.6);
-    border-radius: 8px;
+    border: 1px solid rgba(194,189,181,0.4);
+    border-radius: 16px;
     position: relative;
     transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
     overflow: hidden;
+    box-shadow: 0 4px 16px rgba(26,30,46,0.05);
   }
   .step-item::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0; left: 16px; right: 16px;
     height: 3px;
     background: linear-gradient(90deg, var(--accent), rgba(58,91,207,0.3));
     opacity: 0;
     transition: opacity 0.35s;
+    border-radius: 0 0 3px 3px;
   }
   .step-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(26,30,46,0.1), 0 2px 8px rgba(58,91,207,0.08);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(26,30,46,0.1), 0 4px 12px rgba(58,91,207,0.1);
     border-color: rgba(58,91,207,0.3);
   }
   .step-item:hover::before {
@@ -865,24 +884,27 @@
     fill: rgba(58,91,207,0.08) !important;
   }
 
-  /* ── Section Backgrounds (подложки) ── */
+  /* ── Section Backgrounds (подложки) — airy floating cards ── */
   .section-card {
-    background: rgba(255,255,255,0.55);
-    border: 1px solid var(--grid-major);
-    border-radius: 4px;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(194,189,181,0.5);
+    border-radius: 20px;
     padding: 40px 48px;
     margin-bottom: 60px;
     position: relative;
-    box-shadow: 0 2px 12px rgba(30,38,64,0.04);
+    box-shadow: 0 8px 40px rgba(26,30,46,0.07), 0 2px 8px rgba(26,30,46,0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .section-card::after {
     content: '';
     position: absolute;
-    bottom: -8px; left: 12px; right: 12px;
-    height: 8px;
-    background: rgba(30,38,64,0.03);
-    border-radius: 0 0 4px 4px;
+    bottom: -10px; left: 20px; right: 20px;
+    height: 10px;
+    background: rgba(30,38,64,0.04);
+    border-radius: 0 0 20px 20px;
     z-index: -1;
+    filter: blur(4px);
   }
 
   .section-dark {
@@ -893,6 +915,7 @@
     margin-right: -60px;
     margin-bottom: 60px;
     position: relative;
+    border-radius: 24px;
   }
   .section-dark .section-title {
     color: var(--paper);
@@ -911,7 +934,8 @@
     border-left: 4px solid var(--accent);
     padding: 32px 40px;
     margin-bottom: 60px;
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px 20px 20px 4px;
+    box-shadow: 0 4px 20px rgba(26,30,46,0.05);
   }
 
   /* ── Hero CTA Button ── */
@@ -926,7 +950,7 @@
     text-decoration: none;
     letter-spacing: 0.5px;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 4px;
+    border-radius: 14px;
     position: relative;
     overflow: hidden;
   }
@@ -963,7 +987,7 @@
     text-decoration: none;
     letter-spacing: 0.5px;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 4px;
+    border-radius: 14px;
     position: relative;
     overflow: hidden;
   }
@@ -998,6 +1022,8 @@
     margin-right: -60px;
     position: relative;
     overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 16px 60px rgba(26,30,46,0.2), 0 4px 16px rgba(58,91,207,0.15);
   }
   .hero-stripe::before {
     content: '';
@@ -1062,10 +1088,16 @@
     font-size: 14px;
     color: var(--ink);
     background: rgba(255,255,255,0.6);
-    border: 1px solid var(--grid-major);
+    border: 1px solid rgba(194,189,181,0.5);
     padding: 10px 14px;
-    border-radius: 3px;
+    border-radius: 12px;
     line-height: 1.5;
+    box-shadow: 0 2px 8px rgba(26,30,46,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .question-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(26,30,46,0.08);
   }
   .question-chip::before {
     content: '?';
@@ -1102,7 +1134,11 @@
     transform: translateY(0);
   }
 
-  /* ── Side Navigation ── */
+  /* ── Side Navigation — with persistent labels ── */
+  @keyframes navPulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(58,91,207,0.4), 0 0 12px rgba(58,91,207,0.15); }
+    50% { box-shadow: 0 0 10px rgba(58,91,207,0.6), 0 0 20px rgba(58,91,207,0.25); }
+  }
   .side-nav {
     position: fixed;
     left: 16px;
@@ -1111,10 +1147,18 @@
     z-index: 100;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    align-items: center;
+    gap: 12px;
+    align-items: flex-start;
   }
   .side-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 4px 0;
+    position: relative;
+  }
+  .side-nav a .nav-dot {
     display: block;
     width: 10px;
     height: 10px;
@@ -1122,47 +1166,49 @@
     background: var(--grid-major);
     border: 2px solid var(--grid-major);
     transition: all 0.3s;
-    position: relative;
-    text-decoration: none;
+    flex-shrink: 0;
   }
-  .side-nav a.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    transform: scale(1.4);
-    box-shadow: 0 0 8px rgba(58,91,207,0.5), 0 0 16px rgba(58,91,207,0.2);
-  }
-  .side-nav a:hover {
-    border-color: var(--ink);
-    transform: scale(1.2);
-  }
-  .side-nav a::after {
-    content: attr(data-label);
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+  .side-nav a .nav-label {
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--faded-strong);
+    color: transparent;
     white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.2s;
-    pointer-events: none;
+    transition: color 0.25s, transform 0.25s;
+    transform: translateX(-4px);
   }
-  .side-nav a:hover::after {
-    opacity: 1;
+  .side-nav a:hover .nav-label {
+    color: var(--faded-strong);
+    transform: translateX(0);
+  }
+  .side-nav a:hover .nav-dot {
+    border-color: var(--ink);
+    transform: scale(1.2);
+  }
+  .side-nav a.active .nav-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.5);
+    animation: navPulse 2.5s ease-in-out infinite;
+  }
+  .side-nav a.active .nav-label {
+    color: var(--accent);
+    font-weight: 600;
+    transform: translateX(0);
+  }
+  @media (max-width: 1100px) {
+    .side-nav .nav-label { display: none; }
   }
   @media (max-width: 900px) {
     .side-nav { display: none; }
   }
 
-  /* ── Responsive ── */
+  /* ── Responsive — tablet ── */
   @media (max-width: 900px) {
-    body { padding: 24px 16px 40px; }
+    body { padding: 20px 14px 40px; }
     /* Logo — icon-only pill on mobile */
-    .logo-area { padding: 6px 14px; top: 10px; }
+    .logo-area { padding: 6px 12px; top: 10px; border-radius: 24px; }
     .logo-area a span { display: none; }
     .logo-img { width: 20px; height: 20px; }
     /* Layout stacking */
@@ -1178,55 +1224,71 @@
       gap: 6px 20px;
     }
     .annotation-strip .ann-heading { width: 100%; }
-    /* Steps — single column with tighter spacing */
-    .steps-grid { grid-template-columns: 1fr; gap: 14px; }
-    .step-item { padding: 18px 16px 16px; }
+    /* Steps — single column */
+    .steps-grid { grid-template-columns: 1fr; gap: 12px; }
+    .step-item { padding: 20px 16px 16px; border-radius: 14px; }
     .step-icon { width: 28px; height: 28px; }
-    /* Speakers */
-    .speakers-grid { grid-template-columns: 1fr; gap: 20px; }
-    .speaker-card { padding: 24px 20px 20px; }
-    .speaker-photo { width: 100px !important; height: 100px !important; }
+    /* Speakers — single column */
+    .speakers-grid { grid-template-columns: 1fr; gap: 16px; }
+    .speaker-card { padding: 24px 20px 20px; border-radius: 16px; }
+    .speaker-photo { width: 80px !important; height: 80px !important; }
     /* Video */
     .video-section { margin-bottom: 40px; }
-    .video-timecodes-grid { grid-template-columns: 1fr; gap: 20px; }
-    /* Cards */
-    .section-card { padding: 20px 16px; }
-    .section-dark { margin-left: -16px; margin-right: -16px; padding: 32px 20px; }
-    /* Hero */
-    .hero-stripe { padding: 48px 20px 36px; margin-left: -16px; margin-right: -16px; }
+    .video-timecodes-grid { grid-template-columns: 1fr; gap: 16px; }
+    /* Cards — full mobile rounding */
+    .section-card { padding: 24px 18px; border-radius: 16px; }
+    .section-dark { margin-left: -14px; margin-right: -14px; padding: 32px 20px; border-radius: 20px; }
+    /* Hero — full width rounded */
+    .hero-stripe { padding: 52px 20px 36px; margin-left: -14px; margin-right: -14px; border-radius: 20px; }
     .hero-stripe::after { font-size: 60px; top: 10px; right: 10px; }
-    .hero-stripe h1 { font-size: 32px !important; }
+    .hero-stripe h1 { font-size: 32px !important; line-height: 1.2 !important; }
     .hero-stripe p { font-size: 16px !important; }
+    /* Hero speaker photos — smaller on mobile */
+    .hero-stripe img[alt="Olya Eremina"],
+    .hero-stripe img[alt="Alex Povaliaev"] { width: 70px !important; height: 70px !important; }
     /* Questions */
     .questions-grid { grid-template-columns: 1fr; gap: 8px; }
-    .question-chip { font-size: 13px; padding: 8px 12px; }
+    .question-chip { font-size: 13px; padding: 10px 14px; border-radius: 10px; }
     /* Quote */
     .quote-text { font-size: 16px; }
     .quote-mark { font-size: 48px; }
-    .quote-item { padding: 0 16px; }
+    .quote-item { padding: 0 12px; }
     /* Numbers */
     .pull-number { font-size: 40px; }
     /* Section titles */
     .section-title { font-size: 18px; }
     /* Outcomes */
-    .outcomes-section { padding: 20px 16px; }
+    .outcomes-section { padding: 22px 18px; border-radius: 16px; }
     .outcomes-list li { font-size: 15px; padding-left: 20px; }
-    /* CTA buttons — full width */
-    .hero-cta-button, .dark-cta-button { width: 100%; text-align: center; padding: 16px 24px; font-size: 17px; }
+    /* CTA buttons — full width, bigger tap target */
+    .hero-cta-button, .dark-cta-button { width: 100%; text-align: center; padding: 16px 24px; font-size: 17px; border-radius: 14px; }
     /* Insight boxes */
-    .insight-box { padding: 20px 16px; }
-    .section-accent { padding: 24px 20px; }
+    .insight-box { padding: 20px 18px; border-radius: 14px; }
+    .section-accent { padding: 24px 18px; border-radius: 4px 16px 16px 4px; }
+    /* Dividers — smaller on mobile */
+    .svg-divider { width: 200px; margin: 20px auto 30px; }
+    .deco-cross { width: 30px; height: 30px; margin: 20px auto 30px; }
   }
 
-  /* ── Small mobile ── */
+  /* ── Small mobile (phones) ── */
   @media (max-width: 480px) {
-    body { padding: 16px 12px 32px; }
-    .hero-stripe { padding: 44px 16px 32px; margin-left: -12px; margin-right: -12px; }
+    body { padding: 14px 10px 32px; }
+    .hero-stripe { padding: 48px 16px 32px; margin-left: -10px; margin-right: -10px; border-radius: 16px; }
     .hero-stripe h1 { font-size: 28px !important; line-height: 1.2 !important; }
-    .section-dark { margin-left: -12px; margin-right: -12px; padding: 28px 16px; }
+    .section-card { padding: 20px 14px; border-radius: 14px; }
+    .section-dark { margin-left: -10px; margin-right: -10px; padding: 28px 16px; border-radius: 16px; }
     .step-number { font-size: 18px; }
     .step-name { font-size: 14px; }
     .step-desc { font-size: 13px; }
+    .step-item { border-radius: 12px; }
+    .speaker-card { border-radius: 14px; }
+    .outcomes-section { border-radius: 14px; }
+    .question-chip { border-radius: 10px; }
+    .insight-box { border-radius: 12px; }
+    /* Timecodes — tighter */
+    .timecode-link { padding: 6px 8px; gap: 10px; }
+    .timecode-text { font-size: 13px; }
+    .timecode-time { font-size: 12px; min-width: 38px; }
   }
 </style>
 </head>
@@ -1243,15 +1305,15 @@
 
 <!-- SIDE NAVIGATION -->
 <nav class="side-nav" id="sideNav">
-  <a href="#hero" data-label="Hero" data-section="hero" class="active"></a>
-  <a href="#problem" data-label="Проблема" data-section="problem"></a>
-  <a href="#video" data-label="Видео" data-section="video"></a>
-  <a href="#map" data-label="Карта" data-section="map"></a>
-  <a href="#quotes" data-label="Цитаты" data-section="quotes"></a>
-  <a href="#format" data-label="Формат" data-section="format"></a>
-  <a href="#results" data-label="Результат" data-section="results"></a>
-  <a href="#speakers" data-label="Спикеры" data-section="speakers"></a>
-  <a href="#cta" data-label="Записаться" data-section="cta"></a>
+  <a href="#hero" data-section="hero" class="active"><span class="nav-dot"></span><span class="nav-label">Hero</span></a>
+  <a href="#problem" data-section="problem"><span class="nav-dot"></span><span class="nav-label">Проблема</span></a>
+  <a href="#video" data-section="video"><span class="nav-dot"></span><span class="nav-label">Видео</span></a>
+  <a href="#map" data-section="map"><span class="nav-dot"></span><span class="nav-label">Карта</span></a>
+  <a href="#quotes" data-section="quotes"><span class="nav-dot"></span><span class="nav-label">Цитаты</span></a>
+  <a href="#format" data-section="format"><span class="nav-dot"></span><span class="nav-label">Формат</span></a>
+  <a href="#results" data-section="results"><span class="nav-dot"></span><span class="nav-label">Результат</span></a>
+  <a href="#speakers" data-section="speakers"><span class="nav-dot"></span><span class="nav-label">Спикеры</span></a>
+  <a href="#cta" data-section="cta"><span class="nav-dot"></span><span class="nav-label">Записаться</span></a>
 </nav>
 
 <div class="page-container">
@@ -1277,7 +1339,7 @@
       <circle cx="200" cy="200" r="80" fill="none" stroke="#fff" stroke-width="0.5" stroke-dasharray="4,4"/>
     </svg>
     <div style="position:relative;z-index:1;display:flex;gap:40px;align-items:center;flex-wrap:wrap;">
-      <div style="flex:1;min-width:320px;">
+      <div style="flex:1;min-width:260px;">
         <div style="font-family:var(--mono); font-size:12px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,237,232,0.45); margin-bottom:16px;">FOS #26 &middot; мастер-класс &middot; AI Mindset</div>
         <h1 style="font-family:var(--sans); font-size:44px; font-weight:700; letter-spacing:1px; line-height:1.15; margin-bottom:16px; color:#fff;">Карта<br>Реальностей &times; AI</h1>
         <p style="font-family:var(--sans); font-size:18px; font-weight:400; line-height:1.6; color:rgba(240,237,232,0.85); margin-bottom:24px; max-width:480px;">
@@ -1777,10 +1839,10 @@
         <div class="speaker-desc">
           <span class="speaker-line">13+ лет в стратегии и трендвотчинге</span>
           <span class="speaker-line">50+ корпоративных проектов (РБК, X5, Ozon, VK, ВТБ)</span>
-          <span class="speaker-line">основатель <a href="https://futuredecoder.ru" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">FutureDecoder.ru</a></span>
+          <span class="speaker-line">основатель <a href="https://futuredecoder.ru" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">FutureDecoder.ru</a> &mdash; канал <a href="https://t.me/futuredecoder" target="_blank" style="color:var(--terracotta);text-decoration:none;border-bottom:1px solid var(--terracotta);">Декодер будущего</a></span>
           <span class="speaker-line">провела тестовую лабу на 7 человек &mdash; просят продолжения</span>
         </div>
-        <div class="speaker-links">@ereminaolya &middot; <a href="https://futuredecoder.ru" target="_blank">futuredecoder.ru</a></div>
+        <div class="speaker-links"><a href="https://t.me/futuredecoder" target="_blank">@futuredecoder</a> &middot; <a href="https://futuredecoder.ru" target="_blank">futuredecoder.ru</a></div>
       </div>
       <div class="speaker-card speaker-alex">
         <img class="speaker-photo" src="assets/alex.jpg" alt="Alex Povaliaev" style="width:130px; height:130px;">
@@ -1818,6 +1880,11 @@
         <a href="https://t.me/ai_mind_set" target="_blank" style="color:rgba(240,237,232,0.55); text-decoration:none; border-bottom:1px solid rgba(240,237,232,0.2);">Telegram</a> &nbsp;&middot;&nbsp;
         <a href="https://www.youtube.com/@aimindset" target="_blank" style="color:rgba(240,237,232,0.55); text-decoration:none; border-bottom:1px solid rgba(240,237,232,0.2);">YouTube</a> &nbsp;&middot;&nbsp;
         <a href="https://aimindset.org" target="_blank" style="color:rgba(240,237,232,0.55); text-decoration:none; border-bottom:1px solid rgba(240,237,232,0.2);">aimindset.org</a>
+      </div>
+      <!-- Footer logo -->
+      <div style="margin-top:32px; padding-top:20px; border-top:1px solid rgba(240,237,232,0.1); display:flex; align-items:center; justify-content:center; gap:10px;">
+        <img src="assets/logo_rb.png" alt="AI Mindset" style="width:20px; height:20px; object-fit:contain; filter:brightness(0) invert(1); opacity:0.4;">
+        <span style="font-family:var(--mono); font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,237,232,0.3);">AI Mindset &middot; 2026</span>
       </div>
     </div>
   </div>
