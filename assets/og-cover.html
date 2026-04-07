@@ -8,11 +8,6 @@
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
   :root {
-    --paper: #f0ede8;
-    --grid-minor: #d8d4cc;
-    --grid-major: #c2bdb5;
-    --ink: #1e2640;
-    --accent: #3a5bcf;
     --mono: 'IBM Plex Mono', monospace;
     --sans: 'Space Grotesk', sans-serif;
   }
@@ -23,194 +18,258 @@
     width: 1200px;
     height: 630px;
     overflow: hidden;
-    background: var(--paper);
+    margin: 0;
     font-family: var(--mono);
-    color: var(--ink);
+    color: #fff;
     position: relative;
+    background: linear-gradient(135deg, #1e2640, #2a3a6b 40%, #3a5bcf 70%, #c45c4a 100%);
   }
 
-  /* Graph paper — same as map */
-  body {
-    background-image:
-      linear-gradient(var(--grid-minor) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px),
-      linear-gradient(var(--grid-major) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
-    background-size:
-      20px 20px,
-      20px 20px,
-      100px 100px,
-      100px 100px;
-    background-position: -1px -1px;
-  }
-
-  /* Brand top-left */
-  .brand {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 5px;
-    color: var(--ink);
-    opacity: 0.35;
-    z-index: 4;
-  }
-
-  /* Layout: left text + right cross */
-  .layout {
+  /* ── Noise texture overlay ── */
+  body::before {
+    content: '';
     position: absolute;
     inset: 0;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 60px;
-    padding: 0 80px;
+    z-index: 1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    pointer-events: none;
   }
 
-  /* Left side */
-  .left {
-    flex: 1;
-    max-width: 500px;
+  /* ── Large decorative multiply sign watermark ── */
+  .watermark {
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    transform: translate(-50%, -50%);
+    font-family: var(--sans);
+    font-size: 180px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.06);
+    z-index: 2;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  /* ── Title block: top-left ── */
+  .title-block {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    z-index: 5;
   }
 
   .title {
     font-family: var(--sans);
-    font-size: 36px;
+    font-size: 52px;
     font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--ink);
-    line-height: 1.2;
-    margin-bottom: 16px;
+    color: #fff;
+    letter-spacing: 2px;
+    line-height: 1.15;
+    margin-bottom: 18px;
   }
+
   .title .x-mark {
-    color: var(--accent);
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
   }
 
   .subtitle {
     font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(240, 237, 232, 0.6);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .details {
+    font-family: var(--mono);
     font-size: 14px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-  }
-
-  .rule {
-    width: 200px;
-    height: 3px;
-    background: var(--ink);
-    margin-bottom: 16px;
-  }
-
-  .meta {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: rgba(30,38,64,0.4);
-    line-height: 1.8;
+    font-weight: 400;
+    color: rgba(240, 237, 232, 0.45);
     letter-spacing: 0.5px;
   }
 
-  /* Right side: cross */
-  .cross-wrap {
-    position: relative;
-    width: 320px;
-    height: 320px;
-    flex-shrink: 0;
-  }
-
-  .q-label {
+  /* ── Speaker photos: bottom-left ── */
+  .speakers {
     position: absolute;
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--ink);
-    opacity: 0.35;
-    letter-spacing: 0.5px;
+    bottom: 60px;
+    left: 80px;
     z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
-  .q-label.tl { top: 28px; left: 14px; }
-  .q-label.tr { top: 28px; right: 14px; text-align: right; }
-  .q-label.bl { bottom: 28px; left: 14px; }
-  .q-label.br { bottom: 28px; right: 14px; text-align: right; }
+
+  .speaker-photos {
+    display: flex;
+    gap: 10px;
+  }
+
+  .speaker-photos img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    object-fit: cover;
+    filter: grayscale(30%);
+  }
+
+  .speaker-names {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: rgba(240, 237, 232, 0.5);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Logo: bottom-right ── */
+  .logo-block {
+    position: absolute;
+    bottom: 60px;
+    right: 80px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-block img {
+    height: 24px;
+    filter: brightness(0) invert(1);
+  }
+
+  .logo-block span {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ── 4-quadrant diagram: center-right ── */
+  .quadrant-wrap {
+    position: absolute;
+    top: 50%;
+    right: 120px;
+    transform: translateY(-50%);
+    width: 300px;
+    height: 300px;
+    z-index: 4;
+  }
 
 </style>
 </head>
 <body>
 
-  <!-- Brand -->
-  <div class="brand">AI MINDSET</div>
+  <!-- Watermark -->
+  <div class="watermark">&times;</div>
 
-  <!-- Layout -->
-  <div class="layout">
+  <!-- Title -->
+  <div class="title-block">
+    <div class="title">КАРТА РЕАЛЬНОСТЕЙ <span class="x-mark">&times;</span> AI</div>
+    <div class="subtitle">мастер-класс &middot; 25 апреля 2026</div>
+    <div class="details">4 часа &middot; Zoom &middot; 99 EUR</div>
+  </div>
 
-    <!-- Left: text -->
-    <div class="left">
-      <div class="title">КАРТА РЕАЛЬНОСТЕЙ <span class="x-mark">&times;</span> AI</div>
-      <div class="subtitle">Integral Context OS</div>
-      <div class="rule"></div>
-      <div class="meta">
-        мастер-класс &middot; 25 апреля 2026<br>
-        99 EUR &middot; 30 мест &middot; Zoom<br>
-        Alex Povaliaev + Olya Eremina
-      </div>
+  <!-- Speaker photos -->
+  <div class="speakers">
+    <div class="speaker-photos">
+      <img src="olya.jpg" alt="Olya Eremina">
+      <img src="alex.jpg" alt="Alex Povaliaev">
     </div>
+    <div class="speaker-names">Olya Eremina &times; Alex Povaliaev</div>
+  </div>
 
-    <!-- Right: cross -->
-    <div class="cross-wrap">
-      <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
-        <defs>
-          <filter id="rough" x="-2%" y="-2%" width="104%" height="104%">
-            <feTurbulence type="turbulence" baseFrequency="0.015" numOctaves="3" result="noise" seed="2"/>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
+  <!-- Logo -->
+  <div class="logo-block">
+    <img src="logo_rb.png" alt="AI Mindset">
+    <span>AI MINDSET</span>
+  </div>
 
-        <!-- Axis lines -->
-        <g filter="url(#rough)">
-          <path d="M 160 15 C 159 80, 161 240, 160 305" stroke="#1e2640" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M 15 160 C 80 159, 240 161, 305 160" stroke="#1e2640" stroke-width="3" fill="none" stroke-linecap="round"/>
-        </g>
+  <!-- 4-quadrant abstract diagram -->
+  <div class="quadrant-wrap">
+    <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
+      <defs>
+        <!-- Glow filter for center circle -->
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
 
-        <!-- Endpoints -->
-        <circle cx="160" cy="15" r="5" fill="#1e2640"/>
-        <circle cx="160" cy="305" r="5" fill="#1e2640"/>
-        <circle cx="15" cy="160" r="5" fill="#1e2640"/>
-        <circle cx="305" cy="160" r="5" fill="#1e2640"/>
+        <!-- Outer glow for center -->
+        <filter id="outerGlow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
 
-        <!-- Center circle -->
-        <circle cx="160" cy="160" r="20" fill="#f0ede8" stroke="#1e2640" stroke-width="2.5" filter="url(#glow)"/>
-        <circle cx="160" cy="160" r="20" fill="none" stroke="#3a5bcf" stroke-width="1" opacity="0.35"/>
-        <text x="160" y="164" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="10" font-weight="700" fill="#1e2640">ЗАЧЕМ</text>
+        <!-- Radial gradient for quadrant fills -->
+        <radialGradient id="qFill1" cx="75" cy="75" r="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <radialGradient id="qFill2" cx="225" cy="75" r="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <radialGradient id="qFill3" cx="75" cy="225" r="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.04)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <radialGradient id="qFill4" cx="225" cy="225" r="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+      </defs>
 
-        <!-- Axis labels -->
-        <text x="160" y="8" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="8" font-weight="700" fill="#1e2640" letter-spacing="2">ДЕЦЕНТР</text>
-        <text x="160" y="318" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="8" font-weight="700" fill="#1e2640" letter-spacing="2">ЦЕНТР</text>
+      <!-- Quadrant fills with different opacities -->
+      <rect x="15" y="15" width="135" height="135" fill="url(#qFill1)" rx="4"/>
+      <rect x="150" y="15" width="135" height="135" fill="url(#qFill2)" rx="4"/>
+      <rect x="15" y="150" width="135" height="135" fill="url(#qFill3)" rx="4"/>
+      <rect x="150" y="150" width="135" height="135" fill="url(#qFill4)" rx="4"/>
 
-        <!-- Diagonal lines -->
-        <g stroke="#c2bdb5" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.3">
-          <line x1="70" y1="70" x2="142" y2="144"/>
-          <line x1="250" y1="70" x2="178" y2="144"/>
-          <line x1="70" y1="250" x2="142" y2="176"/>
-          <line x1="250" y1="250" x2="178" y2="176"/>
-        </g>
-      </svg>
+      <!-- Dashed circle around center -->
+      <circle cx="150" cy="150" r="65" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
 
-      <!-- Quadrant labels -->
-      <span class="q-label tl">Суверенный сад</span>
-      <span class="q-label tr">Техносуверен</span>
-      <span class="q-label bl">Институц. вклад</span>
-      <span class="q-label br">Коллаборация</span>
-    </div>
+      <!-- Thin white cross lines -->
+      <line x1="150" y1="20" x2="150" y2="280" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+      <line x1="20" y1="150" x2="280" y2="150" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
 
+      <!-- Small corner tick marks -->
+      <line x1="148" y1="20" x2="152" y2="20" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      <line x1="148" y1="280" x2="152" y2="280" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      <line x1="20" y1="148" x2="20" y2="152" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      <line x1="280" y1="148" x2="280" y2="152" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+
+      <!-- Outer soft glow at center -->
+      <circle cx="150" cy="150" r="22" fill="rgba(58,91,207,0.25)" filter="url(#outerGlow)"/>
+
+      <!-- Center glowing circle -->
+      <circle cx="150" cy="150" r="14" fill="rgba(58,91,207,0.6)" filter="url(#glow)"/>
+      <circle cx="150" cy="150" r="14" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"/>
+      <circle cx="150" cy="150" r="5" fill="rgba(255,255,255,0.9)"/>
+
+      <!-- Subtle dots at quadrant centers -->
+      <circle cx="82" cy="82" r="3" fill="rgba(255,255,255,0.12)"/>
+      <circle cx="218" cy="82" r="3" fill="rgba(255,255,255,0.08)"/>
+      <circle cx="82" cy="218" r="3" fill="rgba(255,255,255,0.06)"/>
+      <circle cx="218" cy="218" r="3" fill="rgba(255,255,255,0.10)"/>
+
+      <!-- Fine diagonal lines toward center -->
+      <line x1="82" y1="82" x2="138" y2="138" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" stroke-dasharray="3,4"/>
+      <line x1="218" y1="82" x2="162" y2="138" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" stroke-dasharray="3,4"/>
+      <line x1="82" y1="218" x2="138" y2="162" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" stroke-dasharray="3,4"/>
+      <line x1="218" y1="218" x2="162" y2="162" stroke="rgba(255,255,255,0.07)" stroke-width="0.5" stroke-dasharray="3,4"/>
+
+    </svg>
   </div>
 
 </body>
