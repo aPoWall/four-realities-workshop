@@ -2,17 +2,12 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1080">
-<title>Four Realities Workshop — Luma Cover</title>
+<meta name="viewport" content="width=1600">
+<title>Карта Реальностей × AI — Luma Cover</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
   :root {
-    --paper: #f0ede8;
-    --grid-minor: #d8d4cc;
-    --grid-major: #c2bdb5;
-    --ink: #1e2640;
-    --accent: #3a5bcf;
     --mono: 'IBM Plex Mono', monospace;
     --sans: 'Space Grotesk', sans-serif;
   }
@@ -20,180 +15,296 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
-    width: 1080px;
-    height: 1080px;
+    width: 1600px;
+    height: 900px;
     overflow: hidden;
-    background: var(--paper);
+    margin: 0;
     font-family: var(--mono);
-    color: var(--ink);
+    color: #fff;
     position: relative;
+    background: linear-gradient(135deg, #1a1e30 0%, #1e2640 15%, #2a3a6b 45%, #3a5bcf 72%, #c45c4a 100%);
   }
 
-  /* Graph paper — same as map */
-  body {
-    background-image:
-      linear-gradient(var(--grid-minor) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px),
-      linear-gradient(var(--grid-major) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
-    background-size:
-      20px 20px,
-      20px 20px,
-      100px 100px,
-      100px 100px;
-    background-position: -1px -1px;
-  }
-
-  /* Brand top-left */
-  .brand {
-    position: absolute;
-    top: 52px;
-    left: 60px;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 5px;
-    color: var(--ink);
-    opacity: 0.35;
-    z-index: 4;
-  }
-
-  /* Content centered */
-  .content {
+  /* Noise texture */
+  body::before {
+    content: '';
     position: absolute;
     inset: 0;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    z-index: 1;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    pointer-events: none;
   }
 
-  /* Title */
+  /* Mesh glow overlays */
+  body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      radial-gradient(ellipse at 25% 45%, rgba(58,91,207,0.3) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 30%, rgba(196,92,74,0.2) 0%, transparent 45%),
+      radial-gradient(ellipse at 60% 85%, rgba(240,237,232,0.06) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* Watermark × */
+  .watermark {
+    position: absolute;
+    top: 42%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+    font-family: var(--sans);
+    font-size: 320px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    z-index: 3;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  /* Left content block */
+  .left-content {
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 55%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 90px;
+  }
+
+  .brand {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(240,237,232,0.35);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.4;
+  }
+
+  .supertitle {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(240,237,232,0.4);
+    margin-bottom: 18px;
+  }
+
   .title {
     font-family: var(--sans);
-    font-size: 38px;
+    font-size: 68px;
     font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-align: center;
-    margin-bottom: 56px;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 40px rgba(58,91,207,0.25);
   }
   .title .x-mark {
-    color: var(--accent);
+    color: rgba(240,237,232,0.35);
     font-weight: 400;
   }
 
-  /* Cross SVG */
-  .cross-wrap {
-    position: relative;
-    width: 440px;
-    height: 440px;
-    margin-bottom: 48px;
+  .subtitle {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(240,237,232,0.75);
+    margin-bottom: 32px;
+    max-width: 520px;
   }
 
-  /* Quadrant labels */
-  .q-label {
-    position: absolute;
+  .meta {
     font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink);
-    opacity: 0.4;
+    font-size: 15px;
+    color: rgba(240,237,232,0.5);
     letter-spacing: 1px;
-    z-index: 5;
   }
-  .q-label.tl { top: 40px; left: 24px; }
-  .q-label.tr { top: 40px; right: 24px; text-align: right; }
-  .q-label.bl { bottom: 40px; left: 24px; }
-  .q-label.br { bottom: 40px; right: 24px; text-align: right; }
 
-  /* Bottom info */
-  .info {
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    color: var(--ink);
-    opacity: 0.4;
+  /* Speaker photos */
+  .speakers {
+    position: absolute;
+    bottom: 80px;
+    left: 90px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
-  .info .dot {
-    margin: 0 10px;
-    opacity: 0.5;
+  .speakers img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(240,237,232,0.25);
+    filter: grayscale(20%);
+  }
+  .speakers .names {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: rgba(240,237,232,0.45);
+    letter-spacing: 0.5px;
+  }
+  .speakers .x-sep {
+    font-family: var(--sans);
+    font-size: 18px;
+    color: rgba(240,237,232,0.2);
+  }
+
+  /* Right side — abstract quadrant diagram */
+  .diagram-area {
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+    width: 520px;
+    height: 520px;
+    z-index: 8;
+  }
+
+  /* Glow behind diagram */
+  .diagram-area::before {
+    content: '';
+    position: absolute;
+    inset: -80px;
+    background: radial-gradient(ellipse at center, rgba(58,91,207,0.2) 0%, transparent 55%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Subtle grid lines in diagram area */
+  .diagram-grid {
+    position: absolute;
+    inset: 40px;
+    opacity: 0.06;
+    background-image:
+      linear-gradient(rgba(240,237,232,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,237,232,1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
   }
 
 </style>
 </head>
 <body>
 
-  <!-- Brand -->
-  <div class="brand">AI MINDSET</div>
+  <div class="watermark">&times;</div>
 
-  <!-- Content -->
-  <div class="content">
-
-    <!-- Title -->
-    <div class="title">КАРТА РЕАЛЬНОСТЕЙ <span class="x-mark">&times;</span> AI</div>
-
-    <!-- Cross diagram — same stroke style as map -->
-    <div class="cross-wrap">
-      <svg viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
-        <defs>
-          <filter id="rough" x="-2%" y="-2%" width="104%" height="104%">
-            <feTurbulence type="turbulence" baseFrequency="0.015" numOctaves="3" result="noise" seed="2"/>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-
-        <!-- Axis lines — hand-drawn feel like map -->
-        <g filter="url(#rough)">
-          <path d="M 220 20 C 219 100, 221 300, 220 420" stroke="#1e2640" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M 20 220 C 100 219, 340 221, 420 220" stroke="#1e2640" stroke-width="3" fill="none" stroke-linecap="round"/>
-        </g>
-
-        <!-- Axis endpoints -->
-        <circle cx="220" cy="20" r="6" fill="#1e2640"/>
-        <circle cx="220" cy="420" r="6" fill="#1e2640"/>
-        <circle cx="20" cy="220" r="6" fill="#1e2640"/>
-        <circle cx="420" cy="220" r="6" fill="#1e2640"/>
-
-        <!-- Center circle: ЗАЧЕМ -->
-        <circle cx="220" cy="220" r="26" fill="#f0ede8" stroke="#1e2640" stroke-width="3" filter="url(#glow)"/>
-        <circle cx="220" cy="220" r="26" fill="none" stroke="#3a5bcf" stroke-width="1.5" opacity="0.35"/>
-        <text x="220" y="225" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="700" fill="#1e2640">ЗАЧЕМ</text>
-
-        <!-- Axis labels -->
-        <text x="220" y="12" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="#1e2640" letter-spacing="3">ДЕЦЕНТР</text>
-        <text x="220" y="438" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="#1e2640" letter-spacing="3">ЦЕНТР</text>
-        <text x="10" y="220" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="10" font-weight="700" fill="#1e2640" letter-spacing="2" transform="rotate(-90, 10, 220)">СИНТЕТИКА</text>
-        <text x="430" y="220" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="10" font-weight="700" fill="#1e2640" letter-spacing="2" transform="rotate(90, 430, 220)">ЗЕМЛЯ</text>
-
-        <!-- Diagonal connection lines -->
-        <g stroke="#c2bdb5" stroke-width="1" stroke-dasharray="4,4" opacity="0.3">
-          <line x1="100" y1="100" x2="195" y2="200"/>
-          <line x1="340" y1="100" x2="245" y2="200"/>
-          <line x1="100" y1="340" x2="195" y2="240"/>
-          <line x1="340" y1="340" x2="245" y2="240"/>
-        </g>
-      </svg>
-
-      <!-- Quadrant labels -->
-      <span class="q-label tl">Суверенный сад</span>
-      <span class="q-label tr">Техносуверен</span>
-      <span class="q-label bl">Институциональный вклад</span>
-      <span class="q-label br">Коллаборация сообщества</span>
+  <!-- Left content -->
+  <div class="left-content">
+    <div class="brand">
+      <img src="logo_rb.png" alt="">
+      <span>AI MINDSET</span>
     </div>
+    <div class="supertitle">FOS #26 &middot; мастер-класс &middot; 4 часа</div>
+    <div class="title">Карта<br>Реальностей <span class="x-mark">&times;</span> AI</div>
+    <div class="subtitle">практический мастер-класс: как собирать свою систему решений через 4 линзы реальности</div>
+    <div class="meta">25 апреля 2026 &middot; Zoom &middot; 99 EUR &middot; 36 мест</div>
+  </div>
 
-    <!-- Info line -->
-    <div class="info">
-      25.04.2026<span class="dot">&middot;</span>99 EUR
-    </div>
+  <!-- Speakers — bottom-left -->
+  <div class="speakers">
+    <img src="olya.jpg" alt="Olya Eremina">
+    <span class="x-sep">&times;</span>
+    <img src="alex.jpg" alt="Alex Povaliaev">
+    <div class="names">Olya Eremina &middot; Alex Povaliaev</div>
+  </div>
 
+  <!-- Right side — abstract quadrant diagram -->
+  <div class="diagram-area">
+    <div class="diagram-grid"></div>
+    <svg viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <radialGradient id="q1" cx="130" cy="130" r="120" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.1)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <radialGradient id="q2" cx="390" cy="130" r="120" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(196,92,74,0.12)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <radialGradient id="q3" cx="130" cy="390" r="120" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+        <radialGradient id="q4" cx="390" cy="390" r="120" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="rgba(58,91,207,0.1)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Quadrant fills -->
+      <rect x="30" y="30" width="225" height="225" rx="8" fill="url(#q1)"/>
+      <rect x="265" y="30" width="225" height="225" rx="8" fill="url(#q2)"/>
+      <rect x="30" y="265" width="225" height="225" rx="8" fill="url(#q3)"/>
+      <rect x="265" y="265" width="225" height="225" rx="8" fill="url(#q4)"/>
+
+      <!-- Axis lines -->
+      <line x1="260" y1="20" x2="260" y2="500" stroke="rgba(240,237,232,0.25)" stroke-width="2.5"/>
+      <line x1="20" y1="260" x2="500" y2="260" stroke="rgba(240,237,232,0.25)" stroke-width="2.5"/>
+
+      <!-- Axis endpoints -->
+      <circle cx="260" cy="20" r="5" fill="rgba(240,237,232,0.5)"/>
+      <circle cx="260" cy="500" r="5" fill="rgba(240,237,232,0.5)"/>
+      <circle cx="20" cy="260" r="5" fill="rgba(240,237,232,0.5)"/>
+      <circle cx="500" cy="260" r="5" fill="rgba(240,237,232,0.5)"/>
+
+      <!-- Axis labels -->
+      <text x="260" y="12" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="12" font-weight="700" fill="rgba(240,237,232,0.55)" letter-spacing="3">ДЕЦЕНТР</text>
+      <text x="260" y="516" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="12" font-weight="700" fill="rgba(240,237,232,0.55)" letter-spacing="3">ЦЕНТР</text>
+      <text x="10" y="260" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="rgba(240,237,232,0.45)" letter-spacing="2" transform="rotate(-90, 10, 260)">СИНТЕТИКА</text>
+      <text x="510" y="260" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="11" font-weight="700" fill="rgba(240,237,232,0.45)" letter-spacing="2" transform="rotate(90, 510, 260)">ЗЕМЛЯ</text>
+
+      <!-- Diagonal connections -->
+      <g stroke="rgba(240,237,232,0.12)" stroke-width="1" stroke-dasharray="4,4">
+        <line x1="120" y1="120" x2="235" y2="240"/>
+        <line x1="400" y1="120" x2="285" y2="240"/>
+        <line x1="120" y1="400" x2="235" y2="280"/>
+        <line x1="400" y1="400" x2="285" y2="280"/>
+      </g>
+
+      <!-- Center circle: ЗАЧЕМ -->
+      <circle cx="260" cy="260" r="30" fill="rgba(26,30,46,0.6)" stroke="rgba(240,237,232,0.4)" stroke-width="2.5" filter="url(#glow)"/>
+      <circle cx="260" cy="260" r="30" fill="none" stroke="rgba(58,91,207,0.4)" stroke-width="1.5"/>
+      <text x="260" y="265" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="13" font-weight="700" fill="rgba(240,237,232,0.85)">ЗАЧЕМ</text>
+
+      <!-- Quadrant name labels -->
+      <text x="142" y="105" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" fill="rgba(240,237,232,0.35)" letter-spacing="0.5">Суверенный сад</text>
+      <text x="380" y="105" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" fill="rgba(240,237,232,0.35)" letter-spacing="0.5">Техносуверен</text>
+      <text x="142" y="420" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(240,237,232,0.3)" letter-spacing="0.5">Институциональный вклад</text>
+      <text x="380" y="420" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(240,237,232,0.3)" letter-spacing="0.5">Коллаборация сообщества</text>
+
+      <!-- Decorative dots at quadrant centers -->
+      <circle cx="142" cy="155" r="3.5" fill="rgba(240,237,232,0.1)"/>
+      <circle cx="380" cy="155" r="3.5" fill="rgba(196,92,74,0.15)"/>
+      <circle cx="142" cy="370" r="3.5" fill="rgba(240,237,232,0.06)"/>
+      <circle cx="380" cy="370" r="3.5" fill="rgba(58,91,207,0.15)"/>
+
+      <!-- Orbit rings around center -->
+      <circle cx="260" cy="260" r="50" fill="none" stroke="rgba(240,237,232,0.08)" stroke-width="1" stroke-dasharray="2,4"/>
+      <circle cx="260" cy="260" r="75" fill="none" stroke="rgba(240,237,232,0.05)" stroke-width="1" stroke-dasharray="3,6"/>
+    </svg>
   </div>
 
 </body>
