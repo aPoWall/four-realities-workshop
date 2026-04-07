@@ -62,12 +62,13 @@
 
   .title {
     font-family: var(--sans);
-    font-size: 52px;
+    font-size: 58px;
     font-weight: 700;
     color: #fff;
     letter-spacing: 2px;
-    line-height: 1.15;
+    line-height: 1.12;
     margin-bottom: 18px;
+    text-shadow: 0 2px 30px rgba(58,91,207,0.3);
   }
 
   .title .x-mark {
@@ -109,12 +110,13 @@
   }
 
   .speaker-photos img {
-    width: 60px;
-    height: 60px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.7);
+    border: 2.5px solid rgba(255, 255, 255, 0.7);
     object-fit: cover;
-    filter: grayscale(30%);
+    filter: grayscale(20%);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
   }
 
   .speaker-names {
@@ -148,15 +150,25 @@
     color: rgba(255, 255, 255, 0.6);
   }
 
-  /* ── 4-quadrant diagram: center-right ── */
+  /* ── 4-quadrant diagram: center-right, larger & juicier ── */
   .quadrant-wrap {
     position: absolute;
     top: 50%;
-    right: 120px;
+    right: 60px;
     transform: translateY(-50%);
-    width: 300px;
-    height: 300px;
+    width: 420px;
+    height: 420px;
     z-index: 4;
+  }
+
+  /* Mesh glow behind diagram */
+  .quadrant-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -60px;
+    background: radial-gradient(ellipse at center, rgba(58,91,207,0.25) 0%, transparent 60%);
+    z-index: -1;
+    pointer-events: none;
   }
 
 </style>
@@ -213,7 +225,7 @@
 
         <!-- Radial gradient for quadrant fills -->
         <radialGradient id="qFill1" cx="75" cy="75" r="90" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+          <stop offset="0%" stop-color="rgba(255,255,255,0.14)"/>
           <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
         </radialGradient>
         <radialGradient id="qFill2" cx="225" cy="75" r="90" gradientUnits="userSpaceOnUse">
@@ -259,7 +271,7 @@
 
       <!-- Subtle dots at quadrant centers -->
       <circle cx="82" cy="82" r="3" fill="rgba(255,255,255,0.12)"/>
-      <circle cx="218" cy="82" r="3" fill="rgba(255,255,255,0.08)"/>
+      <circle cx="218" cy="82" r="3" fill="rgba(255,255,255,0.14)"/>
       <circle cx="82" cy="218" r="3" fill="rgba(255,255,255,0.06)"/>
       <circle cx="218" cy="218" r="3" fill="rgba(255,255,255,0.10)"/>
 
