@@ -63,40 +63,48 @@
     position: relative;
   }
 
-  /* ── Logo ── */
+  /* ── Logo — floating island ── */
   .logo-area {
-    margin-bottom: 40px;
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 50;
-    background: rgba(240,237,232,0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    margin-left: -60px;
-    margin-right: -60px;
-    padding: 12px 60px;
-    border-bottom: 1px solid var(--grid-minor);
+    background: rgba(26,30,46,0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 8px 20px;
+    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .logo-area:hover {
+    background: rgba(26,30,46,0.9);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.25);
   }
   .logo-area a {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--faded-strong);
+    color: rgba(240,237,232,0.8);
     text-decoration: none;
     transition: color 0.2s;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
   .logo-area a:hover {
-    color: var(--accent);
+    color: #fff;
   }
   .logo-img {
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
   }
 
   /* ── Title Block ── */
@@ -802,20 +810,55 @@
     background-size: 200px 200px;
   }
 
-  /* ── Step cards with icons ── */
+  /* ── Step cards with SVG icons ── */
   .step-item {
-    padding: 20px;
-    background: rgba(255,255,255,0.45);
-    border: 1px solid var(--grid-major);
-    border-radius: 4px;
+    padding: 24px 20px 20px;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(194,189,181,0.6);
+    border-radius: 8px;
     position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    overflow: hidden;
+  }
+  .step-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), rgba(58,91,207,0.3));
+    opacity: 0;
+    transition: opacity 0.35s;
   }
   .step-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(26,30,46,0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(26,30,46,0.1), 0 2px 8px rgba(58,91,207,0.08);
+    border-color: rgba(58,91,207,0.3);
   }
-  /* step-item:last-child — no special styling, all cards equal */
+  .step-item:hover::before {
+    opacity: 1;
+  }
+  .step-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    transition: transform 0.35s;
+  }
+  .step-item:hover .step-icon {
+    transform: scale(1.15) rotate(5deg);
+  }
+  /* Staggered reveal for step cards */
+  .reveal-step {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease var(--delay, 0s), transform 0.5s ease var(--delay, 0s);
+  }
+  .reveal-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   /* ── Quadrant redesign — colored backgrounds ── */
   .quadrant-zone:hover rect.q-bg {
@@ -1085,10 +1128,12 @@
   .side-nav a.active {
     background: var(--accent);
     border-color: var(--accent);
-    transform: scale(1.3);
+    transform: scale(1.4);
+    box-shadow: 0 0 8px rgba(58,91,207,0.5), 0 0 16px rgba(58,91,207,0.2);
   }
   .side-nav a:hover {
     border-color: var(--ink);
+    transform: scale(1.2);
   }
   .side-nav a::after {
     content: attr(data-label);
@@ -1115,10 +1160,12 @@
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    body { padding: 24px 20px 60px; }
-    .logo-area { margin-left: -20px; margin-right: -20px; padding: 10px 20px; }
-    .logo-img { width: 24px; height: 24px; }
-    .logo-area a { font-size: 11px; letter-spacing: 3px; }
+    body { padding: 24px 16px 40px; }
+    /* Logo — icon-only pill on mobile */
+    .logo-area { padding: 6px 14px; top: 10px; }
+    .logo-area a span { display: none; }
+    .logo-img { width: 20px; height: 20px; }
+    /* Layout stacking */
     .diagram-area { flex-direction: column; }
     .annotation-strip {
       width: 100%;
@@ -1131,23 +1178,68 @@
       gap: 6px 20px;
     }
     .annotation-strip .ann-heading { width: 100%; }
-    .steps-grid { grid-template-columns: 1fr; }
-    .speakers-grid { grid-template-columns: 1fr; }
-    .video-section { margin-bottom: 60px; }
-    .video-timecodes-grid { grid-template-columns: 1fr; }
-    .section-card { padding: 24px 20px; }
-    .section-dark { margin-left: -20px; margin-right: -20px; padding: 32px 20px; }
-    .hero-stripe { padding: 36px 24px; margin-left: -20px; margin-right: -20px; }
-    .hero-stripe::after { font-size: 80px; top: 10px; right: 10px; }
-    .questions-grid { grid-template-columns: 1fr; }
-    .pull-number { font-size: 48px; }
+    /* Steps — single column with tighter spacing */
+    .steps-grid { grid-template-columns: 1fr; gap: 14px; }
+    .step-item { padding: 18px 16px 16px; }
+    .step-icon { width: 28px; height: 28px; }
+    /* Speakers */
+    .speakers-grid { grid-template-columns: 1fr; gap: 20px; }
+    .speaker-card { padding: 24px 20px 20px; }
+    .speaker-photo { width: 100px !important; height: 100px !important; }
+    /* Video */
+    .video-section { margin-bottom: 40px; }
+    .video-timecodes-grid { grid-template-columns: 1fr; gap: 20px; }
+    /* Cards */
+    .section-card { padding: 20px 16px; }
+    .section-dark { margin-left: -16px; margin-right: -16px; padding: 32px 20px; }
+    /* Hero */
+    .hero-stripe { padding: 48px 20px 36px; margin-left: -16px; margin-right: -16px; }
+    .hero-stripe::after { font-size: 60px; top: 10px; right: 10px; }
+    .hero-stripe h1 { font-size: 32px !important; }
+    .hero-stripe p { font-size: 16px !important; }
+    /* Questions */
+    .questions-grid { grid-template-columns: 1fr; gap: 8px; }
+    .question-chip { font-size: 13px; padding: 8px 12px; }
+    /* Quote */
     .quote-text { font-size: 16px; }
-    .quote-mark { font-size: 60px; }
+    .quote-mark { font-size: 48px; }
+    .quote-item { padding: 0 16px; }
+    /* Numbers */
+    .pull-number { font-size: 40px; }
+    /* Section titles */
+    .section-title { font-size: 18px; }
+    /* Outcomes */
+    .outcomes-section { padding: 20px 16px; }
+    .outcomes-list li { font-size: 15px; padding-left: 20px; }
+    /* CTA buttons — full width */
     .hero-cta-button, .dark-cta-button { width: 100%; text-align: center; padding: 16px 24px; font-size: 17px; }
+    /* Insight boxes */
+    .insight-box { padding: 20px 16px; }
+    .section-accent { padding: 24px 20px; }
+  }
+
+  /* ── Small mobile ── */
+  @media (max-width: 480px) {
+    body { padding: 16px 12px 32px; }
+    .hero-stripe { padding: 44px 16px 32px; margin-left: -12px; margin-right: -12px; }
+    .hero-stripe h1 { font-size: 28px !important; line-height: 1.2 !important; }
+    .section-dark { margin-left: -12px; margin-right: -12px; padding: 28px 16px; }
+    .step-number { font-size: 18px; }
+    .step-name { font-size: 14px; }
+    .step-desc { font-size: 13px; }
   }
 </style>
 </head>
 <body>
+
+<!-- SIDE NAVIGATION -->
+<!-- FLOATING LOGO ISLAND -->
+<div class="logo-area">
+  <a href="https://aimindset.org" target="_blank">
+    <img src="assets/logo_rb.png" alt="AI Mindset" class="logo-img">
+    <span>AI MINDSET</span>
+  </a>
+</div>
 
 <!-- SIDE NAVIGATION -->
 <nav class="side-nav" id="sideNav">
@@ -1163,14 +1255,6 @@
 </nav>
 
 <div class="page-container">
-
-  <!-- 1. AI MINDSET LOGO -->
-  <div class="logo-area">
-    <a href="https://aimindset.org" target="_blank">
-      <img src="assets/logo_rb.png" alt="AI Mindset" class="logo-img">
-      <span>AI MINDSET</span>
-    </a>
-  </div>
 
   <!-- 2. HERO — bold gradient with speakers -->
   <div class="hero-stripe reveal" id="hero">
@@ -1559,39 +1643,89 @@
   <div class="workshop-section section-card reveal" style="padding:40px 48px;" id="format">
     <div class="section-title">Формат: как это будет</div>
 
-    <!-- Steps Details (SVG flow removed — duplicated info, Karina: "кругляшки грустные") -->
+    <!-- Steps with SVG metaphor icons -->
     <div class="steps-grid">
-      <div class="step-item">
+      <div class="step-item reveal-step" style="--delay: 0s;">
+        <svg class="step-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+          <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.6"/>
+          <line x1="20" y1="4" x2="20" y2="12" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="20" y1="28" x2="20" y2="36" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="4" y1="20" x2="12" y2="20" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="28" y1="20" x2="36" y2="20" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
         <div class="step-number">01</div>
         <div class="step-name">ЗАЧЕМ</div>
         <div class="step-time">30 мин</div>
         <div class="step-desc">Формулируем личный запрос. Зачем мне карта реальностей?</div>
       </div>
-      <div class="step-item">
+      <div class="step-item reveal-step" style="--delay: 0.08s;">
+        <svg class="step-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="28" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+          <line x1="20" y1="6" x2="20" y2="34" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <line x1="6" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <circle cx="13" cy="13" r="3" fill="currentColor" opacity="0.4"/><circle cx="27" cy="13" r="3" fill="currentColor" opacity="0.25"/>
+          <circle cx="13" cy="27" r="3" fill="currentColor" opacity="0.2"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity="0.35"/>
+        </svg>
         <div class="step-number">02</div>
         <div class="step-name">КАРТА</div>
         <div class="step-time">45 мин &middot; Оля</div>
         <div class="step-desc">4 реальности, система координат. Wilber AQAL как навигация.</div>
       </div>
-      <div class="step-item">
+      <div class="step-item reveal-step" style="--delay: 0.16s;">
+        <svg class="step-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3,3" opacity="0.25"/>
+          <circle cx="20" cy="20" r="8" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+          <path d="M20 4 Q24 14 20 20 Q16 14 20 4" fill="currentColor" opacity="0.3"/>
+          <circle cx="20" cy="20" r="2.5" fill="currentColor" opacity="0.7"/>
+          <line x1="28" y1="12" x2="32" y2="8" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+          <circle cx="33" cy="7" r="2" fill="currentColor" opacity="0.4"/>
+        </svg>
         <div class="step-number">03</div>
         <div class="step-name">СИГНАЛЫ</div>
         <div class="step-time">60 мин &middot; Alex</div>
         <div class="step-desc">AI-скан каналов по 4 мирам. Слабые сигналы, тренды, аномалии.</div>
       </div>
-      <div class="step-item">
+      <div class="step-item reveal-step" style="--delay: 0.24s;">
+        <svg class="step-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+          <circle cx="28" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+          <circle cx="12" cy="28" r="5" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+          <circle cx="28" cy="28" r="5" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+          <line x1="17" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+          <line x1="12" y1="17" x2="12" y2="23" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+          <line x1="28" y1="17" x2="28" y2="23" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+          <line x1="17" y1="28" x2="23" y2="28" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+          <line x1="16" y1="16" x2="24" y2="24" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity="0.25"/>
+          <line x1="24" y1="16" x2="16" y2="24" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2" opacity="0.25"/>
+        </svg>
         <div class="step-number">04</div>
         <div class="step-name">ИГРА</div>
         <div class="step-time">60 мин &middot; все</div>
         <div class="step-desc">Групповая раскладка, слепые зоны. Перемещение между квадрантами.</div>
       </div>
-      <div class="step-item">
+      <div class="step-item reveal-step" style="--delay: 0.32s;">
+        <svg class="step-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.25"/>
+          <circle cx="20" cy="20" r="8" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+          <circle cx="20" cy="20" r="2" fill="currentColor" opacity="0.8"/>
+          <path d="M20 12 L22 18 L20 20 L18 18 Z" fill="currentColor" opacity="0.5"/>
+        </svg>
         <div class="step-number">05</div>
         <div class="step-name">РЕШЕНИЕ</div>
         <div class="step-time">30 мин</div>
         <div class="step-desc">Что поддерживать, что нельзя игнорировать. Приоритеты.</div>
       </div>
-      <div class="step-item">
+      <div class="step-item reveal-step" style="--delay: 0.4s;">
+        <svg class="step-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="10" width="24" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
+          <line x1="8" y1="15" x2="32" y2="15" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+          <circle cx="12" cy="12.5" r="1.5" fill="currentColor" opacity="0.5"/>
+          <circle cx="16" cy="12.5" r="1.5" fill="currentColor" opacity="0.35"/>
+          <circle cx="20" cy="12.5" r="1.5" fill="currentColor" opacity="0.2"/>
+          <text x="13" y="24" font-family="monospace" font-size="6" fill="currentColor" opacity="0.5">&gt;_</text>
+          <line x1="20" y1="22" x2="28" y2="22" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+        </svg>
         <div class="step-number">06</div>
         <div class="step-name">AI-ОБВЯЗКА</div>
         <div class="step-time">15 мин &middot; Alex</div>
@@ -1811,6 +1945,21 @@ const revealObserver = new IntersectionObserver(function(entries) {
 
 revealElements.forEach(function(el) {
   revealObserver.observe(el);
+});
+
+// Staggered reveal for step cards
+const stepElements = document.querySelectorAll('.reveal-step');
+const stepObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      stepObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+stepElements.forEach(function(el) {
+  stepObserver.observe(el);
 });
 </script>
 
